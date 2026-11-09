@@ -1,0 +1,38 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Services;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace WebViewer.View
+{
+    public partial class LogOut : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        [WebMethod(EnableSession = true)]
+        public static void LogOutSession()
+        {
+            if (HttpContext.Current.Session["EmpNo"] != null)
+            {
+                clsDatabase db = new clsDatabase();
+
+                string query = string.Format("exec Code_CloseSession '{0}', N'{1}', '{2}'", HttpContext.Current.Session["CorpId"], HttpContext.Current.Session["EmpNo"], HttpContext.Current.Session["SessionNo"]);
+                db.ExecuteQuery(query);
+
+                //HttpContext.Current.Session.Abandon();
+            }
+        }
+
+        [WebMethod(EnableSession = true)]
+        public static string SessionCheck()
+        {
+            return (HttpContext.Current.Session["EmpNo"] ?? "").ToString();
+        }
+    }
+}

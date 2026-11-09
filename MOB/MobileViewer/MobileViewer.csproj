@@ -1,0 +1,540 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C4CBDAF6-6713-438B-82A2-86193ED955B2}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MobileViewer</RootNamespace>
+    <AssemblyName>MobileViewer</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>preview</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>preview</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Pdf.v23.2.Drawing, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Web.Bootstrap.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="DevExpress.Data.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Web.ASPxThemes.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.RichEdit.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.RichEdit.v23.2.Export, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Web.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Web.Bootstrap.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraReports.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraReports.v23.2.Web, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraReports.v23.2.Web.WebForms, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Drawing.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Pdf.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Web.Resources.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Charts.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.CodeParser.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.DataAccess.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Office.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.PivotGrid.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Sparkline.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Xpo.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraCharts.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraGauges.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Global.asax" />
+    <Content Include="Images\BlueCircle.png" />
+    <Content Include="Images\desk-24.png" />
+    <Content Include="Images\desk_image.png" />
+    <Content Include="Images\ExamType\외래.png" />
+    <Content Include="Images\ExamType\입원.png" />
+    <Content Include="Images\ExamType\재진.png" />
+    <Content Include="Images\ExamType\초진.png" />
+    <Content Include="Images\heal_image.png" />
+    <Content Include="Images\hospital_sample.png" />
+    <Content Include="Images\hosung_logo.png" />
+    <Content Include="Images\hosung_logo_side.png" />
+    <Content Include="Images\ksm_icon.ico" />
+    <Content Include="Images\ksm_sm_icon.png" />
+    <Content Include="Images\login_logo.png" />
+    <Content Include="Images\RedCircle.png" />
+    <Content Include="Images\sejongrmc_logo.png" />
+    <Content Include="Images\Slogo.ico" />
+    <Content Include="Images\YOZM_Logo_Mint.png" />
+    <Content Include="index.html" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="SF로고원본ai파일%28투명%29.ico" />
+    <Content Include="View\assets\css\inc\bootstrap\bootstrap.min.css" />
+    <Content Include="View\assets\css\inc\splide\splide.min.css" />
+    <Content Include="View\assets\css\style.css" />
+    <Content Include="View\assets\img\favicon.png" />
+    <Content Include="View\assets\img\hosung_icon.ico" />
+    <Content Include="View\assets\img\icon\128x128.png" />
+    <Content Include="View\assets\img\icon\144x144.png" />
+    <Content Include="View\assets\img\icon\152x152.png" />
+    <Content Include="View\assets\img\icon\192x192.png" />
+    <Content Include="View\assets\img\icon\384x384.png" />
+    <Content Include="View\assets\img\icon\512x512.png" />
+    <Content Include="View\assets\img\icon\72x72.png" />
+    <Content Include="View\assets\img\icon\96x96.png" />
+    <Content Include="View\assets\img\sample\ads\300x250.jpg" />
+    <Content Include="View\assets\img\sample\ads\300x50.jpg" />
+    <Content Include="View\assets\img\sample\avatar\avatar1.jpg" />
+    <Content Include="View\assets\img\sample\avatar\avatar10.jpg" />
+    <Content Include="View\assets\img\sample\avatar\avatar2.jpg" />
+    <Content Include="View\assets\img\sample\avatar\avatar3.jpg" />
+    <Content Include="View\assets\img\sample\avatar\avatar4.jpg" />
+    <Content Include="View\assets\img\sample\avatar\avatar5.jpg" />
+    <Content Include="View\assets\img\sample\avatar\avatar6.jpg" />
+    <Content Include="View\assets\img\sample\avatar\avatar7.jpg" />
+    <Content Include="View\assets\img\sample\avatar\avatar8.jpg" />
+    <Content Include="View\assets\img\sample\avatar\avatar9.jpg" />
+    <Content Include="View\assets\img\hosung_logo_32.png" />
+    <Content Include="View\assets\img\sample\photo\1.jpg" />
+    <Content Include="View\assets\img\sample\photo\2.jpg" />
+    <Content Include="View\assets\img\sample\photo\3.jpg" />
+    <Content Include="View\assets\img\sample\photo\4.jpg" />
+    <Content Include="View\assets\img\sample\photo\5.jpg" />
+    <Content Include="View\assets\img\sample\photo\6.jpg" />
+    <Content Include="View\assets\img\sample\photo\d1.jpg" />
+    <Content Include="View\assets\img\sample\photo\d2.jpg" />
+    <Content Include="View\assets\img\sample\photo\d3.jpg" />
+    <Content Include="View\assets\img\sample\photo\d4.jpg" />
+    <Content Include="View\assets\img\sample\photo\d5.jpg" />
+    <Content Include="View\assets\img\sample\photo\d6.jpg" />
+    <Content Include="View\assets\img\sample\photo\d7.jpg" />
+    <Content Include="View\assets\img\sample\photo\product1.jpg" />
+    <Content Include="View\assets\img\sample\photo\product2.jpg" />
+    <Content Include="View\assets\img\sample\photo\product3.jpg" />
+    <Content Include="View\assets\img\sample\photo\product4.jpg" />
+    <Content Include="View\assets\img\sample\photo\vector1.png" />
+    <Content Include="View\assets\img\sample\photo\vector2.png" />
+    <Content Include="View\assets\img\sample\photo\vector3.png" />
+    <Content Include="View\assets\img\sample\photo\vector4.png" />
+    <Content Include="View\assets\img\sample\photo\vector5.png" />
+    <Content Include="View\assets\img\sample\photo\vector6.png" />
+    <Content Include="View\assets\img\sample\photo\vertical1.jpg" />
+    <Content Include="View\assets\img\sample\photo\vertical2.jpg" />
+    <Content Include="View\assets\img\sample\photo\vertical3.jpg" />
+    <Content Include="View\assets\img\sample\photo\vertical4.jpg" />
+    <Content Include="View\assets\img\sample\photo\vertical5.jpg" />
+    <Content Include="View\assets\img\sample\photo\wide0.jpg" />
+    <Content Include="View\assets\img\sample\photo\wide1.jpg" />
+    <Content Include="View\assets\img\sample\photo\wide2.jpg" />
+    <Content Include="View\assets\img\sample\photo\wide3.jpg" />
+    <Content Include="View\assets\img\sample\photo\wide4.jpg" />
+    <Content Include="View\assets\img\sample\photo\wide5.jpg" />
+    <Content Include="View\assets\img\sample\photo\wide6.jpg" />
+    <Content Include="View\assets\img\sejongrmc_logo.png" />
+    <Content Include="View\assets\js\base.js" />
+    <Content Include="View\assets\js\lib\bootstrap.min.js" />
+    <Content Include="View\assets\js\lib\bootstrap2.min.js" />
+    <Content Include="View\assets\js\plugins\progressbar-js\progressbar.min.js" />
+    <Content Include="View\assets\js\plugins\splide\splide.min.js" />
+    <Content Include="View\CommonCtrl\SideMenu.ascx" />
+    <Content Include="View\Document\BusinessOrder.aspx" />
+    <Content Include="View\Document\DGPHourList.aspx" />
+    <Content Include="View\Document\Monitoring_SiloStock.aspx" />
+    <Content Include="View\Document\Monitoring_EntireByItem.aspx" />
+    <Content Include="View\Document\TruckScaleMonitoring.aspx" />
+    <Content Include="View\Document\RMCMix.aspx" />
+    <Content Include="View\Document\BusinessOrderList.aspx" />
+    <Content Include="View\Document\DocumentViewer.aspx" />
+    <Content Include="View\Document\FaultRateList.aspx" />
+    <Content Include="View\Document\MachineOperationList.aspx" />
+    <Content Include="View\Document\MachineOperationMonitoring.aspx" />
+    <Content Include="View\Document\OrderResultList.aspx" />
+    <Content Include="View\Document\Monitoring_ProductionProgress.aspx" />
+    <Content Include="View\Document\Monitoring_Operation_Press_JSG.aspx" />
+    <Content Include="View\Document\OrderProgressStatus.aspx" />
+    <Content Include="View\Document\ProcessingInspectionDetail.aspx" />
+    <Content Include="View\Document\MaterialOutView.aspx" />
+    <Content Include="View\Document\PurchaseViewAmt.aspx" />
+    <Content Include="View\Document\PurchaseView.aspx" />
+    <Content Include="View\Document\SalesViewAmt.aspx" />
+    <Content Include="View\Login.aspx" />
+    <Content Include="View\Main.aspx" />
+    <Content Include="View\Document\Monitoring_Operation.aspx" />
+    <Content Include="View\Document\Monitoring_SalesProgress.aspx" />
+    <Content Include="View\Document\OutRequest.aspx" />
+    <Content Include="View\Document\ProcessingInspection.aspx" />
+    <Content Include="View\Document\SalesView.aspx" />
+    <Content Include="View\SessionError.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="View\assets\sass\framework\_accordion.scss" />
+    <Content Include="View\assets\sass\framework\_actionsheet.scss" />
+    <Content Include="View\assets\sass\framework\_adbox.scss" />
+    <Content Include="View\assets\sass\framework\_add-to-home.scss" />
+    <Content Include="View\assets\sass\framework\_alert.scss" />
+    <Content Include="View\assets\sass\framework\_badge.scss" />
+    <Content Include="View\assets\sass\framework\_blog.scss" />
+    <Content Include="View\assets\sass\framework\_button.scss" />
+    <Content Include="View\assets\sass\framework\_card.scss" />
+    <Content Include="View\assets\sass\framework\_carousel.scss" />
+    <Content Include="View\assets\sass\framework\_checkbox-radio-toggle.scss" />
+    <Content Include="View\assets\sass\framework\_chips.scss" />
+    <Content Include="View\assets\sass\framework\_color-class.scss" />
+    <Content Include="View\assets\sass\framework\_comment.scss" />
+    <Content Include="View\assets\sass\framework\_dialog.scss" />
+    <Content Include="View\assets\sass\framework\_divider.scss" />
+    <Content Include="View\assets\sass\framework\_dropdown.scss" />
+    <Content Include="View\assets\sass\framework\_e-commerce.scss" />
+    <Content Include="View\assets\sass\framework\_error-page.scss" />
+    <Content Include="View\assets\sass\framework\_fab-button.scss" />
+    <Content Include="View\assets\sass\framework\_form-validation.scss" />
+    <Content Include="View\assets\sass\framework\_form-wizard.scss" />
+    <Content Include="View\assets\sass\framework\_go-to-top.scss" />
+    <Content Include="View\assets\sass\framework\_grid.scss" />
+    <Content Include="View\assets\sass\framework\_icon.scss" />
+    <Content Include="View\assets\sass\framework\_image.scss" />
+    <Content Include="View\assets\sass\framework\_inputs.scss" />
+    <Content Include="View\assets\sass\framework\_invoice.scss" />
+    <Content Include="View\assets\sass\framework\_listview.scss" />
+    <Content Include="View\assets\sass\framework\_loader.scss" />
+    <Content Include="View\assets\sass\framework\_login.scss" />
+    <Content Include="View\assets\sass\framework\_messages.scss" />
+    <Content Include="View\assets\sass\framework\_modal.scss" />
+    <Content Include="View\assets\sass\framework\_notification.scss" />
+    <Content Include="View\assets\sass\framework\_offcanvas.scss" />
+    <Content Include="View\assets\sass\framework\_online-detection.scss" />
+    <Content Include="View\assets\sass\framework\_os-detection.scss" />
+    <Content Include="View\assets\sass\framework\_pagination.scss" />
+    <Content Include="View\assets\sass\framework\_preloader.scss" />
+    <Content Include="View\assets\sass\framework\_profile.scss" />
+    <Content Include="View\assets\sass\framework\_progressbar.scss" />
+    <Content Include="View\assets\sass\framework\_search.scss" />
+    <Content Include="View\assets\sass\framework\_stepper.scss" />
+    <Content Include="View\assets\sass\framework\_stories.scss" />
+    <Content Include="View\assets\sass\framework\_table.scss" />
+    <Content Include="View\assets\sass\framework\_tabs.scss" />
+    <Content Include="View\assets\sass\framework\_timeline.scss" />
+    <Content Include="View\assets\sass\framework\_toast.scss" />
+    <Content Include="View\assets\sass\framework\_tooltip.scss" />
+    <Content Include="View\assets\sass\framework\_typography.scss" />
+    <Content Include="View\assets\sass\section\_bottomMenu.scss" />
+    <Content Include="View\assets\sass\section\_content.scss" />
+    <Content Include="View\assets\sass\section\_footer.scss" />
+    <Content Include="View\assets\sass\section\_header.scss" />
+    <Content Include="View\assets\sass\section\_sidebar.scss" />
+    <Content Include="View\assets\sass\style.scss" />
+    <Content Include="View\assets\sass\_body.scss" />
+    <Content Include="View\assets\sass\_darkmode.scss" />
+    <Content Include="View\assets\sass\_rtl.scss" />
+    <Content Include="View\assets\sass\_theme-settings.scss" />
+    <Content Include="View\assets\sass\_ui-framework.scss" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Code\clsGrid.cs" />
+    <Compile Include="View\CommonCtrl\SideMenu.ascx.cs">
+      <DependentUpon>SideMenu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\CommonCtrl\SideMenu.ascx.designer.cs">
+      <DependentUpon>SideMenu.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Document\BusinessOrder.aspx.cs">
+      <DependentUpon>BusinessOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Document\BusinessOrder.aspx.designer.cs">
+      <DependentUpon>BusinessOrder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Document\DGPHourList.aspx.cs">
+      <DependentUpon>DGPHourList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Document\DGPHourList.aspx.designer.cs">
+      <DependentUpon>DGPHourList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Document\Monitoring_SiloStock.aspx.cs">
+      <DependentUpon>Monitoring_SiloStock.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Document\Monitoring_SiloStock.aspx.designer.cs">
+      <DependentUpon>Monitoring_SiloStock.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Document\Monitoring_EntireByItem.aspx.cs">
+      <DependentUpon>Monitoring_EntireByItem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Document\Monitoring_EntireByItem.aspx.designer.cs">
+      <DependentUpon>Monitoring_EntireByItem.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Document\TruckScaleMonitoring.aspx.cs">
+      <DependentUpon>TruckScaleMonitoring.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Document\TruckScaleMonitoring.aspx.designer.cs">
+      <DependentUpon>TruckScaleMonitoring.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Document\RMCMix.aspx.cs">
+      <DependentUpon>RMCMix.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Document\RMCMix.aspx.designer.cs">
+      <DependentUpon>RMCMix.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Document\BusinessOrderList.aspx.cs">
+      <DependentUpon>BusinessOrderList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Document\BusinessOrderList.aspx.designer.cs">
+      <DependentUpon>BusinessOrderList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Document\DocumentViewer.aspx.cs">
+      <DependentUpon>DocumentViewer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Document\DocumentViewer.aspx.designer.cs">
+      <DependentUpon>DocumentViewer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Document\FaultRateList.aspx.cs">
+      <DependentUpon>FaultRateList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Document\FaultRateList.aspx.designer.cs">
+      <DependentUpon>FaultRateList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Document\MachineOperationList.aspx.cs">
+      <DependentUpon>MachineOperationList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Document\MachineOperationList.aspx.designer.cs">
+      <DependentUpon>MachineOperationList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Document\MachineOperationMonitoring.aspx.cs">
+      <DependentUpon>MachineOperationMonitoring.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Document\MachineOperationMonitoring.aspx.designer.cs">
+      <DependentUpon>MachineOperationMonitoring.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Document\OrderResultList.aspx.cs">
+      <DependentUpon>OrderResultList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Document\OrderResultList.aspx.designer.cs">
+      <DependentUpon>OrderResultList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Document\Monitoring_ProductionProgress.aspx.cs">
+      <DependentUpon>Monitoring_ProductionProgress.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Document\Monitoring_ProductionProgress.aspx.designer.cs">
+      <DependentUpon>Monitoring_ProductionProgress.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Document\Monitoring_Operation_Press_JSG.aspx.cs">
+      <DependentUpon>Monitoring_Operation_Press_JSG.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Document\Monitoring_Operation_Press_JSG.aspx.designer.cs">
+      <DependentUpon>Monitoring_Operation_Press_JSG.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Document\OrderProgressStatus.aspx.cs">
+      <DependentUpon>OrderProgressStatus.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Document\OrderProgressStatus.aspx.designer.cs">
+      <DependentUpon>OrderProgressStatus.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Document\ProcessingInspectionDetail.aspx.cs">
+      <DependentUpon>ProcessingInspectionDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Document\ProcessingInspectionDetail.aspx.designer.cs">
+      <DependentUpon>ProcessingInspectionDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Document\MaterialOutView.aspx.cs">
+      <DependentUpon>MaterialOutView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Document\MaterialOutView.aspx.designer.cs">
+      <DependentUpon>MaterialOutView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Document\PurchaseViewAmt.aspx.cs">
+      <DependentUpon>PurchaseViewAmt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Document\PurchaseViewAmt.aspx.designer.cs">
+      <DependentUpon>PurchaseViewAmt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Document\PurchaseView.aspx.cs">
+      <DependentUpon>PurchaseView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Document\PurchaseView.aspx.designer.cs">
+      <DependentUpon>PurchaseView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Document\SalesViewAmt.aspx.cs">
+      <DependentUpon>SalesViewAmt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Document\SalesViewAmt.aspx.designer.cs">
+      <DependentUpon>SalesViewAmt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\CustomOperationLogger.cs" />
+    <Compile Include="App_Code\clsDatabase.cs" />
+    <Compile Include="App_Code\clsCommon.cs" />
+    <Compile Include="App_Code\clsAuthor.cs" />
+    <Compile Include="App_Code\CustomReportStorageWebExtension.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\Main.aspx.cs">
+      <DependentUpon>Main.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Main.aspx.designer.cs">
+      <DependentUpon>Main.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Document\Monitoring_Operation.aspx.cs">
+      <DependentUpon>Monitoring_Operation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Document\Monitoring_Operation.aspx.designer.cs">
+      <DependentUpon>Monitoring_Operation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Document\Monitoring_SalesProgress.aspx.cs">
+      <DependentUpon>Monitoring_SalesProgress.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Document\Monitoring_SalesProgress.aspx.designer.cs">
+      <DependentUpon>Monitoring_SalesProgress.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Document\OutRequest.aspx.cs">
+      <DependentUpon>OutRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Document\OutRequest.aspx.designer.cs">
+      <DependentUpon>OutRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Document\ProcessingInspection.aspx.cs">
+      <DependentUpon>ProcessingInspection.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Document\ProcessingInspection.aspx.designer.cs">
+      <DependentUpon>ProcessingInspection.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Document\SalesView.aspx.cs">
+      <DependentUpon>SalesView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Document\SalesView.aspx.designer.cs">
+      <DependentUpon>SalesView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\SessionError.aspx.cs">
+      <DependentUpon>SessionError.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\SessionError.aspx.designer.cs">
+      <DependentUpon>SessionError.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Temp\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>SF로고원본ai파일%28투명%29.ico</ApplicationIcon>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>55334</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:55187/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

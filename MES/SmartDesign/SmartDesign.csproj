@@ -1,0 +1,436 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{410582AE-E4DC-4688-8BBE-3613FA73C6BC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>SmartDesign</RootNamespace>
+    <AssemblyName>SmartDesign</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+    <PublishUrl>게시\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Accessibility" />
+    <Reference Include="CraftSynth.ImageEditor">
+      <HintPath>..\CraftSynth.ImageEditor\obj\Debug\CraftSynth.ImageEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Charts.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.CodeParser.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Dashboard.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Dashboard.v23.2.Win, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.Desktop.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.DataAccess.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.DataAccess.v23.2.UI, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.DataVisualization.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Diagram.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Drawing.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Map.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Office.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Pdf.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.PivotGrid.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.RichEdit.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Sparkline.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Spreadsheet.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.TreeMap.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Utils.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v23.2.UI, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Xpo.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraBars.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraCharts.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraCharts.v23.2.UI, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraCharts.v23.2.Wizard, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraDiagram.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGantt.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGauges.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraGauges.v23.2.Presets, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraGauges.v23.2.Win, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraGrid.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraMap.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraNavBar.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraPivotGrid.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraPrinting.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraReports.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraRichEdit.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Images.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraSpreadsheet.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraTreeList.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraTreeMap.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraTreeMap.v23.2.UI, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraVerticalGrid.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CodeDataSet.cs">
+      <DependentUpon>CodeDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="CodeDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CodeDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DesignDataSet.cs">
+      <DependentUpon>DesignDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DesignDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DesignDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DesignPlan.cs" />
+    <Compile Include="Model\CodeProject.cs" />
+    <Compile Include="Model\CodeMember.cs" />
+    <Compile Include="Model\ProjectMaster.cs" />
+    <Compile Include="Model\ProjectRepository.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\Code\frmCodeMemberPop.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Code\frmCodeMemberPop.Designer.cs">
+      <DependentUpon>frmCodeMemberPop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Code\frmCodeMember.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Code\frmCodeMember.Designer.cs">
+      <DependentUpon>frmCodeMember.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Code\frmCodeProjectPop.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Code\frmCodeProjectPop.Designer.cs">
+      <DependentUpon>frmCodeProjectPop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Code\frmCodeProject.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Code\frmCodeProject.Designer.cs">
+      <DependentUpon>frmCodeProject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Design\frmDesign.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Design\frmDesign.Designer.cs">
+      <DependentUpon>frmDesign.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Design\frmDesignOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Design\frmDesignOrder.Designer.cs">
+      <DependentUpon>frmDesignOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Design\frmDesignPlan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Design\frmDesignPlan.Designer.cs">
+      <DependentUpon>frmDesignPlan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Design\frmDesignWorkList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Design\frmDesignWorkList.Designer.cs">
+      <DependentUpon>frmDesignWorkList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Design\frmImageView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Design\frmImageView.Designer.cs">
+      <DependentUpon>frmImageView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Design\frmDesignPlanChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Design\frmDesignPlanChange.Designer.cs">
+      <DependentUpon>frmDesignPlanChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Design\frmDesignView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Design\frmDesignView.designer.cs">
+      <DependentUpon>frmDesignView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Design\frmProductDesign.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Design\frmProductDesign.Designer.cs">
+      <DependentUpon>frmProductDesign.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Editor\frmImageEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Editor\frmImageEditor.Designer.cs">
+      <DependentUpon>frmImageEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Lookup\frmLookupGoods.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Lookup\frmLookupGoods.designer.cs">
+      <DependentUpon>frmLookupGoods.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Project\frmDesignPlanDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Project\frmDesignPlanDetail.Designer.cs">
+      <DependentUpon>frmDesignPlanDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Project\frmDesignProject.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Project\frmDesignProject.Designer.cs">
+      <DependentUpon>frmDesignProject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Project\frmDesignProjectDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Project\frmDesignProjectDetail.Designer.cs">
+      <DependentUpon>frmDesignProjectDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Project\frmDesignSchedule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Project\frmDesignSchedule.Designer.cs">
+      <DependentUpon>frmDesignSchedule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Project\frmProjectModify.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Project\frmProjectModify.Designer.cs">
+      <DependentUpon>frmProjectModify.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Project\frmWorkOrderExcel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Project\frmWorkOrderExcel.Designer.cs">
+      <DependentUpon>frmWorkOrderExcel.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="View\Code\frmCodeMemberPop.resx">
+      <DependentUpon>frmCodeMemberPop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Code\frmCodeMember.resx">
+      <DependentUpon>frmCodeMember.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Code\frmCodeProjectPop.resx">
+      <DependentUpon>frmCodeProjectPop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Code\frmCodeProject.resx">
+      <DependentUpon>frmCodeProject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Design\frmDesign.resx">
+      <DependentUpon>frmDesign.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Design\frmDesignOrder.resx">
+      <DependentUpon>frmDesignOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Design\frmDesignPlan.resx">
+      <DependentUpon>frmDesignPlan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Design\frmDesignWorkList.resx">
+      <DependentUpon>frmDesignWorkList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Design\frmImageView.resx">
+      <DependentUpon>frmImageView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Design\frmDesignPlanChange.resx">
+      <DependentUpon>frmDesignPlanChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Design\frmDesignView.resx">
+      <DependentUpon>frmDesignView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Design\frmProductDesign.resx">
+      <DependentUpon>frmProductDesign.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Editor\frmImageEditor.resx">
+      <DependentUpon>frmImageEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Lookup\frmLookupGoods.resx">
+      <DependentUpon>frmLookupGoods.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Project\frmDesignPlanDetail.resx">
+      <DependentUpon>frmDesignPlanDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Project\frmDesignProject.resx">
+      <DependentUpon>frmDesignProject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Project\frmDesignProjectDetail.resx">
+      <DependentUpon>frmDesignProjectDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Project\frmDesignSchedule.resx">
+      <DependentUpon>frmDesignSchedule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Project\frmProjectModify.resx">
+      <DependentUpon>frmProjectModify.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Project\frmWorkOrderExcel.resx">
+      <DependentUpon>frmWorkOrderExcel.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="CodeDataSet.xsc">
+      <DependentUpon>CodeDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="CodeDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CodeDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="CodeDataSet.xss">
+      <DependentUpon>CodeDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="DesignDataSet.xsc">
+      <DependentUpon>DesignDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="DesignDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DesignDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DesignDataSet.xss">
+      <DependentUpon>DesignDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cut_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder_24X24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus_16X16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Save_as_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Search_16px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cut1_16X16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\baseSMT\baseSMT.csproj">
+      <Project>{27309a88-b42a-412d-bb3c-6dbc4f079732}</Project>
+      <Name>baseSMT</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SmartCommon\SmartCommon.csproj">
+      <Project>{a4b404ca-0b27-4ae7-adcf-07e265c0f9be}</Project>
+      <Name>SmartCommon</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\add1_16X16.png" />
+    <None Include="Resources\reload-16.png" />
+    <None Include="Resources\edit-16.png" />
+    <None Include="Resources\end-16.png" />
+    <None Include="Resources\start-16.png" />
+    <None Include="Resources\realtime-16.png" />
+    <None Include="Resources\producthis_16X16.png" />
+    <None Include="Resources\outlist_16X16.png" />
+    <None Include="Resources\invoice.png" />
+    <None Include="Resources\showtestreport_16x16.png" />
+    <None Include="Resources\calendar1_16X16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8%28x86 및 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="View\Request\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

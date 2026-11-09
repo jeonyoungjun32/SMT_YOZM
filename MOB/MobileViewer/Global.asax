@@ -1,0 +1,1 @@
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="MobileViewer.Global_asax" Language="C#" %>

@@ -1,0 +1,21 @@
+﻿using System;
+using System.Drawing;
+using System.Collections;
+using System.ComponentModel;
+using DevExpress.XtraReports.UI;
+
+namespace SmartPOP.Report
+{
+    public partial class SamsungLotLabel : DevExpress.XtraReports.UI.XtraReport
+    {
+        public SamsungLotLabel()
+        {
+            InitializeComponent();
+        }
+
+        private void SamsungLotLabel_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+
+        }
+    }
+}

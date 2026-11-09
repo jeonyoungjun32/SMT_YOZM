@@ -1,0 +1,3620 @@
+﻿<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4ACF15F3-4D79-4CF7-BAA8-978090205CB6}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SmartMES</RootNamespace>
+    <AssemblyName>SNexisMES_YOZM</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <PublishUrl>ftp://smtv.iptime.org/SNexis-MES_YOZM/MES/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>true</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>http://smtv.iptime.org/SNexis-MES_YOZM/MES/</InstallUrl>
+    <SupportUrl>http://www.smtvision.co.kr/</SupportUrl>
+    <ProductName>SNexisMES_YOZM</ProductName>
+    <PublisherName>%28주%29에스엠티비전</PublisherName>
+    <SuiteName>SNexisMES_YOZM</SuiteName>
+    <MinimumRequiredVersion>1.0.0.5</MinimumRequiredVersion>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>index.html</WebPage>
+    <TrustUrlParameters>true</TrustUrlParameters>
+    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>true</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>C29D7BA352E8640BD4DD37C425D7520DF5E98E52</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>SmartMES_1_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\YOZM_favicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup>
+    <Reference Include="Accessibility" />
+    <Reference Include="Bunifu_UI_v1.5.3, Version=1.5.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Bunifu_UI_v1.5.3.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.BonusSkins.v23.2">
+      <HintPath>..\..\DLL\DevExpress.BonusSkins.v23.2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Charts.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.Charts.v23.2.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.CodeParser.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.CodeParser.v23.2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Dashboard.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.Dashboard.v23.2.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Dashboard.v23.2.Win, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <HintPath>..\..\DLL\DevExpress.Dashboard.v23.2.Win.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Data.Desktop.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.Data.Desktop.v23.2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Data.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.Data.v23.2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.DataAccess.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.DataAccess.v23.2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.DataAccess.v23.2.UI, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.DataAccess.v23.2.UI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.DataVisualization.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <HintPath>..\..\DLL\DevExpress.DataVisualization.v23.2.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Diagram.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.Diagram.v23.2.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Dialogs.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.Dialogs.v23.2.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Docs.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <HintPath>..\..\DLL\DevExpress.Docs.v23.2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Drawing.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.Drawing.v23.2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Images.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.Images.v23.2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Map.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.Map.v23.2.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Office.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.Office.v23.2.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Pdf.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.Pdf.v23.2.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Pdf.v23.2.Drawing, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.Pdf.v23.2.Drawing.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.PivotGrid.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.PivotGrid.v23.2.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.Printing.v23.2.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.RichEdit.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.RichEdit.v23.2.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.RichEdit.v23.2.Export, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.RichEdit.v23.2.Export.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Spreadsheet.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <HintPath>..\..\DLL\DevExpress.Spreadsheet.v23.2.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.TreeMap.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.TreeMap.v23.2.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.Utils.v23.2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Sparkline.v23.2.Core">
+      <HintPath>..\..\DLL\DevExpress.Sparkline.v23.2.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v23.2.UI, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.Utils.v23.2.UI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <HintPath>..\..\DLL\DevExpress.Xpf.Grid.v23.2.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <HintPath>..\..\DLL\DevExpress.Xpf.Grid.v23.2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpo.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.Xpo.v23.2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraBars.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <HintPath>..\..\DLL\DevExpress.XtraBars.v23.2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.XtraCharts.v23.2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v23.2.Extensions, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.XtraCharts.v23.2.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v23.2.UI, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.XtraCharts.v23.2.UI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v23.2.Wizard, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.XtraCharts.v23.2.Wizard.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraDiagram.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.XtraDiagram.v23.2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraDialogs.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <HintPath>..\..\DLL\DevExpress.XtraDialogs.v23.2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.XtraEditors.v23.2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraGauges.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.XtraGauges.v23.2.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraGauges.v23.2.Presets, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.XtraGauges.v23.2.Presets.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraGauges.v23.2.Win, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.XtraGauges.v23.2.Win.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraGrid.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <HintPath>..\..\DLL\DevExpress.XtraGrid.v23.2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraLayout.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <HintPath>..\..\DLL\DevExpress.XtraLayout.v23.2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraMap.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.XtraMap.v23.2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraNavBar.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <HintPath>..\..\DLL\DevExpress.XtraNavBar.v23.2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraPdfViewer.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <HintPath>..\..\DLL\DevExpress.XtraPdfViewer.v23.2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraPivotGrid.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.XtraPivotGrid.v23.2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraPrinting.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.XtraPrinting.v23.2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.XtraReports.v23.2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v23.2.CodeCompletion, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.XtraReports.v23.2.CodeCompletion.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v23.2.Extensions, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <HintPath>..\..\DLL\DevExpress.XtraReports.v23.2.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraRichEdit.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.XtraRichEdit.v23.2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.Core, Version=1.0.2849.39, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.2849.39\lib\net462\Microsoft.Web.WebView2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.WinForms, Version=1.0.2849.39, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.2849.39\lib\net462\Microsoft.Web.WebView2.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.Wpf, Version=1.0.2849.39, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.2849.39\lib\net462\Microsoft.Web.WebView2.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraScheduler.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <HintPath>..\..\DLL\DevExpress.XtraScheduler.v23.2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraScheduler.v23.2.Core, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <HintPath>..\..\DLL\DevExpress.XtraScheduler.v23.2.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraScheduler.v23.2.Core.Desktop, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <HintPath>..\..\DLL\DevExpress.XtraScheduler.v23.2.Core.Desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraSpreadsheet.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <HintPath>..\..\DLL\DevExpress.XtraSpreadsheet.v23.2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraTreeList.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.XtraTreeList.v23.2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraTreeMap.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.XtraTreeMap.v23.2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraTreeMap.v23.2.UI, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.XtraTreeMap.v23.2.UI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraVerticalGrid.v23.2, Version=23.2.12.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <HintPath>..\..\DLL\DevExpress.XtraVerticalGrid.v23.2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Windows.Input.Manipulations" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\AIRequester.cs" />
+    <Compile Include="Common\clsDocument.cs" />
+    <Compile Include="Common\clsShortcut.cs" />
+    <Compile Include="Common\ScreenLayoutManager.cs" />
+    <Compile Include="Common\ScreenLayoutRepository.cs" />
+    <Compile Include="Common\clsExcelDown.cs" />
+    <Compile Include="Common\cls_Database.cs" />
+    <Compile Include="Common\cls_FTP.cs" />
+    <Compile Include="Common\CommonClass.cs" />
+    <Compile Include="Common\ViewExportM.cs" />
+    <Compile Include="Frm_Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_Login.designer.cs">
+      <DependentUpon>Frm_Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm_Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_Main.designer.cs">
+      <DependentUpon>Frm_Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm_SettingConntionDB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_SettingConntionDB.designer.cs">
+      <DependentUpon>Frm_SettingConntionDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AI\ChatBot_Api.cs" />
+    <Compile Include="Models\AI\ChatBot_History.cs" />
+    <Compile Include="Models\AI\ChatBot_Knowledege_Base.cs" />
+    <Compile Include="Models\AI\clsDatabase.cs" />
+    <Compile Include="Models\AI\OC_AbsData.cs" />
+    <Compile Include="Models\AI\OC_AbsData_Record.cs" />
+    <Compile Include="Models\AI\OC_MergeData.cs" />
+    <Compile Include="Models\AI\OC_ProcCond.cs" />
+    <Compile Include="Models\AI\ST_Item_Inspect_Mgnt.cs" />
+    <Compile Include="Models\AI\ST_Item_Machine.cs" />
+    <Compile Include="Models\AI\ST_OptCond_Init.cs" />
+    <Compile Include="Models\AI\ST_Std_DataSet.cs" />
+    <Compile Include="Models\BM\BM_EstimateD.cs" />
+    <Compile Include="Models\BM\BM_EstimateM.cs" />
+    <Compile Include="Models\BM\BM_SampleOutM.cs" />
+    <Compile Include="Models\Chatbot\ChatBot_History.cs" />
+    <Compile Include="Models\CM\CM_Routing.cs" />
+    <Compile Include="Models\CM\CM_RoutingRev.cs" />
+    <Compile Include="Models\CM\CM_BOMRev.cs" />
+    <Compile Include="Models\CM\CM_ItemImage.cs" />
+    <Compile Include="Models\CM\CM_ItemPrice.cs" />
+    <Compile Include="Models\CM\CM_PartList.cs" />
+    <Compile Include="Models\CM\CM_BOM.cs" />
+    <Compile Include="Models\CM\CM_Dept.cs" />
+    <Compile Include="Models\CM\CM_DefectCode.cs" />
+    <Compile Include="Models\CM\CM_Warehouse.cs" />
+    <Compile Include="Models\DM\DM_Code.cs" />
+    <Compile Include="Models\DM\DM_Config.cs" />
+    <Compile Include="Models\DM\DM_Impact.cs" />
+    <Compile Include="Models\DM\DM_Result.cs" />
+    <Compile Include="Models\DM\DM_Weather.cs" />
+    <Compile Include="Models\DTL\DTL_Log.cs" />
+    <Compile Include="Models\DTL\DTL_OrderResult.cs" />
+    <Compile Include="Models\IF\IF_DGPStatus.cs" />
+    <Compile Include="Models\MD\MD_MoldChk_Rmk.cs" />
+    <Compile Include="Models\MD\MD_MoldRepairImage.cs" />
+    <Compile Include="Models\MD\MD_MoldChk_Std.cs" />
+    <Compile Include="Models\MD\MD_MoldImage.cs" />
+    <Compile Include="Models\MD\MD_MoldIn.cs" />
+    <Compile Include="Models\MD\MD_MoldInOut.cs" />
+    <Compile Include="Models\MD\MD_MoldOut.cs" />
+    <Compile Include="Models\MD\MD_MoldChk.cs" />
+    <Compile Include="Models\PJ\ProjectDetail.cs" />
+    <Compile Include="Models\PJ\ProjectMember.cs" />
+    <Compile Include="Models\PJ\ProjectMaster.cs" />
+    <Compile Include="Models\PJ\ProjectRepository.cs" />
+    <Compile Include="Models\QM\QM_4MChangeHistory.cs" />
+    <Compile Include="Models\QM\QM_ExamResultDaily.cs" />
+    <Compile Include="Models\QM\QM_Gauge.cs" />
+    <Compile Include="Models\QM\QM_GaugeCalibration.cs" />
+    <Compile Include="Models\QM\QM_HaccpExamResult.cs" />
+    <Compile Include="Models\QM\QM_HaccpStd.cs" />
+    <Compile Include="Models\QM\QM_NCDisposition.cs" />
+    <Compile Include="Models\QM\QM_NCAction.cs" />
+    <Compile Include="Models\QM\QM_NonConformanceM.cs" />
+    <Compile Include="Models\SM\SM_AuthorGroup.cs" />
+    <Compile Include="Models\SM\SM_Corp.cs" />
+    <Compile Include="Models\SM\SM_MenuGroup.cs" />
+    <Compile Include="Models\SM\SM_Quick.cs" />
+    <Compile Include="Models\SM\SM_User.cs" />
+    <Compile Include="Models\CM\CM_Line.cs" />
+    <Compile Include="Models\CM\CM_Process.cs" />
+    <Compile Include="Models\BM\BM_SalesM.cs" />
+    <Compile Include="Models\EQ\EQ_MachineChkStd.cs" />
+    <Compile Include="Models\CM\CM_CLASS.cs" />
+    <Compile Include="Models\CM\CM_Cust.cs" />
+    <Compile Include="Models\Chatbot\ChatBot.cs" />
+    <Compile Include="Models\CM\CM_LineProcessWorker.cs" />
+    <Compile Include="Models\IF\IF_DGPControl.cs" />
+    <Compile Include="Models\CM\CM_CommonFile.cs" />
+    <Compile Include="Models\EQ\EQ_Machine.cs" />
+    <Compile Include="Models\EQ\EQ_MachineImage.cs" />
+    <Compile Include="Models\EQ\EQ_MachineChk.cs" />
+    <Compile Include="Models\EQ\EQ_Operation.cs" />
+    <Compile Include="Models\EQ\EQ_Repair.cs" />
+    <Compile Include="Models\Management\MM_ProductAnalysis.cs" />
+    <Compile Include="Models\Management\MM_PurchaseAnalysis.cs" />
+    <Compile Include="Models\PM\PM_OrderProcess.cs" />
+    <Compile Include="Models\PM\PM_OrderResultWorker.cs" />
+    <Compile Include="Models\PM\PM_SdRoute.cs" />
+    <Compile Include="Models\PM\PM_OrderResult.cs" />
+    <Compile Include="Models\PM\PM_ProductPlan.cs" />
+    <Compile Include="Models\MM\MM_PlacingD.cs" />
+    <Compile Include="Models\MM\MM_PlacingM.cs" />
+    <Compile Include="Models\MM\MM_PurchaseM.cs" />
+    <Compile Include="Models\MM\MM_PurchaseD.cs" />
+    <Compile Include="Models\QM\QM_4MChange.cs" />
+    <Compile Include="Models\QM\QM_ExamResult.cs" />
+    <Compile Include="Models\QM\QM_WorkDefect.cs" />
+    <Compile Include="Models\BM\BM_SdOrderM.cs" />
+    <Compile Include="Models\BM\BM_Return.cs" />
+    <Compile Include="Models\BM\BM_SalesD.cs" />
+    <Compile Include="Models\BM\BM_SdOrderD.cs" />
+    <Compile Include="Models\SM\SM_Author.cs" />
+    <Compile Include="Models\SM\SM_UserAuthor.cs" />
+    <Compile Include="Models\ST\ST_StockD.cs" />
+    <Compile Include="Models\ST\ST_StockM.cs" />
+    <Compile Include="Models\SM\SM_Notice.cs" />
+    <Compile Include="Models\IF\IF_ApiHistory.cs" />
+    <Compile Include="Models\SM\SM_CodeOption.cs" />
+    <Compile Include="Models\MD\MD_Mold.cs" />
+    <Compile Include="Models\MD\MD_MoldItem.cs" />
+    <Compile Include="Models\MD\MD_MoldRepair.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Btn_ExcelDown_ALL.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Btn_ExcelDown_ALL.Designer.cs">
+      <DependentUpon>Btn_ExcelDown_ALL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common\WrComFunc.cs" />
+    <Compile Include="Frm_MainBoard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_MainBoard.designer.cs">
+      <DependentUpon>Frm_MainBoard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\QM\QM_ExamMgnt.cs" />
+    <Compile Include="Models\QM\QM_ItemExamMgnt.cs" />
+    <Compile Include="Models\CM\CM_CateItem.cs" />
+    <Compile Include="Models\CM\CM_Item.cs" />
+    <Compile Include="Models\clsLookup.cs" />
+    <Compile Include="Models\clsBom.cs" />
+    <Compile Include="Models\clsCode.cs" />
+    <Compile Include="Models\clsMachine.cs" />
+    <Compile Include="Models\clsObtainOrder.cs" />
+    <Compile Include="Models\clsPurchase.cs" />
+    <Compile Include="Models\clsSystem.cs" />
+    <Compile Include="Models\IF\IF_DGPCode.cs" />
+    <Compile Include="Models\SM\SM_LoginHistory.cs" />
+    <Compile Include="Models\SM\SM_SystemOption.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\rptInspection.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rptInspection.Designer.cs">
+      <DependentUpon>rptInspection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptInvoice.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rptInvoice.designer.cs">
+      <DependentUpon>rptInvoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptMaterialOut.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rptMaterialOut.designer.cs">
+      <DependentUpon>rptMaterialOut.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptWorkOrder.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rptWorkOrder.designer.cs">
+      <DependentUpon>rptWorkOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ucCount.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucCount.Designer.cs">
+      <DependentUpon>ucCount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCDGP.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCDGP.designer.cs">
+      <DependentUpon>UCDGP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCDGP2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCDGP2.designer.cs">
+      <DependentUpon>UCDGP2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ucFilterControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucFilterControl.designer.cs">
+      <DependentUpon>ucFilterControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ucStock.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucStock.Designer.cs">
+      <DependentUpon>ucStock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Ai\Frm_Ai_Document.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Ai\Frm_Ai_Document.designer.cs">
+      <DependentUpon>Frm_Ai_Document.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Ai\Frm_Ai_DocumentView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Ai\Frm_Ai_DocumentView.designer.cs">
+      <DependentUpon>Frm_Ai_DocumentView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Ai\Frm_Ai_Template.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Ai\Frm_Ai_Template.Designer.cs">
+      <DependentUpon>Frm_Ai_Template.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Ai_Demand\Frm_Demand_Accuracy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Ai_Demand\Frm_Demand_Accuracy.designer.cs">
+      <DependentUpon>Frm_Demand_Accuracy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Ai_Demand\Frm_Demand_ApiAlertConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Ai_Demand\Frm_Demand_ApiAlertConfig.designer.cs">
+      <DependentUpon>Frm_Demand_ApiAlertConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Ai_Demand\Frm_Demand_ApiDataAdjust.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Ai_Demand\Frm_Demand_ApiDataAdjust.designer.cs">
+      <DependentUpon>Frm_Demand_ApiDataAdjust.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Ai_Demand\Frm_Demand_ApiDataView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Ai_Demand\Frm_Demand_ApiDataView.designer.cs">
+      <DependentUpon>Frm_Demand_ApiDataView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Ai_Demand\Frm_Demand_ApiData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Ai_Demand\Frm_Demand_ApiData.designer.cs">
+      <DependentUpon>Frm_Demand_ApiData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Ai_Demand\Frm_Demand_DateView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Ai_Demand\Frm_Demand_DateView.designer.cs">
+      <DependentUpon>Frm_Demand_DateView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Ai_Demand\Frm_Demand_Condition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Ai_Demand\Frm_Demand_Condition.designer.cs">
+      <DependentUpon>Frm_Demand_Condition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Ai_Demand\Frm_Demand_Document.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Ai_Demand\Frm_Demand_Document.designer.cs">
+      <DependentUpon>Frm_Demand_Document.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Analysis\Frm_AN_BadType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Analysis\Frm_AN_BadType.designer.cs">
+      <DependentUpon>Frm_AN_BadType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Analysis\Frm_AN_Capacity_ByMonth.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Analysis\Frm_AN_Capacity_ByMonth.designer.cs">
+      <DependentUpon>Frm_AN_Capacity_ByMonth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Analysis\Frm_AN_Machine_ProductView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Analysis\Frm_AN_Machine_ProductView.Designer.cs">
+      <DependentUpon>Frm_AN_Machine_ProductView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Analysis\Frm_AN_Plan_ProductView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Analysis\Frm_AN_Plan_ProductView.Designer.cs">
+      <DependentUpon>Frm_AN_Plan_ProductView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Analysis\Frm_AN_Work_LineView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Analysis\Frm_AN_Work_LineView.designer.cs">
+      <DependentUpon>Frm_AN_Work_LineView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Analysis\Frm_AN_ProductMachine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Analysis\Frm_AN_ProductMachine.designer.cs">
+      <DependentUpon>Frm_AN_ProductMachine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Analysis\Frm_AN_Bad_ChkView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Analysis\Frm_AN_Bad_ChkView.designer.cs">
+      <DependentUpon>Frm_AN_Bad_ChkView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Analysis\Frm_AN_DefectType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Analysis\Frm_AN_DefectType.Designer.cs">
+      <DependentUpon>Frm_AN_DefectType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_OrderOutDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_OrderOutDetail.Designer.cs">
+      <DependentUpon>Frm_BM_OrderOutDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_SampleOutView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_SampleOutView.designer.cs">
+      <DependentUpon>Frm_BM_SampleOutView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_SampleOut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_SampleOut.designer.cs">
+      <DependentUpon>Frm_BM_SampleOut.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_SdOrderView_Shortage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_SdOrderView_Shortage.designer.cs">
+      <DependentUpon>Frm_BM_SdOrderView_Shortage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Chatbot\FrmChatAI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Chatbot\FrmChatAI.Designer.cs">
+      <DependentUpon>FrmChatAI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Chatbot\ChatMain_V2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Chatbot\ChatMain_V2.Designer.cs">
+      <DependentUpon>ChatMain_V2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Chatbot\ChatMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Chatbot\ChatMain.Designer.cs">
+      <DependentUpon>ChatMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Chatbot\FrmChatBotView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Chatbot\FrmChatBotView.designer.cs">
+      <DependentUpon>FrmChatBotView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Chatbot\FrmChatbot_AI_TEST.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Chatbot\FrmChatbot_AI_TEST.designer.cs">
+      <DependentUpon>FrmChatbot_AI_TEST.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Chatbot\FrmChatbot_AI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Chatbot\FrmChatbot_AI.designer.cs">
+      <DependentUpon>FrmChatbot_AI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Chatbot\FrmKnowledgeBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Chatbot\FrmKnowledgeBase.designer.cs">
+      <DependentUpon>FrmKnowledgeBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Chatbot\Frm_Chat_ResponseQuality.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Chatbot\Frm_Chat_ResponseQuality.designer.cs">
+      <DependentUpon>Frm_Chat_ResponseQuality.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Chatbot\Frm_Chat_ScenarioManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Chatbot\Frm_Chat_ScenarioManagement.designer.cs">
+      <DependentUpon>Frm_Chat_ScenarioManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Chatbot\FrmChatAI_Web.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Chatbot\FrmChatAI_Web.Designer.cs">
+      <DependentUpon>FrmChatAI_Web.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_CommonFile_Item.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_CommonFile_Item.Designer.cs">
+      <DependentUpon>Frm_CM_CommonFile_Item.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_CommonFile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_CommonFile.Designer.cs">
+      <DependentUpon>Frm_CM_CommonFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_BOMList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_BOMList.Designer.cs">
+      <DependentUpon>Frm_CM_BOMList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_BOMView_Copy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_BOMView_Copy.Designer.cs">
+      <DependentUpon>Frm_CM_BOMView_Copy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_ItemClass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_ItemClass.designer.cs">
+      <DependentUpon>Frm_CM_ItemClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dashboard\ComprehensiveData.cs" />
+    <Compile Include="View\Dashboard\ComprehensiveDrawHelper.cs" />
+    <Compile Include="View\Dashboard\ComprehensiveRepository.cs" />
+    <Compile Include="View\Dashboard\ComprehensiveTokens.cs" />
+    <Compile Include="View\Dashboard\DeliveryInventoryPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\Dashboard\frmComprehensiveDashboard.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\Dashboard\frmComprehensiveDashboard.designer.cs">
+      <DependentUpon>frmComprehensiveDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dashboard\MaintenanceOeePanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\Dashboard\ProductionPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\Dashboard\QualityPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\DTL\Frm_DT_Interface.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\DTL\Frm_DT_Interface.designer.cs">
+      <DependentUpon>Frm_DT_Interface.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\DTL\Frm_DT_DTLOrderResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\DTL\Frm_DT_DTLOrderResult.Designer.cs">
+      <DependentUpon>Frm_DT_DTLOrderResult.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\DTL\Frm_DT_Monitoring.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\DTL\Frm_DT_Monitoring.Designer.cs">
+      <DependentUpon>Frm_DT_Monitoring.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\DTL\Frm_DT_Quality.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\DTL\Frm_DT_Quality.designer.cs">
+      <DependentUpon>Frm_DT_Quality.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\DTL\Frm_DT_LogView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\DTL\Frm_DT_LogView.Designer.cs">
+      <DependentUpon>Frm_DT_LogView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\DTL\Frm_DT_ProcessView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\DTL\Frm_DT_ProcessView.designer.cs">
+      <DependentUpon>Frm_DT_ProcessView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\DTL\Frm_DT_MachineView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\DTL\Frm_DT_MachineView.Designer.cs">
+      <DependentUpon>Frm_DT_MachineView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\DTL\Frm_DT_OrderProcessbyResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\DTL\Frm_DT_OrderProcessbyResult.designer.cs">
+      <DependentUpon>Frm_DT_OrderProcessbyResult.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\DTL\Frm_DT_DataQuality.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\DTL\Frm_DT_DataQuality.designer.cs">
+      <DependentUpon>Frm_DT_DataQuality.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\EQ\Frm_EQ_NonOperatingType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\EQ\Frm_EQ_NonOperatingType.designer.cs">
+      <DependentUpon>Frm_EQ_NonOperatingType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_OrderOutView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_OrderOutView.Designer.cs">
+      <DependentUpon>Frm_BM_OrderOutView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Lookup\Frm_LookUpItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Lookup\Frm_LookUpItem.Designer.cs">
+      <DependentUpon>Frm_LookUpItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Lookup\Frm_LookUpSampleOut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Lookup\Frm_LookUpSampleOut.designer.cs">
+      <DependentUpon>Frm_LookUpSampleOut.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Management\Dash\BM_Dashboard1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\Management\Dash\BM_Dashboard1.Designer.cs">
+      <DependentUpon>BM_Dashboard1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_Dashboard_Total1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_Dashboard_Total1.Designer.cs">
+      <DependentUpon>Frm_MM_Dashboard_Total1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_KPI_Product.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_KPI_Product.Designer.cs">
+      <DependentUpon>Frm_MM_KPI_Product.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_KPI_SdOrderSales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_KPI_SdOrderSales.Designer.cs">
+      <DependentUpon>Frm_MM_KPI_SdOrderSales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_Dashboard_MM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_Dashboard_MM.Designer.cs">
+      <DependentUpon>Frm_MM_Dashboard_MM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_Dashboard_Total.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_Dashboard_Total.Designer.cs">
+      <DependentUpon>Frm_MM_Dashboard_Total.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_Dashboard_QM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_Dashboard_QM.Designer.cs">
+      <DependentUpon>Frm_MM_Dashboard_QM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_Sales_View.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_Sales_View.Designer.cs">
+      <DependentUpon>Frm_MM_Sales_View.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_Purchase_View.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_Purchase_View.Designer.cs">
+      <DependentUpon>Frm_MM_Purchase_View.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MD\Frm_MD_MoldChk_Std.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MD\Frm_MD_MoldChk_Std.designer.cs">
+      <DependentUpon>Frm_MD_MoldChk_Std.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MD\Frm_MD_MoldRepairImage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MD\Frm_MD_MoldRepairImage.designer.cs">
+      <DependentUpon>Frm_MD_MoldRepairImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MD\Frm_MD_Mold_ChkView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MD\Frm_MD_Mold_ChkView.designer.cs">
+      <DependentUpon>Frm_MD_Mold_ChkView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MD\Frm_MD_Mold_Chk.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MD\Frm_MD_Mold_Chk.designer.cs">
+      <DependentUpon>Frm_MD_Mold_Chk.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MD\Frm_MD_MoldChk_Daily.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MD\Frm_MD_MoldChk_Daily.designer.cs">
+      <DependentUpon>Frm_MD_MoldChk_Daily.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MD\Frm_MD_MoldHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MD\Frm_MD_MoldHistory.designer.cs">
+      <DependentUpon>Frm_MD_MoldHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MD\Frm_MD_Mold.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MD\Frm_MD_Mold.designer.cs">
+      <DependentUpon>Frm_MD_Mold.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MD\Frm_MD_MoldInOut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MD\Frm_MD_MoldInOut.designer.cs">
+      <DependentUpon>Frm_MD_MoldInOut.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MD\Frm_MD_MoldOut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MD\Frm_MD_MoldOut.designer.cs">
+      <DependentUpon>Frm_MD_MoldOut.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MD\Frm_MD_Mold_Management.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MD\Frm_MD_Mold_Management.designer.cs">
+      <DependentUpon>Frm_MD_Mold_Management.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MD\Frm_MD_MoldChk_Routine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MD\Frm_MD_MoldChk_Routine.designer.cs">
+      <DependentUpon>Frm_MD_MoldChk_Routine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MD\Frm_MD_Mold_Wash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MD\Frm_MD_Mold_Wash.designer.cs">
+      <DependentUpon>Frm_MD_Mold_Wash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MD\Rpt\Rpt_Mold_Management.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\MD\Rpt\Rpt_Mold_Management.designer.cs">
+      <DependentUpon>Rpt_Mold_Management.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Monitoring\Frm_BM_SalesDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Monitoring\Frm_BM_SalesDashboard.Designer.cs">
+      <DependentUpon>Frm_BM_SalesDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Monitoring\Frm_EQ_MachineDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Monitoring\Frm_EQ_MachineDashboard.Designer.cs">
+      <DependentUpon>Frm_EQ_MachineDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Monitoring\Frm_MM_QualityDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Monitoring\Frm_MM_QualityDashboard.Designer.cs">
+      <DependentUpon>Frm_MM_QualityDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Monitoring\Frm_PM_ProductionDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Monitoring\Frm_PM_ProductionDashboard.Designer.cs">
+      <DependentUpon>Frm_PM_ProductionDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Monitoring\Frm_PM_Monitoring.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Monitoring\Frm_PM_Monitoring.Designer.cs">
+      <DependentUpon>Frm_PM_Monitoring.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Monitoring\Frm_MM_Entire_View.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Monitoring\Frm_MM_Entire_View.designer.cs">
+      <DependentUpon>Frm_MM_Entire_View.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Monitoring\Frm_ProductionDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Monitoring\Frm_ProductionDashboard.designer.cs">
+      <DependentUpon>Frm_ProductionDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Monitoring\Machine\Frm_MM_MachineHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Monitoring\Machine\Frm_MM_MachineHistory.Designer.cs">
+      <DependentUpon>Frm_MM_MachineHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Monitoring\Machine\Frm_PM_MachinePerformance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Monitoring\Machine\Frm_PM_MachinePerformance.designer.cs">
+      <DependentUpon>Frm_PM_MachinePerformance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Monitoring\Frm_TotalMonitoring.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Monitoring\Frm_TotalMonitoring.designer.cs">
+      <DependentUpon>Frm_TotalMonitoring.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Monitoring\Machine\Frm_PM_ProductionProgressMonitor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Monitoring\Machine\Frm_PM_ProductionProgressMonitor.designer.cs">
+      <DependentUpon>Frm_PM_ProductionProgressMonitor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Monitoring\Dashboard\ChartPanels.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\Monitoring\Dashboard\DonutGaugePanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\Monitoring\Dashboard\DrawHelper.cs" />
+    <Compile Include="View\Monitoring\Dashboard\Frm_PM_ProductionDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Monitoring\Dashboard\Frm_PM_ProductionDashboard.Designer.cs">
+      <DependentUpon>Frm_PM_ProductionDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Monitoring\Frm_MM_ProcCondition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Monitoring\Frm_MM_ProcCondition.designer.cs">
+      <DependentUpon>Frm_MM_ProcCondition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PJ\Frm_PJ_ProjectView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PJ\Frm_PJ_ProjectView.designer.cs">
+      <DependentUpon>Frm_PJ_ProjectView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PJ\Frm_PJ_ProjectMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PJ\Frm_PJ_ProjectMaster.designer.cs">
+      <DependentUpon>Frm_PJ_ProjectMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PJ\Popup\Frm_PJ_CodeProjectPop.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PJ\Popup\Frm_PJ_CodeProjectPop.designer.cs">
+      <DependentUpon>Frm_PJ_CodeProjectPop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_4MChangeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_4MChangeView.Designer.cs">
+      <DependentUpon>Frm_QM_4MChangeView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_4MChange_ConfirmHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_4MChange_ConfirmHistory.Designer.cs">
+      <DependentUpon>Frm_QM_4MChange_ConfirmHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_NCDisposition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_NCDisposition.designer.cs">
+      <DependentUpon>Frm_QM_NCDisposition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_NCAction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_NCAction.designer.cs">
+      <DependentUpon>Frm_QM_NCAction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_LOTQCHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_LOTQCHistory.designer.cs">
+      <DependentUpon>Frm_QM_LOTQCHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_WorkDefectViewTypeWorker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_WorkDefectViewTypeWorker.designer.cs">
+      <DependentUpon>Frm_QM_WorkDefectViewTypeWorker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_WorkDefectViewTypeMachine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_WorkDefectViewTypeMachine.designer.cs">
+      <DependentUpon>Frm_QM_WorkDefectViewTypeMachine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_WorkDefectViewTypeProcess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_WorkDefectViewTypeProcess.designer.cs">
+      <DependentUpon>Frm_QM_WorkDefectViewTypeProcess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_WorkDefectViewType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_WorkDefectViewType.designer.cs">
+      <DependentUpon>Frm_QM_WorkDefectViewType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Gauge\Frm_QM_GaugeCalibrationCertificate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Gauge\Frm_QM_GaugeCalibrationCertificate.Designer.cs">
+      <DependentUpon>Frm_QM_GaugeCalibrationCertificate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Gauge\Frm_QM_GaugeCalibrationHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Gauge\Frm_QM_GaugeCalibrationHistory.Designer.cs">
+      <DependentUpon>Frm_QM_GaugeCalibrationHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Gauge\Frm_QM_GaugeCalibrationSchedule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Gauge\Frm_QM_GaugeCalibrationSchedule.Designer.cs">
+      <DependentUpon>Frm_QM_GaugeCalibrationSchedule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Gauge\Frm_QM_GaugeCalibration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Gauge\Frm_QM_GaugeCalibration.Designer.cs">
+      <DependentUpon>Frm_QM_GaugeCalibration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Gauge\Frm_QM_GaugeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Gauge\Frm_QM_GaugeView.designer.cs">
+      <DependentUpon>Frm_QM_GaugeView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Gauge\Frm_QM_Gauge.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Gauge\Frm_QM_Gauge.designer.cs">
+      <DependentUpon>Frm_QM_Gauge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_HACCPResultView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_HACCPResultView.designer.cs">
+      <DependentUpon>Frm_QM_HACCPResultView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_HACCPResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_HACCPResult.designer.cs">
+      <DependentUpon>Frm_QM_HACCPResult.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_HACCPStd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_HACCPStd.designer.cs">
+      <DependentUpon>Frm_QM_HACCPStd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_ExamResultDaily.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_ExamResultDaily.designer.cs">
+      <DependentUpon>Frm_QM_ExamResultDaily.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_NonConformanceView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_NonConformanceView.designer.cs">
+      <DependentUpon>Frm_QM_NonConformanceView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_NonConformance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_NonConformance.designer.cs">
+      <DependentUpon>Frm_QM_NonConformance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\SM\Frm_SM_Corp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\SM\Frm_SM_Corp.designer.cs">
+      <DependentUpon>Frm_SM_Corp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\EQ\Frm_EQ_Machine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\EQ\Frm_EQ_Machine.Designer.cs">
+      <DependentUpon>Frm_EQ_Machine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_ItemPrice_Cust.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_ItemPrice_Cust.Designer.cs">
+      <DependentUpon>Frm_CM_ItemPrice_Cust.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_Process.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_Process.Designer.cs">
+      <DependentUpon>Frm_CM_Process.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_Item.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_Item.designer.cs">
+      <DependentUpon>Frm_CM_Item.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\EQ\Frm_EQ_Inspection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\EQ\Frm_EQ_Inspection.designer.cs">
+      <DependentUpon>Frm_EQ_Inspection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_ItemExamMgnt_ItemCopy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_ItemExamMgnt_ItemCopy.designer.cs">
+      <DependentUpon>Frm_QM_ItemExamMgnt_ItemCopy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_PartList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_PartList.designer.cs">
+      <DependentUpon>Frm_CM_PartList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_ExcelUpLoad_ItemlPrice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_ExcelUpLoad_ItemlPrice.designer.cs">
+      <DependentUpon>Frm_CM_ExcelUpLoad_ItemlPrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Common\Frm_FileDownloader.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Common\Frm_FileDownloader.designer.cs">
+      <DependentUpon>Frm_FileDownloader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Common\Frm_FilesUploader.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Common\Frm_FilesUploader.designer.cs">
+      <DependentUpon>Frm_FilesUploader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Common\Frm_PictureEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Common\Frm_PictureEdit.Designer.cs">
+      <DependentUpon>Frm_PictureEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Common\Frm_RptDesingner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Common\Frm_RptDesingner.Designer.cs">
+      <DependentUpon>Frm_RptDesingner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\IF\Frm_IF_DGPView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\IF\Frm_IF_DGPView.designer.cs">
+      <DependentUpon>Frm_IF_DGPView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\IF\Frm_IF_PLCManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\IF\Frm_IF_PLCManager.designer.cs">
+      <DependentUpon>Frm_IF_PLCManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\IF\Frm_IF_PLCSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\IF\Frm_IF_PLCSetting.designer.cs">
+      <DependentUpon>Frm_IF_PLCSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_LineProcessWorker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_LineProcessWorker.Designer.cs">
+      <DependentUpon>Frm_CM_LineProcessWorker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_Worker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_Worker.Designer.cs">
+      <DependentUpon>Frm_CM_Worker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\EQ\Frm_EQ_MachineDowntime.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\EQ\Frm_EQ_MachineDowntime.designer.cs">
+      <DependentUpon>Frm_EQ_MachineDowntime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_Line.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_Line.designer.cs">
+      <DependentUpon>Frm_CM_Line.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_ExamMgnt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_ExamMgnt.designer.cs">
+      <DependentUpon>Frm_QM_ExamMgnt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_ItemExamMgnt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_ItemExamMgnt.Designer.cs">
+      <DependentUpon>Frm_QM_ItemExamMgnt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_ItemExamMgnt_Quantity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_ItemExamMgnt_Quantity.designer.cs">
+      <DependentUpon>Frm_QM_ItemExamMgnt_Quantity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_ItemImage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_ItemImage.designer.cs">
+      <DependentUpon>Frm_CM_ItemImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\EQ\Frm_EQ_MachineChkStd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\EQ\Frm_EQ_MachineChkStd.designer.cs">
+      <DependentUpon>Frm_EQ_MachineChkStd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_ExcelUpLoad_Customer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_ExcelUpLoad_Customer.designer.cs">
+      <DependentUpon>Frm_CM_ExcelUpLoad_Customer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_ExcelUpLoad_Material.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_ExcelUpLoad_Material.designer.cs">
+      <DependentUpon>Frm_CM_ExcelUpLoad_Material.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_ExcelUpLoad_Item.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_ExcelUpLoad_Item.designer.cs">
+      <DependentUpon>Frm_CM_ExcelUpLoad_Item.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Lookup\Frm_LookUpPurchase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Lookup\Frm_LookUpPurchase.Designer.cs">
+      <DependentUpon>Frm_LookUpPurchase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PM\Frm_PM_Forecasting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PM\Frm_PM_Forecasting.Designer.cs">
+      <DependentUpon>Frm_PM_Forecasting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PM\Frm_PM_OrderResultView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PM\Frm_PM_OrderResultView.designer.cs">
+      <DependentUpon>Frm_PM_OrderResultView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PM\Frm_PM_OrderProcessResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PM\Frm_PM_OrderProcessResult.designer.cs">
+      <DependentUpon>Frm_PM_OrderProcessResult.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PM\Frm_PM_OrderProcessView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PM\Frm_PM_OrderProcessView.designer.cs">
+      <DependentUpon>Frm_PM_OrderProcessView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PM\Frm_PM_OrderProcess_MC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PM\Frm_PM_OrderProcess_MC.designer.cs">
+      <DependentUpon>Frm_PM_OrderProcess_MC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PM\Frm_PM_ProductPlan_Indiv.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PM\Frm_PM_ProductPlan_Indiv.designer.cs">
+      <DependentUpon>Frm_PM_ProductPlan_Indiv.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PM\Frm_PM_ProductPlan_SdOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PM\Frm_PM_ProductPlan_SdOrder.designer.cs">
+      <DependentUpon>Frm_PM_ProductPlan_SdOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PM\Frm_PM_ProductPlanView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PM\Frm_PM_ProductPlanView.designer.cs">
+      <DependentUpon>Frm_PM_ProductPlanView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PM\Frm_PM_ProductPlanShortageView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PM\Frm_PM_ProductPlanShortageView.Designer.cs">
+      <DependentUpon>Frm_PM_ProductPlanShortageView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PM\Popup\Frm_PM_BadQty.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PM\Popup\Frm_PM_BadQty.Designer.cs">
+      <DependentUpon>Frm_PM_BadQty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\SM\Frm_SM_Notice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\SM\Frm_SM_Notice.designer.cs">
+      <DependentUpon>Frm_SM_Notice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\EQ\Frm_EQ_MachineWorkHistoryView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\EQ\Frm_EQ_MachineWorkHistoryView.Designer.cs">
+      <DependentUpon>Frm_EQ_MachineWorkHistoryView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\EQ\Frm_EQ_MachineWorkHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\EQ\Frm_EQ_MachineWorkHistory.Designer.cs">
+      <DependentUpon>Frm_EQ_MachineWorkHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_SalesAnalysis_View_TypeA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_SalesAnalysis_View_TypeA.designer.cs">
+      <DependentUpon>Frm_MM_SalesAnalysis_View_TypeA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_PurchaseAnalysis_View_TypeA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_PurchaseAnalysis_View_TypeA.designer.cs">
+      <DependentUpon>Frm_MM_PurchaseAnalysis_View_TypeA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PM\Popup\Frm_PM_OrderResultWorker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PM\Popup\Frm_PM_OrderResultWorker.Designer.cs">
+      <DependentUpon>Frm_PM_OrderResultWorker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PM\Frm_PM_OrderProcess_Indiv.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PM\Frm_PM_OrderProcess_Indiv.designer.cs">
+      <DependentUpon>Frm_PM_OrderProcess_Indiv.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PM\Frm_PM_OrderResult_MatInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PM\Frm_PM_OrderResult_MatInput.designer.cs">
+      <DependentUpon>Frm_PM_OrderResult_MatInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PM\Rpt\RptWorkStdSheet_UAG.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\PM\Rpt\RptWorkStdSheet_UAG.designer.cs">
+      <DependentUpon>RptWorkStdSheet_UAG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PM\Rpt\RptWorkOrderReport_RND.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\PM\Rpt\RptWorkOrderReport_RND.designer.cs">
+      <DependentUpon>RptWorkOrderReport_RND.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Monitoring\Machine\Frm_PM_MachineOperatingRate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Monitoring\Machine\Frm_PM_MachineOperatingRate.designer.cs">
+      <DependentUpon>Frm_PM_MachineOperatingRate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Monitoring\Machine\Frm_PM_MachineProgress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Monitoring\Machine\Frm_PM_MachineProgress.designer.cs">
+      <DependentUpon>Frm_PM_MachineProgress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MM\Popup\Frm_PlacingItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MM\Popup\Frm_PlacingItem.Designer.cs">
+      <DependentUpon>Frm_PlacingItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MM\Popup\Frm_SelectItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MM\Popup\Frm_SelectItem.Designer.cs">
+      <DependentUpon>Frm_SelectItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MM\Rpt\RptPO_ALLTHEN_Eng.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\MM\Rpt\RptPO_ALLTHEN_Eng.Designer.cs">
+      <DependentUpon>RptPO_ALLTHEN_Eng.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MM\Rpt\RptPO_ALLTHEN.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\MM\Rpt\RptPO_ALLTHEN.Designer.cs">
+      <DependentUpon>RptPO_ALLTHEN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MM\Rpt\RptPO_UAG.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\MM\Rpt\RptPO_UAG.Designer.cs">
+      <DependentUpon>RptPO_UAG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MM\Rpt\RptPO_RND.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\MM\Rpt\RptPO_RND.Designer.cs">
+      <DependentUpon>RptPO_RND.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MM\Rpt\RptPO_DOOIL.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\MM\Rpt\RptPO_DOOIL.Designer.cs">
+      <DependentUpon>RptPO_DOOIL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MM\Rpt\RptPO_TPG.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\MM\Rpt\RptPO_TPG.Designer.cs">
+      <DependentUpon>RptPO_TPG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MM\Frm_MM_MaterialOutD_TypeA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MM\Frm_MM_MaterialOutD_TypeA.Designer.cs">
+      <DependentUpon>Frm_MM_MaterialOutD_TypeA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MM\Frm_MM_PurchaseD_BarCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MM\Frm_MM_PurchaseD_BarCode.Designer.cs">
+      <DependentUpon>Frm_MM_PurchaseD_BarCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MM\Frm_MM_PurchaseD_TypeA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MM\Frm_MM_PurchaseD_TypeA.Designer.cs">
+      <DependentUpon>Frm_MM_PurchaseD_TypeA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_WorkDefectList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_WorkDefectList.designer.cs">
+      <DependentUpon>Frm_QM_WorkDefectList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_LOTTracking.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_LOTTracking.designer.cs">
+      <DependentUpon>Frm_LOTTracking.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_PopupMeasure.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_PopupMeasure.Designer.cs">
+      <DependentUpon>Frm_PopupMeasure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_ExamResult_TypeA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_ExamResult_TypeA.designer.cs">
+      <DependentUpon>Frm_QM_ExamResult_TypeA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_ExamResult_Print.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_ExamResult_Print.designer.cs">
+      <DependentUpon>Frm_QM_ExamResult_Print.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_ExamResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_ExamResult.designer.cs">
+      <DependentUpon>Frm_QM_ExamResult.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MM\Frm_MM_MaterialOutView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MM\Frm_MM_MaterialOutView.Designer.cs">
+      <DependentUpon>Frm_MM_MaterialOutView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Rpt\RptIQC_ALLTHEN_B.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\QM\Rpt\RptIQC_ALLTHEN_B.designer.cs">
+      <DependentUpon>RptIQC_ALLTHEN_B.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Rpt\RptIQC_ALLTHEN_A.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\QM\Rpt\RptIQC_ALLTHEN_A.designer.cs">
+      <DependentUpon>RptIQC_ALLTHEN_A.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Rpt\RptDaliyQC_TPG.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\QM\Rpt\RptDaliyQC_TPG.designer.cs">
+      <DependentUpon>RptDaliyQC_TPG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Rpt\RptIQC_TPG.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\QM\Rpt\RptIQC_TPG.designer.cs">
+      <DependentUpon>RptIQC_TPG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Rpt\RptOQC_KNP.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\QM\Rpt\RptOQC_KNP.designer.cs">
+      <DependentUpon>RptOQC_KNP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Rpt\RptOQC_TPG.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\QM\Rpt\RptOQC_TPG.designer.cs">
+      <DependentUpon>RptOQC_TPG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Rpt\RptOQC_UAG.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\QM\Rpt\RptOQC_UAG.designer.cs">
+      <DependentUpon>RptOQC_UAG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Rpt\RptOQC_v1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\QM\Rpt\RptOQC_v1.designer.cs">
+      <DependentUpon>RptOQC_v1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Rpt\RptOQC_v2.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\QM\Rpt\RptOQC_v2.designer.cs">
+      <DependentUpon>RptOQC_v2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Rpt\RptOQC_v3.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\QM\Rpt\RptOQC_v3.designer.cs">
+      <DependentUpon>RptOQC_v3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_SdOrderD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_SdOrderD.designer.cs">
+      <DependentUpon>Frm_BM_SdOrderD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_SdOrderView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_SdOrderView.designer.cs">
+      <DependentUpon>Frm_BM_SdOrderView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_SdOrder_1Grid.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_SdOrder_1Grid.designer.cs">
+      <DependentUpon>Frm_BM_SdOrder_1Grid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_Sales_1Grid_Lot.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_Sales_1Grid_Lot.designer.cs">
+      <DependentUpon>Frm_BM_Sales_1Grid_Lot.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_Return_LOT.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_Return_LOT.designer.cs">
+      <DependentUpon>Frm_BM_Return_LOT.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_Estimate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_Estimate.designer.cs">
+      <DependentUpon>Frm_BM_Estimate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_SdOrder_MD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_SdOrder_MD.designer.cs">
+      <DependentUpon>Frm_BM_SdOrder_MD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Lookup\Frm_LookUpDBBackup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Lookup\Frm_LookUpDBBackup.Designer.cs">
+      <DependentUpon>Frm_LookUpDBBackup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Lookup\Frm_LookUpNotice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Lookup\Frm_LookUpNotice.designer.cs">
+      <DependentUpon>Frm_LookUpNotice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Lookup\Frm_LookUpSales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Lookup\Frm_LookUpSales.designer.cs">
+      <DependentUpon>Frm_LookUpSales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Lookup\Frm_SelectPM_ProductPlan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Lookup\Frm_SelectPM_ProductPlan.designer.cs">
+      <DependentUpon>Frm_SelectPM_ProductPlan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\EQ\Frm_EQ_MachineRepairView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\EQ\Frm_EQ_MachineRepairView.designer.cs">
+      <DependentUpon>Frm_EQ_MachineRepairView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\EQ\Frm_EQ_MachineRepair.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\EQ\Frm_EQ_MachineRepair.designer.cs">
+      <DependentUpon>Frm_EQ_MachineRepair.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\EQ\Frm_EQ_Operation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\EQ\Frm_EQ_Operation.Designer.cs">
+      <DependentUpon>Frm_EQ_Operation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\EQ\Frm_EQ_OperationDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\EQ\Frm_EQ_OperationDetail.Designer.cs">
+      <DependentUpon>Frm_EQ_OperationDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\EQ\Frm_EQ_SetProcessConditionInsert.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\EQ\Frm_EQ_SetProcessConditionInsert.designer.cs">
+      <DependentUpon>Frm_EQ_SetProcessConditionInsert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\EQ\Frm_EQ_DailyCheckView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\EQ\Frm_EQ_DailyCheckView.designer.cs">
+      <DependentUpon>Frm_EQ_DailyCheckView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\EQ\Frm_EQ_MachineMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\EQ\Frm_EQ_MachineMaster.Designer.cs">
+      <DependentUpon>Frm_EQ_MachineMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\EQ\Frm_EQ_MachineChk.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\EQ\Frm_EQ_MachineChk.Designer.cs">
+      <DependentUpon>Frm_EQ_MachineChk.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\EQ\Frm_EQ_Machine_DailyCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\EQ\Frm_EQ_Machine_DailyCheck.Designer.cs">
+      <DependentUpon>Frm_EQ_Machine_DailyCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\EQ\Frm_EQ_MTTRView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\EQ\Frm_EQ_MTTRView.designer.cs">
+      <DependentUpon>Frm_EQ_MTTRView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_BadAnalysis_View.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_BadAnalysis_View.designer.cs">
+      <DependentUpon>Frm_MM_BadAnalysis_View.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_Bad_ChkView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_Bad_ChkView.designer.cs">
+      <DependentUpon>Frm_MM_Bad_ChkView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_Entire_ByItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_Entire_ByItem.designer.cs">
+      <DependentUpon>Frm_MM_Entire_ByItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_Entire_View.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_Entire_View.designer.cs">
+      <DependentUpon>Frm_MM_Entire_View.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_ProductAnalysis_Machine_View.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_ProductAnalysis_Machine_View.designer.cs">
+      <DependentUpon>Frm_MM_ProductAnalysis_Machine_View.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_ProductAnalysis_View.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_ProductAnalysis_View.designer.cs">
+      <DependentUpon>Frm_MM_ProductAnalysis_View.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_PurchaseAnalysis_View.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_PurchaseAnalysis_View.designer.cs">
+      <DependentUpon>Frm_MM_PurchaseAnalysis_View.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_SalesAnalysis_View.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Management\Frm_MM_SalesAnalysis_View.designer.cs">
+      <DependentUpon>Frm_MM_SalesAnalysis_View.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Monitoring\Frm_PM_ItemPerformance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Monitoring\Frm_PM_ItemPerformance.designer.cs">
+      <DependentUpon>Frm_PM_ItemPerformance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Monitoring\Frm_PM_ProductionQty.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Monitoring\Frm_PM_ProductionQty.designer.cs">
+      <DependentUpon>Frm_PM_ProductionQty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_Class.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_Class.designer.cs">
+      <DependentUpon>Frm_CM_Class.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_DefectCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_DefectCode.designer.cs">
+      <DependentUpon>Frm_CM_DefectCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_ClassItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_ClassItem.designer.cs">
+      <DependentUpon>Frm_CM_ClassItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_Customer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_Customer.designer.cs">
+      <DependentUpon>Frm_CM_Customer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_Warehouse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_Warehouse.Designer.cs">
+      <DependentUpon>Frm_CM_Warehouse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ucBomConditionInsert.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucBomConditionInsert.Designer.cs">
+      <DependentUpon>ucBomConditionInsert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Monitoring\Machine\Frm_Stock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Monitoring\Machine\Frm_Stock.Designer.cs">
+      <DependentUpon>Frm_Stock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ucTitle.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UcTitle.Designer.cs">
+      <DependentUpon>ucTitle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Monitoring\Frm_PM_ProductionPorgress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Monitoring\Frm_PM_ProductionPorgress.designer.cs">
+      <DependentUpon>Frm_PM_ProductionPorgress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Monitoring\UCDGP3.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Monitoring\UCDGP3.Designer.cs">
+      <DependentUpon>UCDGP3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Monitoring\XtraForm6.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Monitoring\XtraForm6.Designer.cs">
+      <DependentUpon>XtraForm6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Common\Frm_PDFViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Common\Frm_PDFViewer.designer.cs">
+      <DependentUpon>Frm_PDFViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MM\Frm_MM_Placing_SdOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MM\Frm_MM_Placing_SdOrder.designer.cs">
+      <DependentUpon>Frm_MM_Placing_SdOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MM\Frm_MM_PlacingD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MM\Frm_MM_PlacingD.designer.cs">
+      <DependentUpon>Frm_MM_PlacingD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MM\Frm_MM_PlacingView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MM\Frm_MM_PlacingView.designer.cs">
+      <DependentUpon>Frm_MM_PlacingView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MM\Frm_MM_Placing_MD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MM\Frm_MM_Placing_MD.designer.cs">
+      <DependentUpon>Frm_MM_Placing_MD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MM\Frm_MM_Placing_NotInList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MM\Frm_MM_Placing_NotInList.Designer.cs">
+      <DependentUpon>Frm_MM_Placing_NotInList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MM\Frm_MM_MaterialOut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MM\Frm_MM_MaterialOut.Designer.cs">
+      <DependentUpon>Frm_MM_MaterialOut.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MM\Frm_MM_PurchaseView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MM\Frm_MM_PurchaseView.designer.cs">
+      <DependentUpon>Frm_MM_PurchaseView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Dash\DashKPI.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\QM\Dash\DashKPI.designer.cs">
+      <DependentUpon>DashKPI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Dash\DsKPIDATA.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DsKPIDATA.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_ProductInspectionPdf.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_ProductInspectionPdf.designer.cs">
+      <DependentUpon>Frm_QM_ProductInspectionPdf.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_WorkDefectView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_WorkDefectView.designer.cs">
+      <DependentUpon>Frm_QM_WorkDefectView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_WorkDefect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_WorkDefect.designer.cs">
+      <DependentUpon>Frm_QM_WorkDefect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_KPIDashViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_KPIDashViewer.designer.cs">
+      <DependentUpon>Frm_KPIDashViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_InspectionReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_InspectionReport.Designer.cs">
+      <DependentUpon>Frm_QM_InspectionReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_MillSheet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_MillSheet.Designer.cs">
+      <DependentUpon>Frm_MillSheet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_MillSheet_pdf.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_MillSheet_pdf.designer.cs">
+      <DependentUpon>Frm_MillSheet_pdf.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_4MChange_Confirm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_4MChange_Confirm.Designer.cs">
+      <DependentUpon>Frm_QM_4MChange_Confirm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_4MChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_4MChange.Designer.cs">
+      <DependentUpon>Frm_QM_4MChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_ExamResult_InView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_ExamResult_InView.designer.cs">
+      <DependentUpon>Frm_QM_ExamResult_InView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_ExamResult_PQCView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_QM_ExamResult_PQCView.designer.cs">
+      <DependentUpon>Frm_QM_ExamResult_PQCView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\QM\Frm_XRChart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\QM\Frm_XRChart.designer.cs">
+      <DependentUpon>Frm_XRChart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_EstimateD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_EstimateD.designer.cs">
+      <DependentUpon>Frm_BM_EstimateD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_Sales_1Grid.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_Sales_1Grid.designer.cs">
+      <DependentUpon>Frm_BM_Sales_1Grid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_SdOrder_SaleView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_SdOrder_SaleView.designer.cs">
+      <DependentUpon>Frm_BM_SdOrder_SaleView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_Sales_TradingStatement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_Sales_TradingStatement.designer.cs">
+      <DependentUpon>Frm_BM_Sales_TradingStatement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_SalesView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_SalesView.designer.cs">
+      <DependentUpon>Frm_BM_SalesView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_Estimate_File.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_Estimate_File.designer.cs">
+      <DependentUpon>Frm_BM_Estimate_File.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BM\Popup\Frm_BM_SdOrder_Item.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BM\Popup\Frm_BM_SdOrder_Item.Designer.cs">
+      <DependentUpon>Frm_BM_SdOrder_Item.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BM\Popup\Frm_ExRate_smbs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BM\Popup\Frm_ExRate_smbs.designer.cs">
+      <DependentUpon>Frm_ExRate_smbs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BM\Rpt\Rpt_ReqSales_TPG.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\BM\Rpt\Rpt_ReqSales_TPG.designer.cs">
+      <DependentUpon>Rpt_ReqSales_TPG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BM\Rpt\Rpt_Estimate_TPG.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\BM\Rpt\Rpt_Estimate_TPG.designer.cs">
+      <DependentUpon>Rpt_Estimate_TPG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BM\Rpt\RptAcceptanceReceipt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\BM\Rpt\RptAcceptanceReceipt.designer.cs">
+      <DependentUpon>RptAcceptanceReceipt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BM\Rpt\Rpt_InVoice_TPG.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\BM\Rpt\Rpt_InVoice_TPG.designer.cs">
+      <DependentUpon>Rpt_InVoice_TPG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\BM\Rpt\Rpt_InVoice.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\BM\Rpt\Rpt_InVoice.designer.cs">
+      <DependentUpon>Rpt_InVoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ST\Frm_ST_ExcelUpLoad_Base.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ST\Frm_ST_ExcelUpLoad_Base.designer.cs">
+      <DependentUpon>Frm_ST_ExcelUpLoad_Base.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ST\Frm_ST_MonthlyItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ST\Frm_ST_MonthlyItem.Designer.cs">
+      <DependentUpon>Frm_ST_MonthlyItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ST\Frm_ST_DailyItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ST\Frm_ST_DailyItem.Designer.cs">
+      <DependentUpon>Frm_ST_DailyItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ST\Frm_ST_StockBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ST\Frm_ST_StockBase.designer.cs">
+      <DependentUpon>Frm_ST_StockBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ST\Frm_ST_StockInOutTotalQty.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ST\Frm_ST_StockInOutTotalQty.Designer.cs">
+      <DependentUpon>Frm_ST_StockInOutTotalQty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ST\Frm_ST_StockInOutTotal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ST\Frm_ST_StockInOutTotal.Designer.cs">
+      <DependentUpon>Frm_ST_StockInOutTotal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ST\Frm_ST_StockInOutLIst.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ST\Frm_ST_StockInOutLIst.Designer.cs">
+      <DependentUpon>Frm_ST_StockInOutLIst.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ST\Frm_ST_StockD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ST\Frm_ST_StockD.designer.cs">
+      <DependentUpon>Frm_ST_StockD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ST\Frm_ST_StockList_Product.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ST\Frm_ST_SemiFinishedDisposal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ST\Frm_ST_SemiFinishedDisposal.Designer.cs">
+      <DependentUpon>Frm_ST_SemiFinishedDisposal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ST\Frm_ST_StockList_Product.designer.cs">
+      <DependentUpon>Frm_ST_StockList_Product.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ST\Frm_ST_StockList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ST\Frm_ST_StockList.designer.cs">
+      <DependentUpon>Frm_ST_StockList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ST\Frm_ST_StockLotView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ST\Frm_ST_StockLotView.designer.cs">
+      <DependentUpon>Frm_ST_StockLotView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ST\Frm_ST_StockAdj_LOT.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ST\Frm_ST_StockAdj_LOT.designer.cs">
+      <DependentUpon>Frm_ST_StockAdj_LOT.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ST\Frm_ST_StockAdj.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ST\Frm_ST_StockAdj.designer.cs">
+      <DependentUpon>Frm_ST_StockAdj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MM\Frm_MM_DailyMaterial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MM\Frm_MM_DailyMaterial.Designer.cs">
+      <DependentUpon>Frm_MM_DailyMaterial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MM\Frm_MM_MonthlyMaterial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MM\Frm_MM_MonthlyMaterial.Designer.cs">
+      <DependentUpon>Frm_MM_MonthlyMaterial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\SM\Frm_SM_NoticeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\SM\Frm_SM_NoticeView.designer.cs">
+      <DependentUpon>Frm_SM_NoticeView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\SM\Frm_SM_LoginHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\SM\Frm_SM_LoginHistory.designer.cs">
+      <DependentUpon>Frm_SM_LoginHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\SM\Frm_SM_FontChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\SM\Frm_SM_FontChange.designer.cs">
+      <DependentUpon>Frm_SM_FontChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\SM\Frm_SM_Quick.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\SM\Frm_SM_Quick.Designer.cs">
+      <DependentUpon>Frm_SM_Quick.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\SM\Frm_SM_CodeOption.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\SM\Frm_SM_CodeOption.designer.cs">
+      <DependentUpon>Frm_SM_CodeOption.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\SM\Frm_SM_Backup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\SM\Frm_SM_Backup.designer.cs">
+      <DependentUpon>Frm_SM_Backup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\IF\Frm_IF_ApiHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\IF\Frm_IF_ApiHistory.designer.cs">
+      <DependentUpon>Frm_IF_ApiHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\SM\Frm_SM_SystemOption.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\SM\Frm_SM_SystemOption.designer.cs">
+      <DependentUpon>Frm_SM_SystemOption.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ucMachineManufacture.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucMachineManufacture.Designer.cs">
+      <DependentUpon>ucMachineManufacture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MM\Frm_MM_Purchase_MD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MM\Frm_MM_Purchase_MD.Designer.cs">
+      <DependentUpon>Frm_MM_Purchase_MD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\SM\Frm_SM_AuthorGroup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\SM\Frm_SM_AuthorGroup.designer.cs">
+      <DependentUpon>Frm_SM_AuthorGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\SM\Frm_SM_PasswordChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\SM\Frm_SM_PasswordChange.designer.cs">
+      <DependentUpon>Frm_SM_PasswordChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_Dept.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_Dept.Designer.cs">
+      <DependentUpon>Frm_CM_Dept.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\SM\Frm_SM_MenuGroup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\SM\Frm_SM_MenuGroup.Designer.cs">
+      <DependentUpon>Frm_SM_MenuGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\SM\Frm_SM_User.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\SM\Frm_SM_User.designer.cs">
+      <DependentUpon>Frm_SM_User.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_Routing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CM\Frm_CM_Routing.Designer.cs">
+      <DependentUpon>Frm_CM_Routing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\WrSyncWork.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\WrSyncWork.designer.cs">
+      <DependentUpon>WrSyncWork.cs</DependentUpon>
+    </Compile>
+    <Content Include="YOZM_favicon.ico" />
+    <None Include="packages.config" />
+    <None Include="Resources\Actions_Bookmark.svg" />
+    <None Include="Resources\SF로고원본ai파일%28투명%29309x69.png" />
+    <None Include="Resources\open.svg" />
+    <None Include="Resources\shopping_delivery.svg" />
+    <None Include="Resources\logo_GJY.gif" />
+    <None Include="Resources\sankey.bmp" />
+    <Content Include="Resources\YOZM_favicon.ico" />
+    <Content Include="S-MES_ver3.ico" />
+    <Content Include="SMESicon.ico" />
+    <None Include="Resources\sendfile_16x16.png" />
+    <None Include="Resources\excel_16X16.png" />
+    <None Include="Resources\export_16x16.png" />
+    <None Include="Resources\save_16x16.png" />
+    <None Include="Resources\lock94.png" />
+    <None Include="Resources\lock.png" />
+    <None Include="Resources\person.png" />
+    <None Include="Resources\hosung_logo.png" />
+    <None Include="Resources\corporation18.png" />
+    <None Include="Resources\back.png" />
+    <None Include="Properties\valve %281%29.png" />
+    <None Include="Resources\alignjustify_16x161.png" />
+    <None Include="Resources\alignjustify.svg" />
+    <None Include="Resources\alignjustify_16x16.png" />
+    <None Include="Resources\cancel_16x162.png" />
+    <None Include="Resources\exporttoxlsx_16x16.png" />
+    <None Include="Resources\add_16x161.png" />
+    <None Include="Resources\zoom_16x167.png" />
+    <None Include="Resources\편집2_16.png" />
+    <None Include="Resources\검사-20.png" />
+    <None Include="Resources\승인-20.png" />
+    <None Include="Resources\취소-20.png" />
+    <None Include="Resources\excel-16.png" />
+    <None Include="Resources\excel-20.png" />
+    <None Include="Resources\excel-24.png" />
+    <None Include="Resources\ms-엑셀2-16.png" />
+    <None Include="Resources\ms-엑셀-16.png" />
+    <None Include="Resources\restartarrow-20.png" />
+    <None Include="Resources\restart-20.png" />
+    <None Include="Resources\restart-16.png" />
+    <None Include="Resources\RedCircle.png" />
+    <None Include="Resources\GreenCircle.png" />
+    <None Include="Resources\BlueCircle.png" />
+    <EmbeddedResource Include="Frm_Login.resx">
+      <DependentUpon>Frm_Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_Main.resx">
+      <DependentUpon>Frm_Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_SettingConntionDB.resx">
+      <DependentUpon>Frm_SettingConntionDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="UserControls\Btn_ExcelDown_ALL.resx">
+      <DependentUpon>Btn_ExcelDown_ALL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_MainBoard.resx">
+      <DependentUpon>Frm_MainBoard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptInspection.resx">
+      <DependentUpon>rptInspection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptWorkOrder.resx">
+      <DependentUpon>rptWorkOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UCDGP.resx">
+      <DependentUpon>UCDGP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UCDGP2.resx">
+      <DependentUpon>UCDGP2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucFilterControl.resx">
+      <DependentUpon>ucFilterControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Ai\Frm_Ai_Document.resx">
+      <DependentUpon>Frm_Ai_Document.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Ai\Frm_Ai_DocumentView.resx">
+      <DependentUpon>Frm_Ai_DocumentView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Ai\Frm_Ai_Template.resx">
+      <DependentUpon>Frm_Ai_Template.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Ai_Demand\Frm_Demand_Accuracy.resx">
+      <DependentUpon>Frm_Demand_Accuracy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Ai_Demand\Frm_Demand_ApiAlertConfig.resx">
+      <DependentUpon>Frm_Demand_ApiAlertConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Ai_Demand\Frm_Demand_ApiDataAdjust.resx">
+      <DependentUpon>Frm_Demand_ApiDataAdjust.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Ai_Demand\Frm_Demand_ApiDataView.resx">
+      <DependentUpon>Frm_Demand_ApiDataView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Ai_Demand\Frm_Demand_ApiData.resx">
+      <DependentUpon>Frm_Demand_ApiData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Ai_Demand\Frm_Demand_DateView.resx">
+      <DependentUpon>Frm_Demand_DateView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Ai_Demand\Frm_Demand_Condition.resx">
+      <DependentUpon>Frm_Demand_Condition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Ai_Demand\Frm_Demand_Document.resx">
+      <DependentUpon>Frm_Demand_Document.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Analysis\Frm_AN_BadType.resx">
+      <DependentUpon>Frm_AN_BadType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Analysis\Frm_AN_Capacity_ByMonth.resx">
+      <DependentUpon>Frm_AN_Capacity_ByMonth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Analysis\Frm_AN_Machine_ProductView.resx">
+      <DependentUpon>Frm_AN_Machine_ProductView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Analysis\Frm_AN_Plan_ProductView.resx">
+      <DependentUpon>Frm_AN_Plan_ProductView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Analysis\Frm_AN_Work_LineView.resx">
+      <DependentUpon>Frm_AN_Work_LineView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Analysis\Frm_AN_ProductMachine.resx">
+      <DependentUpon>Frm_AN_ProductMachine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Analysis\Frm_AN_Bad_ChkView.resx">
+      <DependentUpon>Frm_AN_Bad_ChkView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Analysis\Frm_AN_DefectType.resx">
+      <DependentUpon>Frm_AN_DefectType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BM\Frm_BM_OrderOutDetail.resx">
+      <DependentUpon>Frm_BM_OrderOutDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BM\Frm_BM_SampleOutView.resx">
+      <DependentUpon>Frm_BM_SampleOutView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BM\Frm_BM_SampleOut.resx">
+      <DependentUpon>Frm_BM_SampleOut.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BM\Frm_BM_SdOrderView_Shortage.resx">
+      <DependentUpon>Frm_BM_SdOrderView_Shortage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Chatbot\FrmChatAI.resx">
+      <DependentUpon>FrmChatAI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Chatbot\ChatMain_V2.resx">
+      <DependentUpon>ChatMain_V2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Chatbot\ChatMain.resx">
+      <DependentUpon>ChatMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Chatbot\FrmChatBotView.resx">
+      <DependentUpon>FrmChatBotView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Chatbot\FrmChatbot_AI_TEST.resx">
+      <DependentUpon>FrmChatbot_AI_TEST.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Chatbot\FrmChatbot_AI.resx">
+      <DependentUpon>FrmChatbot_AI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Chatbot\FrmKnowledgeBase.resx">
+      <DependentUpon>FrmKnowledgeBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Chatbot\Frm_Chat_ResponseQuality.resx">
+      <DependentUpon>Frm_Chat_ResponseQuality.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Chatbot\Frm_Chat_ScenarioManagement.resx">
+      <DependentUpon>Frm_Chat_ScenarioManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CM\Frm_CM_CommonFile_Item.resx">
+      <DependentUpon>Frm_CM_CommonFile_Item.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CM\Frm_CM_CommonFile.resx">
+      <DependentUpon>Frm_CM_CommonFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CM\Frm_CM_BOMList.resx">
+      <DependentUpon>Frm_CM_BOMList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CM\Frm_CM_BOMView_Copy.resx">
+      <DependentUpon>Frm_CM_BOMView_Copy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CM\Frm_CM_ItemClass.resx">
+      <DependentUpon>Frm_CM_ItemClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\DTL\Frm_DT_Interface.resx">
+      <DependentUpon>Frm_DT_Interface.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\DTL\Frm_DT_DTLOrderResult.resx">
+      <DependentUpon>Frm_DT_DTLOrderResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\DTL\Frm_DT_Monitoring.resx">
+      <DependentUpon>Frm_DT_Monitoring.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\DTL\Frm_DT_Quality.resx">
+      <DependentUpon>Frm_DT_Quality.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\DTL\Frm_DT_LogView.resx">
+      <DependentUpon>Frm_DT_LogView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\DTL\Frm_DT_ProcessView.resx">
+      <DependentUpon>Frm_DT_ProcessView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\DTL\Frm_DT_MachineView.resx">
+      <DependentUpon>Frm_DT_MachineView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\DTL\Frm_DT_OrderProcessbyResult.resx">
+      <DependentUpon>Frm_DT_OrderProcessbyResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\DTL\Frm_DT_DataQuality.resx">
+      <DependentUpon>Frm_DT_DataQuality.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\EQ\Frm_EQ_NonOperatingType.resx">
+      <DependentUpon>Frm_EQ_NonOperatingType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BM\Frm_BM_OrderOutView.resx">
+      <DependentUpon>Frm_BM_OrderOutView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Lookup\Frm_LookUpItem.resx">
+      <DependentUpon>Frm_LookUpItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Lookup\Frm_LookUpSampleOut.resx">
+      <DependentUpon>Frm_LookUpSampleOut.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Management\Dash\BM_Dashboard1.resx">
+      <DependentUpon>BM_Dashboard1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Management\Frm_MM_Dashboard_Total1.resx">
+      <DependentUpon>Frm_MM_Dashboard_Total1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Management\Frm_MM_KPI_Product.resx">
+      <DependentUpon>Frm_MM_KPI_Product.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Management\Frm_MM_KPI_SdOrderSales.resx">
+      <DependentUpon>Frm_MM_KPI_SdOrderSales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Management\Frm_MM_Dashboard_Total.resx">
+      <DependentUpon>Frm_MM_Dashboard_Total.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Management\Frm_MM_Dashboard_MM.resx">
+      <DependentUpon>Frm_MM_Dashboard_MM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Management\Frm_MM_Dashboard_QM.resx">
+      <DependentUpon>Frm_MM_Dashboard_QM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Management\Frm_MM_Sales_View.resx">
+      <DependentUpon>Frm_MM_Sales_View.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Management\Frm_MM_Purchase_View.resx">
+      <DependentUpon>Frm_MM_Purchase_View.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MD\Frm_MD_MoldChk_Std.resx">
+      <DependentUpon>Frm_MD_MoldChk_Std.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MD\Frm_MD_MoldRepairImage.resx">
+      <DependentUpon>Frm_MD_MoldRepairImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MD\Frm_MD_Mold_ChkView.resx">
+      <DependentUpon>Frm_MD_Mold_ChkView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MD\Frm_MD_Mold_Chk.resx">
+      <DependentUpon>Frm_MD_Mold_Chk.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MD\Frm_MD_MoldChk_Daily.resx">
+      <DependentUpon>Frm_MD_MoldChk_Daily.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MD\Frm_MD_MoldHistory.resx">
+      <DependentUpon>Frm_MD_MoldHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MD\Frm_MD_Mold.resx">
+      <DependentUpon>Frm_MD_Mold.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MD\Frm_MD_MoldInOut.resx">
+      <DependentUpon>Frm_MD_MoldInOut.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MD\Frm_MD_MoldOut.resx">
+      <DependentUpon>Frm_MD_MoldOut.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MD\Frm_MD_Mold_Management.resx">
+      <DependentUpon>Frm_MD_Mold_Management.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MD\Frm_MD_MoldChk_Routine.resx">
+      <DependentUpon>Frm_MD_MoldChk_Routine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MD\Frm_MD_Mold_Wash.resx">
+      <DependentUpon>Frm_MD_Mold_Wash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MD\Rpt\Rpt_Mold_Management.resx">
+      <DependentUpon>Rpt_Mold_Management.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Monitoring\Frm_BM_SalesDashboard.resx">
+      <DependentUpon>Frm_BM_SalesDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Monitoring\Frm_EQ_MachineDashboard.resx">
+      <DependentUpon>Frm_EQ_MachineDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Monitoring\Frm_MM_QualityDashboard.resx">
+      <DependentUpon>Frm_MM_QualityDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Monitoring\Frm_PM_ProductionDashboard.resx">
+      <DependentUpon>Frm_PM_ProductionDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Monitoring\Frm_PM_Monitoring.resx">
+      <DependentUpon>Frm_PM_Monitoring.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Monitoring\Frm_MM_Entire_View.resx">
+      <DependentUpon>Frm_MM_Entire_View.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Monitoring\Machine\Frm_MM_MachineHistory.resx">
+      <DependentUpon>Frm_MM_MachineHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Monitoring\Machine\Frm_PM_MachinePerformance.resx">
+      <DependentUpon>Frm_PM_MachinePerformance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Monitoring\Frm_TotalMonitoring.resx">
+      <DependentUpon>Frm_TotalMonitoring.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Monitoring\Machine\Frm_PM_ProductionProgressMonitor.resx">
+      <DependentUpon>Frm_PM_ProductionProgressMonitor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Monitoring\Frm_MM_ProcCondition.resx">
+      <DependentUpon>Frm_MM_ProcCondition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PJ\Frm_PJ_ProjectView.resx">
+      <DependentUpon>Frm_PJ_ProjectView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PJ\Frm_PJ_ProjectMaster.resx">
+      <DependentUpon>Frm_PJ_ProjectMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PJ\Popup\Frm_PJ_CodeProjectPop.resx">
+      <DependentUpon>Frm_PJ_CodeProjectPop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_QM_4MChangeView.resx">
+      <DependentUpon>Frm_QM_4MChangeView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_QM_4MChange_ConfirmHistory.resx">
+      <DependentUpon>Frm_QM_4MChange_ConfirmHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_QM_NCDisposition.resx">
+      <DependentUpon>Frm_QM_NCDisposition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_QM_NCAction.resx">
+      <DependentUpon>Frm_QM_NCAction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_QM_LOTQCHistory.resx">
+      <DependentUpon>Frm_QM_LOTQCHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_QM_WorkDefectViewTypeWorker.resx">
+      <DependentUpon>Frm_QM_WorkDefectViewTypeWorker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_QM_WorkDefectViewTypeMachine.resx">
+      <DependentUpon>Frm_QM_WorkDefectViewTypeMachine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_QM_WorkDefectViewTypeProcess.resx">
+      <DependentUpon>Frm_QM_WorkDefectViewTypeProcess.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_QM_WorkDefectViewType.resx">
+      <DependentUpon>Frm_QM_WorkDefectViewType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Gauge\Frm_QM_GaugeCalibrationCertificate.resx">
+      <DependentUpon>Frm_QM_GaugeCalibrationCertificate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Gauge\Frm_QM_GaugeCalibrationHistory.resx">
+      <DependentUpon>Frm_QM_GaugeCalibrationHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Gauge\Frm_QM_GaugeCalibrationSchedule.resx">
+      <DependentUpon>Frm_QM_GaugeCalibrationSchedule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Gauge\Frm_QM_GaugeCalibration.resx">
+      <DependentUpon>Frm_QM_GaugeCalibration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Gauge\Frm_QM_GaugeView.resx">
+      <DependentUpon>Frm_QM_GaugeView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Gauge\Frm_QM_Gauge.resx">
+      <DependentUpon>Frm_QM_Gauge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_QM_HACCPResultView.resx">
+      <DependentUpon>Frm_QM_HACCPResultView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_QM_HACCPResult.resx">
+      <DependentUpon>Frm_QM_HACCPResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_QM_HACCPStd.resx">
+      <DependentUpon>Frm_QM_HACCPStd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_QM_ExamResultDaily.resx">
+      <DependentUpon>Frm_QM_ExamResultDaily.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_QM_NonConformanceView.resx">
+      <DependentUpon>Frm_QM_NonConformanceView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_QM_NonConformance.resx">
+      <DependentUpon>Frm_QM_NonConformance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\SM\Frm_SM_Corp.resx">
+      <DependentUpon>Frm_SM_Corp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\EQ\Frm_EQ_Machine.resx">
+      <DependentUpon>Frm_EQ_Machine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CM\Frm_CM_ItemPrice_Cust.resx">
+      <DependentUpon>Frm_CM_ItemPrice_Cust.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CM\Frm_CM_Process.resx">
+      <DependentUpon>Frm_CM_Process.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CM\Frm_CM_Item.resx">
+      <DependentUpon>Frm_CM_Item.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\EQ\Frm_EQ_Inspection.resx">
+      <DependentUpon>Frm_EQ_Inspection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_QM_ItemExamMgnt_ItemCopy.resx">
+      <DependentUpon>Frm_QM_ItemExamMgnt_ItemCopy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CM\Frm_CM_PartList.resx">
+      <DependentUpon>Frm_CM_PartList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CM\Frm_CM_ExcelUpLoad_ItemlPrice.resx">
+      <DependentUpon>Frm_CM_ExcelUpLoad_ItemlPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Common\Frm_FileDownloader.resx">
+      <DependentUpon>Frm_FileDownloader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Common\Frm_FilesUploader.resx">
+      <DependentUpon>Frm_FilesUploader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Common\Frm_PictureEdit.resx">
+      <DependentUpon>Frm_PictureEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Common\Frm_RptDesingner.resx">
+      <DependentUpon>Frm_RptDesingner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\IF\Frm_IF_DGPView.resx">
+      <DependentUpon>Frm_IF_DGPView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\IF\Frm_IF_PLCManager.resx">
+      <DependentUpon>Frm_IF_PLCManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\IF\Frm_IF_PLCSetting.resx">
+      <DependentUpon>Frm_IF_PLCSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CM\Frm_CM_LineProcessWorker.resx">
+      <DependentUpon>Frm_CM_LineProcessWorker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CM\Frm_CM_Worker.resx">
+      <DependentUpon>Frm_CM_Worker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\EQ\Frm_EQ_MachineDowntime.resx">
+      <DependentUpon>Frm_EQ_MachineDowntime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CM\Frm_CM_Line.resx">
+      <DependentUpon>Frm_CM_Line.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_QM_ExamMgnt.resx">
+      <DependentUpon>Frm_QM_ExamMgnt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_QM_ItemExamMgnt.resx">
+      <DependentUpon>Frm_QM_ItemExamMgnt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_QM_ItemExamMgnt_Quantity.resx">
+      <DependentUpon>Frm_QM_ItemExamMgnt_Quantity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CM\Frm_CM_ItemImage.resx">
+      <DependentUpon>Frm_CM_ItemImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\EQ\Frm_EQ_MachineChkStd.resx">
+      <DependentUpon>Frm_EQ_MachineChkStd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CM\Frm_CM_ExcelUpLoad_Customer.resx">
+      <DependentUpon>Frm_CM_ExcelUpLoad_Customer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CM\Frm_CM_ExcelUpLoad_Material.resx">
+      <DependentUpon>Frm_CM_ExcelUpLoad_Material.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CM\Frm_CM_ExcelUpLoad_Item.resx">
+      <DependentUpon>Frm_CM_ExcelUpLoad_Item.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Lookup\Frm_LookUpPurchase.resx">
+      <DependentUpon>Frm_LookUpPurchase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PM\Frm_PM_Forecasting.resx">
+      <DependentUpon>Frm_PM_Forecasting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PM\Frm_PM_OrderResultView.resx">
+      <DependentUpon>Frm_PM_OrderResultView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PM\Frm_PM_OrderProcessResult.resx">
+      <DependentUpon>Frm_PM_OrderProcessResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PM\Frm_PM_OrderProcessView.resx">
+      <DependentUpon>Frm_PM_OrderProcessView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PM\Frm_PM_OrderProcess_MC.resx">
+      <DependentUpon>Frm_PM_OrderProcess_MC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PM\Frm_PM_ProductPlan_Indiv.resx">
+      <DependentUpon>Frm_PM_ProductPlan_Indiv.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PM\Frm_PM_ProductPlan_SdOrder.resx">
+      <DependentUpon>Frm_PM_ProductPlan_SdOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PM\Frm_PM_ProductPlanView.resx">
+      <DependentUpon>Frm_PM_ProductPlanView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PM\Frm_PM_ProductPlanShortageView.resx">
+      <DependentUpon>Frm_PM_ProductPlanShortageView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PM\Popup\Frm_PM_BadQty.resx">
+      <DependentUpon>Frm_PM_BadQty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\SM\Frm_SM_Notice.resx">
+      <DependentUpon>Frm_SM_Notice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\EQ\Frm_EQ_MachineWorkHistoryView.resx">
+      <DependentUpon>Frm_EQ_MachineWorkHistoryView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\EQ\Frm_EQ_MachineWorkHistory.resx">
+      <DependentUpon>Frm_EQ_MachineWorkHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Management\Frm_MM_SalesAnalysis_View_TypeA.resx">
+      <DependentUpon>Frm_MM_SalesAnalysis_View_TypeA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Management\Frm_MM_PurchaseAnalysis_View_TypeA.resx">
+      <DependentUpon>Frm_MM_PurchaseAnalysis_View_TypeA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PM\Popup\Frm_PM_OrderResultWorker.resx">
+      <DependentUpon>Frm_PM_OrderResultWorker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PM\Frm_PM_OrderProcess_Indiv.resx">
+      <DependentUpon>Frm_PM_OrderProcess_Indiv.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PM\Frm_PM_OrderResult_MatInput.resx">
+      <DependentUpon>Frm_PM_OrderResult_MatInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PM\Rpt\RptWorkStdSheet_UAG.resx">
+      <DependentUpon>RptWorkStdSheet_UAG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PM\Rpt\RptWorkOrderReport_RND.resx">
+      <DependentUpon>RptWorkOrderReport_RND.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Monitoring\Machine\Frm_PM_MachineOperatingRate.resx">
+      <DependentUpon>Frm_PM_MachineOperatingRate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Monitoring\Machine\Frm_PM_MachineProgress.resx">
+      <DependentUpon>Frm_PM_MachineProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MM\Popup\Frm_PlacingItem.resx">
+      <DependentUpon>Frm_PlacingItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MM\Popup\Frm_SelectItem.resx">
+      <DependentUpon>Frm_SelectItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MM\Rpt\RptPO_ALLTHEN_Eng.resx">
+      <DependentUpon>RptPO_ALLTHEN_Eng.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MM\Rpt\RptPO_ALLTHEN.resx">
+      <DependentUpon>RptPO_ALLTHEN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MM\Rpt\RptPO_UAG.resx">
+      <DependentUpon>RptPO_UAG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MM\Rpt\RptPO_RND.resx">
+      <DependentUpon>RptPO_RND.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MM\Rpt\RptPO_DOOIL.resx">
+      <DependentUpon>RptPO_DOOIL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MM\Rpt\RptPO_TPG.resx">
+      <DependentUpon>RptPO_TPG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MM\Frm_MM_MaterialOutD_TypeA.resx">
+      <DependentUpon>Frm_MM_MaterialOutD_TypeA.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MM\Frm_MM_PurchaseD_BarCode.resx">
+      <DependentUpon>Frm_MM_PurchaseD_BarCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MM\Frm_MM_PurchaseD_TypeA.resx">
+      <DependentUpon>Frm_MM_PurchaseD_TypeA.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_QM_WorkDefectList.resx">
+      <DependentUpon>Frm_QM_WorkDefectList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_LOTTracking.resx">
+      <DependentUpon>Frm_LOTTracking.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_PopupMeasure.resx">
+      <DependentUpon>Frm_PopupMeasure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_QM_ExamResult_TypeA.resx">
+      <DependentUpon>Frm_QM_ExamResult_TypeA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_QM_ExamResult_Print.resx">
+      <DependentUpon>Frm_QM_ExamResult_Print.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_QM_ExamResult.resx">
+      <DependentUpon>Frm_QM_ExamResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MM\Frm_MM_MaterialOutView.resx">
+      <DependentUpon>Frm_MM_MaterialOutView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Rpt\RptIQC_ALLTHEN_B.resx">
+      <DependentUpon>RptIQC_ALLTHEN_B.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Rpt\RptIQC_ALLTHEN_A.resx">
+      <DependentUpon>RptIQC_ALLTHEN_A.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Rpt\RptDaliyQC_TPG.resx">
+      <DependentUpon>RptDaliyQC_TPG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Rpt\RptIQC_TPG.resx">
+      <DependentUpon>RptIQC_TPG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Rpt\RptOQC_KNP.resx">
+      <DependentUpon>RptOQC_KNP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Rpt\RptOQC_TPG.resx">
+      <DependentUpon>RptOQC_TPG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Rpt\RptOQC_UAG.resx">
+      <DependentUpon>RptOQC_UAG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Rpt\RptOQC_v1.resx">
+      <DependentUpon>RptOQC_v1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Rpt\RptOQC_v2.resx">
+      <DependentUpon>RptOQC_v2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Rpt\RptOQC_v3.resx">
+      <DependentUpon>RptOQC_v3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BM\Frm_BM_SdOrderD.resx">
+      <DependentUpon>Frm_BM_SdOrderD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BM\Frm_BM_SdOrderView.resx">
+      <DependentUpon>Frm_BM_SdOrderView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BM\Frm_BM_SdOrder_1Grid.resx">
+      <DependentUpon>Frm_BM_SdOrder_1Grid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BM\Frm_BM_Sales_1Grid_Lot.resx">
+      <DependentUpon>Frm_BM_Sales_1Grid_Lot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BM\Frm_BM_Return_LOT.resx">
+      <DependentUpon>Frm_BM_Return_LOT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BM\Frm_BM_Estimate.resx">
+      <DependentUpon>Frm_BM_Estimate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BM\Frm_BM_SdOrder_MD.resx">
+      <DependentUpon>Frm_BM_SdOrder_MD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Lookup\Frm_LookUpDBBackup.resx">
+      <DependentUpon>Frm_LookUpDBBackup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Lookup\Frm_LookUpNotice.resx">
+      <DependentUpon>Frm_LookUpNotice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Lookup\Frm_LookUpSales.resx">
+      <DependentUpon>Frm_LookUpSales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Lookup\Frm_SelectPM_ProductPlan.resx">
+      <DependentUpon>Frm_SelectPM_ProductPlan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\EQ\Frm_EQ_MachineRepairView.resx">
+      <DependentUpon>Frm_EQ_MachineRepairView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\EQ\Frm_EQ_MachineRepair.resx">
+      <DependentUpon>Frm_EQ_MachineRepair.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\EQ\Frm_EQ_Operation.resx">
+      <DependentUpon>Frm_EQ_Operation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\EQ\Frm_EQ_OperationDetail.resx">
+      <DependentUpon>Frm_EQ_OperationDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\EQ\Frm_EQ_SetProcessConditionInsert.resx">
+      <DependentUpon>Frm_EQ_SetProcessConditionInsert.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\EQ\Frm_EQ_DailyCheckView.resx">
+      <DependentUpon>Frm_EQ_DailyCheckView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\EQ\Frm_EQ_MachineMaster.resx">
+      <DependentUpon>Frm_EQ_MachineMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\EQ\Frm_EQ_MachineChk.resx">
+      <DependentUpon>Frm_EQ_MachineChk.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\EQ\Frm_EQ_Machine_DailyCheck.resx">
+      <DependentUpon>Frm_EQ_Machine_DailyCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\EQ\Frm_EQ_MTTRView.resx">
+      <DependentUpon>Frm_EQ_MTTRView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Management\Frm_MM_BadAnalysis_View.resx">
+      <DependentUpon>Frm_MM_BadAnalysis_View.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Management\Frm_MM_Bad_ChkView.resx">
+      <DependentUpon>Frm_MM_Bad_ChkView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Management\Frm_MM_Entire_ByItem.resx">
+      <DependentUpon>Frm_MM_Entire_ByItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Management\Frm_MM_Entire_View.resx">
+      <DependentUpon>Frm_MM_Entire_View.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Management\Frm_MM_ProductAnalysis_Machine_View.resx">
+      <DependentUpon>Frm_MM_ProductAnalysis_Machine_View.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Management\Frm_MM_ProductAnalysis_View.resx">
+      <DependentUpon>Frm_MM_ProductAnalysis_View.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Management\Frm_MM_PurchaseAnalysis_View.resx">
+      <DependentUpon>Frm_MM_PurchaseAnalysis_View.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Management\Frm_MM_SalesAnalysis_View.resx">
+      <DependentUpon>Frm_MM_SalesAnalysis_View.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Monitoring\Frm_PM_ItemPerformance.resx">
+      <DependentUpon>Frm_PM_ItemPerformance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CM\Frm_CM_DefectCode.resx">
+      <DependentUpon>Frm_CM_DefectCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Monitoring\Frm_PM_ProductionPorgress.resx">
+      <DependentUpon>Frm_PM_ProductionPorgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Monitoring\UCDGP3.resx">
+      <DependentUpon>UCDGP3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Common\Frm_PDFViewer.resx">
+      <DependentUpon>Frm_PDFViewer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MM\Frm_MM_Placing_SdOrder.resx">
+      <DependentUpon>Frm_MM_Placing_SdOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MM\Frm_MM_PlacingD.resx">
+      <DependentUpon>Frm_MM_PlacingD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MM\Frm_MM_PlacingView.resx">
+      <DependentUpon>Frm_MM_PlacingView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MM\Frm_MM_Placing_MD.resx">
+      <DependentUpon>Frm_MM_Placing_MD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MM\Frm_MM_Placing_NotInList.resx">
+      <DependentUpon>Frm_MM_Placing_NotInList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MM\Frm_MM_MaterialOut.resx">
+      <DependentUpon>Frm_MM_MaterialOut.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Dash\DashKPI.resx">
+      <DependentUpon>DashKPI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_QM_ProductInspectionPdf.resx">
+      <DependentUpon>Frm_QM_ProductInspectionPdf.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_QM_WorkDefectView.resx">
+      <DependentUpon>Frm_QM_WorkDefectView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_QM_WorkDefect.resx">
+      <DependentUpon>Frm_QM_WorkDefect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_KPIDashViewer.resx">
+      <DependentUpon>Frm_KPIDashViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_QM_InspectionReport.resx">
+      <DependentUpon>Frm_QM_InspectionReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_MillSheet.resx">
+      <DependentUpon>Frm_MillSheet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_MillSheet_pdf.resx">
+      <DependentUpon>Frm_MillSheet_pdf.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_QM_4MChange_Confirm.resx">
+      <DependentUpon>Frm_QM_4MChange_Confirm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_QM_4MChange.resx">
+      <DependentUpon>Frm_QM_4MChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_QM_ExamResult_InView.resx">
+      <DependentUpon>Frm_QM_ExamResult_InView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_QM_ExamResult_PQCView.resx">
+      <DependentUpon>Frm_QM_ExamResult_PQCView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\QM\Frm_XRChart.resx">
+      <DependentUpon>Frm_XRChart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BM\Frm_BM_EstimateD.resx">
+      <DependentUpon>Frm_BM_EstimateD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BM\Frm_BM_Sales_1Grid.resx">
+      <DependentUpon>Frm_BM_Sales_1Grid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BM\Frm_BM_SdOrder_SaleView.resx">
+      <DependentUpon>Frm_BM_SdOrder_SaleView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BM\Frm_BM_Sales_TradingStatement.resx">
+      <DependentUpon>Frm_BM_Sales_TradingStatement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BM\Frm_BM_Estimate_File.resx">
+      <DependentUpon>Frm_BM_Estimate_File.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BM\Popup\Frm_BM_SdOrder_Item.resx">
+      <DependentUpon>Frm_BM_SdOrder_Item.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BM\Popup\Frm_ExRate_smbs.resx">
+      <DependentUpon>Frm_ExRate_smbs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BM\Rpt\Rpt_ReqSales_TPG.resx">
+      <DependentUpon>Rpt_ReqSales_TPG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BM\Rpt\Rpt_Estimate_TPG.resx">
+      <DependentUpon>Rpt_Estimate_TPG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BM\Rpt\RptAcceptanceReceipt.resx">
+      <DependentUpon>RptAcceptanceReceipt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BM\Rpt\Rpt_InVoice_TPG.resx">
+      <DependentUpon>Rpt_InVoice_TPG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BM\Rpt\Rpt_InVoice.resx">
+      <DependentUpon>Rpt_InVoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ST\Frm_ST_ExcelUpLoad_Base.resx">
+      <DependentUpon>Frm_ST_ExcelUpLoad_Base.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ST\Frm_ST_MonthlyItem.resx">
+      <DependentUpon>Frm_ST_MonthlyItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ST\Frm_ST_DailyItem.resx">
+      <DependentUpon>Frm_ST_DailyItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ST\Frm_ST_StockBase.resx">
+      <DependentUpon>Frm_ST_StockBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ST\Frm_ST_StockInOutTotalQty.resx">
+      <DependentUpon>Frm_ST_StockInOutTotalQty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ST\Frm_ST_StockInOutTotal.resx">
+      <DependentUpon>Frm_ST_StockInOutTotal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ST\Frm_ST_StockInOutLIst.resx">
+      <DependentUpon>Frm_ST_StockInOutLIst.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ST\Frm_ST_StockList_Product.resx">
+      <DependentUpon>Frm_ST_StockList_Product.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ST\Frm_ST_StockLotView.resx">
+      <DependentUpon>Frm_ST_StockLotView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ST\Frm_ST_StockAdj_LOT.resx">
+      <DependentUpon>Frm_ST_StockAdj_LOT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ST\Frm_ST_StockAdj.resx">
+      <DependentUpon>Frm_ST_StockAdj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MM\Frm_MM_DailyMaterial.resx">
+      <DependentUpon>Frm_MM_DailyMaterial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MM\Frm_MM_MonthlyMaterial.resx">
+      <DependentUpon>Frm_MM_MonthlyMaterial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\SM\Frm_SM_NoticeView.resx">
+      <DependentUpon>Frm_SM_NoticeView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\SM\Frm_SM_LoginHistory.resx">
+      <DependentUpon>Frm_SM_LoginHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\SM\Frm_SM_FontChange.resx">
+      <DependentUpon>Frm_SM_FontChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\SM\Frm_SM_Quick.resx">
+      <DependentUpon>Frm_SM_Quick.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\SM\Frm_SM_CodeOption.resx">
+      <DependentUpon>Frm_SM_CodeOption.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\SM\Frm_SM_Backup.resx">
+      <DependentUpon>Frm_SM_Backup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\IF\Frm_IF_ApiHistory.resx">
+      <DependentUpon>Frm_IF_ApiHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\SM\Frm_SM_SystemOption.resx">
+      <DependentUpon>Frm_SM_SystemOption.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucMachineManufacture.resx">
+      <DependentUpon>ucMachineManufacture.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CM\Frm_CM_Routing.resx">
+      <DependentUpon>Frm_CM_Routing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\WrSyncWork.resx">
+      <DependentUpon>WrSyncWork.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Resources\ico_tp1.png" />
+    <None Include="Resources\add_16x16.png" />
+    <None Include="Resources\account_16X16.png" />
+    <None Include="Resources\zoom_32x32.png" />
+    <None Include="Resources\zoom_16x166.png" />
+    <None Include="Resources\zoom_16x165.png" />
+    <None Include="Resources\zoom_16x164.png" />
+    <None Include="Resources\zoom_16x163.png" />
+    <None Include="Resources\zoom_16x162.png" />
+    <None Include="Resources\zoom_16x161.png" />
+    <None Include="Resources\zoom_16x16.png" />
+    <None Include="Resources\won_16X16.png" />
+    <None Include="Resources\won.png" />
+    <None Include="Resources\uploadfolder_16X16.png" />
+    <None Include="Resources\Truckinput_16X16.png" />
+    <None Include="Resources\today_16x16.png" />
+    <None Include="Resources\team_16x16.png" />
+    <None Include="Resources\tasks.png" />
+    <None Include="Resources\switchtimescalesto_16x16.png" />
+    <None Include="Resources\suggestion_16x16.png" />
+    <None Include="Resources\stopclock_16X16.png" />
+    <None Include="Resources\sms_24X24.png" />
+    <None Include="Resources\sms_16X16.png" />
+    <None Include="Resources\showtestreport_16x16.png" />
+    <None Include="Resources\search14.png" />
+    <None Include="Resources\Search_20px.png" />
+    <None Include="Resources\Search_16px.png" />
+    <None Include="Resources\search.png" />
+    <None Include="Resources\scheduletime_16X16.png" />
+    <None Include="Resources\schedule_16X16.png" />
+    <None Include="Resources\Save2_16px.png" />
+    <None Include="Resources\Save_as_16px.png" />
+    <None Include="Resources\Right24.png" />
+    <None Include="Resources\reload_16X16.png" />
+    <None Include="Resources\refresh_16X16.png" />
+    <None Include="Resources\producthis_16X16.png" />
+    <None Include="Resources\productadd_16X16.png" />
+    <None Include="Resources\Product_View_16X16png1.png" />
+    <None Include="Resources\Product_View_16X16.png" />
+    <None Include="Resources\printer.png" />
+    <None Include="Resources\printcancel_16X16.png" />
+    <None Include="Resources\Print4_16px.png" />
+    <None Include="Resources\Print3_16px.png" />
+    <None Include="Resources\Print2_16px.png" />
+    <None Include="Resources\print_16x16.png" />
+    <None Include="Resources\Print_16px.png" />
+    <None Include="Resources\plus_16X16.png" />
+    <None Include="Resources\Person3_24px.png" />
+    <None Include="Resources\Person2_24px.png" />
+    <None Include="Resources\Person_24px.png" />
+    <None Include="Resources\people.png" />
+    <None Include="Resources\paste_32x321.png" />
+    <None Include="Resources\paste_32x32.png" />
+    <None Include="Resources\outputplan_16X16.png" />
+    <None Include="Resources\outputhold_16X16.png" />
+    <None Include="Resources\outlist_16X16.png" />
+    <None Include="Resources\orderList_16X16.png" />
+    <None Include="Resources\monthview_32x32.png" />
+    <None Include="Resources\man.png" />
+    <None Include="Resources\logo.png" />
+    <None Include="Resources\logo.jpg" />
+    <None Include="Resources\logo.ico" />
+    <None Include="Resources\Left24.png" />
+    <None Include="Resources\invoice.png" />
+    <None Include="Resources\inputcheck_16X16.png" />
+    <None Include="Resources\Image1.bmp" />
+    <None Include="Resources\ide_32x32.png" />
+    <None Include="Resources\ide_16x161.png" />
+    <None Include="Resources\ide_16x16.png" />
+    <None Include="Resources\group_16x16.png" />
+    <None Include="Resources\folder_24X24.png" />
+    <None Include="Resources\Fax_24X24.png" />
+    <None Include="Resources\Fax_16X16.png" />
+    <None Include="Resources\Export_16px.png" />
+    <None Include="Resources\excel2.png" />
+    <None Include="Resources\excel.png" />
+    <None Include="Resources\Edit1_16X16.png" />
+    <None Include="Resources\edit_16x16.png" />
+    <None Include="Resources\dept3.png" />
+    <None Include="Resources\dept2.png" />
+    <None Include="Resources\dept.png" />
+    <None Include="Resources\dayview_16x16.png" />
+    <None Include="Resources\Day_16X16.png" />
+    <None Include="Resources\cut1_16X16.png" />
+    <None Include="Resources\cut_16x16.png" />
+    <None Include="Resources\convert_16x16.png" />
+    <None Include="Resources\completed.png" />
+    <None Include="Resources\close_16x16.png" />
+    <None Include="Resources\close.png" />
+    <None Include="Resources\cartCancel.png" />
+    <None Include="Resources\cart.png" />
+    <None Include="Resources\Cancel4_20px.png" />
+    <None Include="Resources\Cancel2_20px.png" />
+    <None Include="Resources\Cancel_20px.png" />
+    <None Include="Resources\cancel_16x161.png" />
+    <None Include="Resources\cancel_16x16.png" />
+    <None Include="Resources\Cancel_16px.png" />
+    <None Include="Resources\calendarspecial_16X16.png" />
+    <None Include="Resources\calendarmonth_24X24.png" />
+    <None Include="Resources\calendar31_16X16.png" />
+    <None Include="Resources\calendar7_16X16.png" />
+    <None Include="Resources\calendar1_16X16.png" />
+    <None Include="Resources\Calendar_24px.png" />
+    <None Include="Resources\Calendar_20.png" />
+    <None Include="Resources\businessman_16X16.png" />
+    <None Include="Resources\bad_16X16.png" />
+    <None Include="Resources\back_16X16.png" />
+    <None Include="Resources\atoz_16X16.png" />
+    <None Include="Resources\arrowR_16X16.png" />
+    <None Include="Resources\apply_16x161.png" />
+    <None Include="Resources\apply_16x16.png" />
+    <None Include="Resources\add1_16X16.png" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptInvoice.resx">
+      <DependentUpon>rptInvoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptMaterialOut.resx">
+      <DependentUpon>rptMaterialOut.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucCount.resx">
+      <DependentUpon>ucCount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucStock.resx">
+      <DependentUpon>ucStock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CM\Frm_CM_Class.resx">
+      <DependentUpon>Frm_CM_Class.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CM\Frm_CM_ClassItem.resx">
+      <DependentUpon>Frm_CM_ClassItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CM\Frm_CM_Customer.resx">
+      <DependentUpon>Frm_CM_Customer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CM\Frm_CM_Warehouse.resx">
+      <DependentUpon>Frm_CM_Warehouse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucBomConditionInsert.resx">
+      <DependentUpon>ucBomConditionInsert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Monitoring\Machine\Frm_Stock.resx">
+      <DependentUpon>Frm_Stock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UcTitle.resx">
+      <DependentUpon>ucTitle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Monitoring\XtraForm6.resx">
+      <DependentUpon>XtraForm6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MM\Frm_MM_PurchaseView.resx">
+      <DependentUpon>Frm_MM_PurchaseView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BM\Frm_BM_SalesView.resx">
+      <DependentUpon>Frm_BM_SalesView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ST\Frm_ST_StockD.resx">
+      <DependentUpon>Frm_ST_StockD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ST\Frm_ST_StockList.resx">
+      <DependentUpon>Frm_ST_StockList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MM\Frm_MM_Purchase_MD.resx">
+      <DependentUpon>Frm_MM_Purchase_MD.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\SM\Frm_SM_AuthorGroup.resx">
+      <DependentUpon>Frm_SM_AuthorGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\SM\Frm_SM_PasswordChange.resx">
+      <DependentUpon>Frm_SM_PasswordChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CM\Frm_CM_Dept.resx">
+      <DependentUpon>Frm_CM_Dept.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\SM\Frm_SM_MenuGroup.resx">
+      <DependentUpon>Frm_SM_MenuGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\SM\Frm_SM_User.resx">
+      <DependentUpon>Frm_SM_User.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="App.config" />
+    <Content Include="Fonts\Pretendard-SemiBold.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="SmartMES_1_TemporaryKey.pfx" />
+    <None Include="SmartMES_TemporaryKey.pfx" />
+    <None Include="Resources\dongjin_logo.ico" />
+    <None Include="Resources\dongjin_login_logo.png" />
+    <None Include="View\QM\Dash\DsKPIDATA.xsc">
+      <DependentUpon>DsKPIDATA.xsd</DependentUpon>
+    </None>
+    <None Include="View\QM\Dash\DsKPIDATA.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DsKPIDATA.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="View\QM\Dash\DsKPIDATA.xss">
+      <DependentUpon>DsKPIDATA.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Shell32">
+      <Guid>{50A7E9B0-70EF-11D1-B75A-00A0C90564FE}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\login_back_seail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\vt_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\InitialState.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BO_Category.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BO_WorkflowDefinition.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BuyNow.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BO_Organization.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="View\QM\Claim\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SnapToggleFieldHighlighting.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BO_Sale.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BO_Sale_Item.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\baseSMT\baseSMT.csproj">
+      <Project>{27309a88-b42a-412d-bb3c-6dbc4f079732}</Project>
+      <Name>baseSMT</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SmartCommon\SmartCommon.csproj">
+      <Project>{a4b404ca-0b27-4ae7-adcf-07e265c0f9be}</Project>
+      <Name>SmartCommon</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8%28x86 및 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Microsoft.Web.WebView2.1.0.2849.39\build\Microsoft.Web.WebView2.targets" Condition="Exists('..\packages\Microsoft.Web.WebView2.1.0.2849.39\build\Microsoft.Web.WebView2.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>이 프로젝트는 이 컴퓨터에 없는 NuGet 패키지를 참조합니다. 해당 패키지를 다운로드하려면 NuGet 패키지 복원을 사용하십시오. 자세한 내용은 http://go.microsoft.com/fwlink/?LinkID=322105를 참조하십시오. 누락된 파일은 {0}입니다.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Web.WebView2.1.0.2849.39\build\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Web.WebView2.1.0.2849.39\build\Microsoft.Web.WebView2.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

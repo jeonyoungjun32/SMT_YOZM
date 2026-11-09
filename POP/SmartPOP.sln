@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35828.75 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartPOP", "SmartPOP\SmartPOP.csproj", "{FE271B29-BB04-4ACD-BC5B-F26497CE5B26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "baseSMT", "baseSMT\baseSMT.csproj", "{27309A88-B42A-412D-BB3C-6DBC4F079732}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE271B29-BB04-4ACD-BC5B-F26497CE5B26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE271B29-BB04-4ACD-BC5B-F26497CE5B26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE271B29-BB04-4ACD-BC5B-F26497CE5B26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE271B29-BB04-4ACD-BC5B-F26497CE5B26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27309A88-B42A-412D-BB3C-6DBC4F079732}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27309A88-B42A-412D-BB3C-6DBC4F079732}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27309A88-B42A-412D-BB3C-6DBC4F079732}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27309A88-B42A-412D-BB3C-6DBC4F079732}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {27210C1D-6FB2-4500-864E-5B821B4A2B27}
+	EndGlobalSection
+EndGlobal

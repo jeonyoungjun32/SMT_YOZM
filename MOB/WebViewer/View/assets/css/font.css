@@ -1,0 +1,21 @@
+﻿@font-face {
+    font-family: "NotoSansRegular";
+    src: url("../fonts/NotoSansKR-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "NotoSansSemiBold";
+    src: url("../fonts/NotoSansKR-SemiBold.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+}
+
+body {
+    background-repeat: repeat;
+    background: #f9f9f9;
+    font-family: "NotoSansSemiBold", sans-serif;
+    color: #354558;
+    font-size: 13px;
+}

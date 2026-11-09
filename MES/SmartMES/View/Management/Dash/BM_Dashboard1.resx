@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="customSqlQuery1.Sql" xml:space="preserve">
+    <value>SELECT D.ItemCode, D.Qty, D.TotalPrice, M.SalesDate, M.BillToCode, it.ItemClass1, cci.Title AS ItemClass1Name
+FROM BM_SalesD D
+INNER JOIN BM_SalesM M ON D.Corpid = M.CorpId AND D.SalesNo= M.SalesNo
+LEFT JOIN CM_Item it ON D.CorpId = it.CorpId AND D.ItemCode = it.ItemCode
+LEFT JOIN CM_Cateitem cci ON D.CorpId = cci.CorpId AND it.ItemClass1 = cci.ClassItemCode AND cci.Class = 'A01210'
+WHERE D.CorpId = @pCorpId
+AND M.SalesDate BETWEEN @pStartDate AND @pEndDate</value>
+  </data>
+  <data name="customSqlQuery2.Sql" xml:space="preserve">
+    <value>SELECT 
+    SA.ThisMonthSalesAmt AS [원 매출액]
+  , SA.LastMonthSalesAmt AS [원 매출액전월]
+  , CASE WHEN SA.LastMonthSalesAmt &gt; 0 THEN ((SA.ThisMonthSalesAmt - SA.LastMonthSalesAmt) / SA.LastMonthSalesAmt) * 100.0 ELSE 0 END AS [매출전월대비]
+  , SU.ThisMonthSujuAmt AS [목표액(수주액)]
+  , SU.LastMonthSujuAmt AS [목표액전월]
+  , CASE WHEN SU.ThisMonthSujuAmt &gt; 0 THEN (SA.ThisMonthSalesAmt / SU.ThisMonthSujuAmt) * 100.0 ELSE 0 END AS [목표달성률]
+  , DATEDIFF(DAY, GETDATE(), EOMONTH(GETDATE())) AS [잔여일]
+  , 0 AS [수주 잔고]
+  , SU.ThisMonthSujuCnt AS [신규수주 마스터 건수]
+  , (SU.ThisMonthSujuCnt - SU.LastMonthSujuCnt) AS [신규수주 마스터 전월대비 건수]
+  , SU.ThisMonthSujuDetailCnt AS [신규수주 디테일 건수]
+  , (SU.ThisMonthSujuDetailCnt - SU.LastMonthSujuDetailCnt) AS [신규수주 디테일 전월대비 건수]
+  , CASE WHEN DV.ThisMonthDeliveryTotal &gt; 0 THEN (DV.ThisMonthDeliveryOnTime * 100.0 / DV.ThisMonthDeliveryTotal) ELSE 0 END AS [납기 준수율%]
+  , CASE WHEN DV.LastMonthDeliveryTotal &gt; 0 THEN (DV.LastMonthDeliveryOnTime * 100.0 / DV.LastMonthDeliveryTotal) ELSE 0 END AS [납기 준수율 전월]
+  , (CASE WHEN DV.ThisMonthDeliveryTotal &gt; 0 THEN (DV.ThisMonthDeliveryOnTime * 100.0 / DV.ThisMonthDeliveryTotal) ELSE 0 END) - (CASE WHEN DV.LastMonthDeliveryTotal &gt; 0 THEN (DV.LastMonthDeliveryOnTime * 100.0 / DV.LastMonthDeliveryTotal) ELSE 0 END) AS [납기 전월대비p]
+  , DV.TodayDeliveryExpectedDetailCnt AS [금일 납기 예정 건수]
+  , SA.TodaySalesDetailCnt AS [금일 출하 건수]
+FROM (
+    SELECT 
+        ISNULL(SUM(CASE WHEN M.ObtainDate &gt;= DT.TM_Start THEN D.TotalPrice ELSE 0 END), 0) AS ThisMonthSujuAmt
+      , ISNULL(SUM(CASE WHEN M.ObtainDate &lt; DT.TM_Start THEN D.TotalPrice ELSE 0 END), 0) AS LastMonthSujuAmt
+      , COUNT(DISTINCT CASE WHEN M.ObtainDate &gt;= DT.TM_Start THEN M.SdOrderNo END) AS ThisMonthSujuCnt
+      , COUNT(DISTINCT CASE WHEN M.ObtainDate &lt; DT.TM_Start THEN M.SdOrderNo END) AS LastMonthSujuCnt
+      , COUNT(CASE WHEN M.ObtainDate &gt;= DT.TM_Start THEN D.SdOrderSeq END) AS ThisMonthSujuDetailCnt
+      , COUNT(CASE WHEN M.ObtainDate &lt; DT.TM_Start THEN D.SdOrderSeq END) AS LastMonthSujuDetailCnt
+    FROM (
+        SELECT 
+            DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()) - 1, 0) AS LM_Start
+          , DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()), 0) AS TM_Start
+          , DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()) + 1, 0) AS NM_Start
+    ) AS DT
+    INNER JOIN BM_SdOrderM M 
+        ON M.CorpId = @CorpId 
+       AND M.ObtainDate &gt;= DT.LM_Start 
+       AND M.ObtainDate &lt; DT.NM_Start
+    LEFT JOIN BM_SdOrderD D 
+        ON M.CorpId = D.CorpId 
+       AND M.SdOrderNo = D.SdOrderNo
+) AS SU
+CROSS JOIN (
+    SELECT 
+        ISNULL(SUM(CASE WHEN SM.SalesDate &gt;= DT.TM_Start THEN SD.TotalPrice ELSE 0 END), 0) AS ThisMonthSalesAmt
+      , ISNULL(SUM(CASE WHEN SM.SalesDate &lt; DT.TM_Start THEN SD.TotalPrice ELSE 0 END), 0) AS LastMonthSalesAmt
+      , COUNT(CASE WHEN CAST(SM.SalesDate AS DATE) = CAST(GETDATE() AS DATE) THEN SD.SalesNo END) AS TodaySalesDetailCnt
+    FROM (
+        SELECT 
+            DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()) - 1, 0) AS LM_Start
+          , DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()), 0) AS TM_Start
+          , DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()) + 1, 0) AS NM_Start
+    ) AS DT
+    INNER JOIN BM_SalesM SM 
+        ON SM.CorpId = @CorpId 
+       AND SM.SalesDate &gt;= DT.LM_Start 
+       AND SM.SalesDate &lt; DT.NM_Start
+    LEFT JOIN BM_SalesD SD 
+        ON SM.CorpId = SD.CorpId 
+       AND SM.SalesNo = SD.SalesNo
+) AS SA
+CROSS JOIN (
+    SELECT 
+        COUNT(DISTINCT CASE WHEN OM.DeliveryDate &gt;= DT.TM_Start THEN SD.SdOrderNo END) AS ThisMonthDeliveryTotal
+      , COUNT(DISTINCT CASE WHEN OM.DeliveryDate &gt;= DT.TM_Start AND SM.SalesDate &lt;= OM.DeliveryDate THEN SD.SdOrderNo END) AS ThisMonthDeliveryOnTime
+      , COUNT(DISTINCT CASE WHEN OM.DeliveryDate &lt; DT.TM_Start THEN SD.SdOrderNo END) AS LastMonthDeliveryTotal
+      , COUNT(DISTINCT CASE WHEN OM.DeliveryDate &lt; DT.TM_Start AND SM.SalesDate &lt;= OM.DeliveryDate THEN SD.SdOrderNo END) AS LastMonthDeliveryOnTime
+      , COUNT(DISTINCT CASE WHEN CAST(OM.DeliveryDate AS DATE) = CAST(GETDATE() AS DATE) THEN OD.SdOrderNo + '_' + CAST(OD.SdOrderSeq AS VARCHAR) END) AS TodayDeliveryExpectedDetailCnt
+    FROM (
+        SELECT 
+            DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()) - 1, 0) AS LM_Start
+          , DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()), 0) AS TM_Start
+          , DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()) + 1, 0) AS NM_Start
+    ) AS DT
+    INNER JOIN BM_SdOrderM OM 
+        ON OM.CorpId = @CorpId 
+       AND OM.DeliveryDate &gt;= DT.LM_Start 
+       AND OM.DeliveryDate &lt; DT.NM_Start
+    LEFT JOIN BM_SdOrderD OD 
+        ON OM.CorpId = OD.CorpId 
+       AND OM.SdOrderNo = OD.SdOrderNo
+    LEFT JOIN BM_SalesD SD 
+        ON OD.CorpId = SD.CorpId 
+       AND OD.SdOrderNo = SD.SdOrderNo 
+       AND OD.SdOrderSeq = SD.SdOrderSeq
+    LEFT JOIN BM_SalesM SM 
+        ON SD.CorpId = SM.CorpId 
+       AND SD.SalesNo = SM.SalesNo
+) AS DV</value>
+  </data>
+  <data name="customSqlQuery3.Sql" xml:space="preserve">
+    <value>select D.SdOrderNo,
+       D.ItemCode,
+       D.Qty,
+       D.TotalPrice,
+       M.ObtainDate, M.SoldToCode,
+       M.DeliveryDate, CC.CustName,
+       it.ItemName, it.Size,
+       D.OrderStatus
+  from dbo.BM_SdOrderD D
+  inner join dbo.BM_SdOrderM M
+       on M.CorpId = D.CorpId
+       and (M.SdOrderNo = D.SdOrderNo)
+  left join dbo.CM_Cust CC
+       on (CC.CustCode = M.SoldToCode)
+  left join dbo.CM_Item it on (it.CorpId = D.CorpId) and (it.ItemCode = D.ItemCode)
+  where D.CorpId = @pCorpId
+  AND M.ObtainDate BETWEEN @pStartDate AND @pEndDate</value>
+  </data>
+  <data name="customSqlQuery4.Sql" xml:space="preserve">
+    <value>SELECT M.BillToCode, cc.CustName BillToName, SUM(D.TotalPrice) TotalPrice
+FROM BM_SalesD D
+INNER JOIN BM_SalesM M ON D.CorpId = M.CorpId AND D.SalesNo = M.SalesNo
+LEFT JOIN CM_Cust cc ON D.CorpId = cc.CorpId AND M.BillToCode = cc.CustCode
+WHERE D.CorpId = @CorpId
+AND ISNULL(M.BillToCode, '') &lt;&gt; ''
+AND M.SalesDate BETWEEN @StartDate AND @EndDate
+GROUP BY M.BillToCode, cc.CustName
+ORDER BY TotalPrice DESC</value>
+  </data>
+  <data name="customSqlQuery5.Sql" xml:space="preserve">
+    <value>SELECT 
+    RIGHT(Cal.BaseMonth, 2) + '월' AS BaseMonth
+  , ISNULL(Agg.Amt, 0) AS Amt
+  , ISNULL(Agg.Qty, 0) AS Qty
+  , Cal.Type AS [Type] -- 공백 대신 달력 틀에 기본 탑재된 Type을 그대로 출력
+FROM (
+    -- [핵심 수정] 1~12월 달력 테이블과 '매출', '목표' 두 개의 타입을 CROSS JOIN하여 24개 행의 마스터 틀을 생성
+    SELECT 
+        M.BaseMonth
+      , T.Type
+    FROM (
+        SELECT 
+            CONVERT(VARCHAR(7), DATEFROMPARTS(YEAR(GETDATE()), V.M, 1), 120) AS BaseMonth
+        FROM (VALUES (1), (2), (3), (4), (5), (6), (7), (8), (9), (10), (11), (12)) AS V(M)
+    ) M
+    CROSS JOIN (
+        SELECT '매출' AS Type
+        UNION ALL
+        SELECT '목표' AS Type
+    ) T
+) AS Cal
+LEFT JOIN (
+    -- 기존 집계 쿼리 (변형 없이 그대로 유지)
+    SELECT 
+        CONVERT(VARCHAR(7), A.SalesDate, 120) AS BaseMonth
+      , SUM(ISNULL(B.TotalPrice, 0)) AS Amt
+      , SUM(ISNULL(B.Qty, 0)) AS Qty
+      , '매출' AS Type
+    FROM BM_SalesM A
+    LEFT JOIN BM_SalesD B 
+        ON A.CorpId = B.CorpId 
+       AND A.SalesNo = B.SalesNo
+    WHERE A.CorpId = @CorpId
+      AND YEAR(A.SalesDate) = YEAR(GETDATE())
+    GROUP BY 
+        CONVERT(VARCHAR(7), A.SalesDate, 120)
+
+    UNION ALL
+
+    SELECT 
+        CONVERT(VARCHAR(7), M.ObtainDate, 120) AS BaseMonth
+      , SUM(ISNULL(D.TotalPrice, 0)) AS Amt
+      , SUM(ISNULL(D.Qty, 0)) AS Qty
+      , '목표' AS Type
+    FROM BM_SdOrderM M
+    LEFT JOIN BM_SdOrderD D 
+        ON M.CorpId = D.CorpId 
+       AND M.SdOrderNo = D.SdOrderNo
+    WHERE M.CorpId = @CorpId
+      AND YEAR(M.ObtainDate) = YEAR(GETDATE())
+    GROUP BY 
+        CONVERT(VARCHAR(7), M.ObtainDate, 120)
+) AS Agg 
+    -- [핵심 수정] 월 데이터 조건과 타입(매출/목표) 조건까지 매치시켜 정확한 자리에 0이 들어가도록 조인
+    ON Cal.BaseMonth = Agg.BaseMonth
+   AND Cal.Type = Agg.Type
+ORDER BY 
+    Cal.BaseMonth, 
+    CASE WHEN Cal.Type = '매출' THEN 1 ELSE 2 END;</value>
+  </data>
+  <data name="dashboardSqlDataSource1.ResultSchemaSerializable" xml:space="preserve">
+    <value>PERhdGFTZXQgTmFtZT0iU1FMIERhdGEgU291cmNlIDEiPjxWaWV3IE5hbWU9IlF1ZXJ5X1NhbGVzIj48RmllbGQgTmFtZT0iSXRlbUNvZGUiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iUXR5IiBUeXBlPSJEb3VibGUiIC8+PEZpZWxkIE5hbWU9IlRvdGFsUHJpY2UiIFR5cGU9IkRlY2ltYWwiIC8+PEZpZWxkIE5hbWU9IlNhbGVzRGF0ZSIgVHlwZT0iRGF0ZVRpbWUiIC8+PEZpZWxkIE5hbWU9IkJpbGxUb0NvZGUiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iSXRlbUNsYXNzMSIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJJdGVtQ2xhc3MxTmFtZSIgVHlwZT0iU3RyaW5nIiAvPjwvVmlldz48VmlldyBOYW1lPSJRdWVyeV8xIj48RmllbGQgTmFtZT0i7JuQIOunpOy2nOyVoSIgVHlwZT0iRGVjaW1hbCIgLz48RmllbGQgTmFtZT0i7JuQIOunpOy2nOyVoeyghOyblCIgVHlwZT0iRGVjaW1hbCIgLz48RmllbGQgTmFtZT0i66ek7Lac7KCE7JuU64yA67mEIiBUeXBlPSJEZWNpbWFsIiAvPjxGaWVsZCBOYW1lPSLrqqntkZzslaEo7IiY7KO87JWhKSIgVHlwZT0iRGVjaW1hbCIgLz48RmllbGQgTmFtZT0i66qp7ZGc7JWh7KCE7JuUIiBUeXBlPSJEZWNpbWFsIiAvPjxGaWVsZCBOYW1lPSLrqqntkZzri6zshLHrpaAiIFR5cGU9IkRlY2ltYWwiIC8+PEZpZWxkIE5hbWU9IuyelOyXrOydvCIgVHlwZT0iSW50MzIiIC8+PEZpZWxkIE5hbWU9IuyImOyjvCDsnpTqs6AiIFR5cGU9IkludDMyIiAvPjxGaWVsZCBOYW1lPSLsi6Dqt5zsiJjso7wg66eI7Iqk7YSwIOqxtOyImCIgVHlwZT0iSW50MzIiIC8+PEZpZWxkIE5hbWU9IuyLoOq3nOyImOyjvCDrp4jsiqTthLAg7KCE7JuU64yA67mEIOqxtOyImCIgVHlwZT0iSW50MzIiIC8+PEZpZWxkIE5hbWU9IuyLoOq3nOyImOyjvCDrlJTthYzsnbwg6rG07IiYIiBUeXBlPSJJbnQzMiIgLz48RmllbGQgTmFtZT0i7Iug6rec7IiY7KO8IOuUlO2FjOydvCDsoITsm5TrjIDruYQg6rG07IiYIiBUeXBlPSJJbnQzMiIgLz48RmllbGQgTmFtZT0i64Kp6riwIOykgOyImOycqCUiIFR5cGU9IkRlY2ltYWwiIC8+PEZpZWxkIE5hbWU9IuuCqeq4sCDspIDsiJjsnKgg7KCE7JuUIiBUeXBlPSJEZWNpbWFsIiAvPjxGaWVsZCBOYW1lPSLrgqnquLAg7KCE7JuU64yA67mEcCIgVHlwZT0iRGVjaW1hbCIgLz48RmllbGQgTmFtZT0i6riI7J28IOuCqeq4sCDsmIjsoJUg6rG07IiYIiBUeXBlPSJJbnQzMiIgLz48RmllbGQgTmFtZT0i6riI7J28IOy2nO2VmCDqsbTsiJgiIFR5cGU9IkludDMyIiAvPjwvVmlldz48VmlldyBOYW1lPSJRdWVyeV9TZE9yZGVyIj48RmllbGQgTmFtZT0iU2RPcmRlck5vIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9Ikl0ZW1Db2RlIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IlF0eSIgVHlwZT0iRGVjaW1hbCIgLz48RmllbGQgTmFtZT0iVG90YWxQcmljZSIgVHlwZT0iRGVjaW1hbCIgLz48RmllbGQgTmFtZT0iT2J0YWluRGF0ZSIgVHlwZT0iRGF0ZVRpbWUiIC8+PEZpZWxkIE5hbWU9IlNvbGRUb0NvZGUiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iRGVsaXZlcnlEYXRlIiBUeXBlPSJEYXRlVGltZSIgLz48RmllbGQgTmFtZT0iQ3VzdE5hbWUiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iSXRlbU5hbWUiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iU2l6ZSIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJPcmRlclN0YXR1cyIgVHlwZT0iU3RyaW5nIiAvPjwvVmlldz48VmlldyBOYW1lPSLqs6DqsJ3sgqzrp6TstpwiPjxGaWVsZCBOYW1lPSJCaWxsVG9Db2RlIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IkJpbGxUb05hbWUiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iVG90YWxQcmljZSIgVHlwZT0iRGVjaW1hbCIgLz48L1ZpZXc+PFZpZXcgTmFtZT0i7JuU67OE7IiY7KO866ek7LacIj48RmllbGQgTmFtZT0iQmFzZU1vbnRoIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IkFtdCIgVHlwZT0iRGVjaW1hbCIgLz48RmllbGQgTmFtZT0iUXR5IiBUeXBlPSJEb3VibGUiIC8+PEZpZWxkIE5hbWU9IlR5cGUiIFR5cGU9IlN0cmluZyIgLz48L1ZpZXc+PC9EYXRhU2V0Pg==</value>
+  </data>
+</root>
