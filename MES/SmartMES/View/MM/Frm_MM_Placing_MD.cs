@@ -394,23 +394,44 @@ namespace SmartMES.View.MM
         {
             if (gvPlacingMaster.FocusedRowHandle < 0) return;
 
-            string state = purchase.GetPlacingState(gvPlacingMaster.GetFocusedRowCellValue("MmOrderNo").ToString());
+            string orderNo = gvPlacingMaster.GetFocusedRowCellValue("MmOrderNo").ToString();
+            string state = purchase.GetPlacingState(orderNo);
+            GridColumn masterColumn = gvPlacingMaster.FocusedColumn;
+            int masterTopRow = gvPlacingMaster.TopRowIndex;
+            int masterLeft = gvPlacingMaster.LeftCoord;
+            object detailSequence = gvDetail.GetFocusedRowCellValue("MmOrderSeq");
+            GridColumn detailColumn = gvDetail.FocusedColumn;
+            int detailTopRow = gvDetail.TopRowIndex;
+            int detailLeft = gvDetail.LeftCoord;
 
             try
             {
                 if (state != "완료")
                 {
-                    //if (Database.DbName.ToUpper().Contains("ALLTHEN") || Database.DbName.ToUpper().Contains("TPG"))
-                    //{
-                    Frm_MM_PlacingD form = new Frm_MM_PlacingD("Update", gvPlacingMaster.GetFocusedRowCellValue("MmOrderNo").ToString());
-                        form.ShowDialog();
-                    //}
-                    //else
-                    //{ 
-                        //frmMM_PlacingD form = new frmMM_PlacingD("Update", gvPlacingMaster.GetFocusedRowCellValue("MmOrderNo").ToString());
-                        //form.ShowDialog();
-                    //}
-                    DisplayData();
+                    using (var form = new Frm_MM_PlacingD("Update", orderNo))
+                        form.ShowDialog(this);
+
+                    gvPlacingMaster.BeginUpdate();
+                    gvDetail.BeginUpdate();
+                    try
+                    {
+                        DisplayData();
+                        // 재조회 후 행 번호가 달라져도 수정한 발주와 상세 항목으로 돌아갑니다.
+                        if (RestoreGridPosition(gvPlacingMaster, "MmOrderNo", orderNo,
+                            masterColumn, masterTopRow, masterLeft))
+                        {
+                            // 같은 행 번호로 복원되면 FocusedRowChanged가 발생하지 않을 수 있습니다.
+                            DisplayDetailList();
+                            RestoreGridPosition(gvDetail, "MmOrderSeq", detailSequence,
+                                detailColumn, detailTopRow, detailLeft);
+                        }
+                    }
+                    finally
+                    {
+                        gvDetail.EndUpdate();
+                        gvPlacingMaster.EndUpdate();
+                    }
+                    gvPlacingMaster.Focus();
                 }
                 else
                 {
@@ -421,6 +442,25 @@ namespace SmartMES.View.MM
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private static bool RestoreGridPosition(GridView view, string keyField, object key,
+            GridColumn column, int topRow, int leftCoord)
+        {
+            if (key == null || key == DBNull.Value || view.DataRowCount == 0)
+                return false;
+
+            int rowHandle = view.LocateByValue(keyField, key);
+            if (rowHandle < 0)
+                return false;
+
+            view.FocusedRowHandle = rowHandle;
+            if (column != null)
+                view.FocusedColumn = column;
+            view.TopRowIndex = Math.Max(0, Math.Min(topRow, view.DataRowCount - 1));
+            view.LeftCoord = leftCoord;
+            view.MakeRowVisible(rowHandle);
+            return true;
         }
 
         //삭제

@@ -77,7 +77,6 @@ namespace SmartMES.View.PM
                     continue;
                 column.DisplayFormat.FormatType = FormatType.Numeric;
                 column.DisplayFormat.FormatString = "#,##0";
-                column.Summary.Add(SummaryItemType.Sum, column.FieldName, "{0:#,##0}");
                 column.AppearanceCell.BackColor = Color.FromArgb(242, 248, 245);
             }
 
@@ -105,7 +104,6 @@ namespace SmartMES.View.PM
             customerColumn.AppearanceCell.TextOptions.VAlignment = VertAlignment.Center;
             forecastView.CellMerge += ForecastView_CellMerge;
             forecastView.MouseDown += ForecastView_MouseDown;
-            forecastView.Columns["ItemName"].Summary.Add(SummaryItemType.Custom, "ItemName", "총 예상수량");
 
             // 날짜 열을 미리 만들고 기준월의 말일에 맞춰 필요한 열만 표시합니다.
             for (int day = 1; day <= 31; day++)
@@ -123,6 +121,32 @@ namespace SmartMES.View.PM
             }
 
             forecastView.CustomDrawRowIndicator += grid.RowNumber_Indicator;
+            InitializeForecastTotals();
+        }
+
+        /// <summary>품목 검색 등 현재 필터를 통과한 행의 수량을 하단에 합산합니다.</summary>
+        private void InitializeForecastTotals()
+        {
+            forecastView.OptionsView.ShowFooter = true;
+            forecastView.FooterPanelHeight = 36;
+            forecastView.Appearance.FooterPanel.BackColor = Color.FromArgb(233, 244, 238);
+            forecastView.Appearance.FooterPanel.ForeColor = Color.FromArgb(35, 70, 55);
+            forecastView.Appearance.FooterPanel.Options.UseBackColor = true;
+            forecastView.Appearance.FooterPanel.Options.UseForeColor = true;
+
+            // 기본 합계 기능은 필터 변경과 데이터 수정 시 자동으로 다시 계산됩니다.
+            foreach (GridColumn column in forecastView.Columns)
+            {
+                if (!column.FieldName.EndsWith("Qty"))
+                    continue;
+
+                column.Summary.Clear();
+                column.Summary.Add(SummaryItemType.Sum, column.FieldName, "{0:#,##0}");
+            }
+
+            var labelColumn = forecastView.Columns["ItemName"];
+            labelColumn.Summary.Clear();
+            labelColumn.Summary.Add(SummaryItemType.Count, "ItemName", "총합계");
         }
 
         /// <summary>판매구분과 거래처명이 같은 인접 행의 거래처 셀만 합칩니다.</summary>
