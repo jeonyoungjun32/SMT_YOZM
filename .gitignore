@@ -1,0 +1,11 @@
+# IDE and build outputs
+.vs/
+.cr/
+.svn/
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+*.pfx
+# Local analysis artifacts
+/outputs/
