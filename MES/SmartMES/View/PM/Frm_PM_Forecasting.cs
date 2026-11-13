@@ -146,7 +146,6 @@ namespace SmartMES.View.PM
 
             var labelColumn = forecastView.Columns["ItemName"];
             labelColumn.Summary.Clear();
-            labelColumn.Summary.Add(SummaryItemType.Count, "ItemName", "총합계");
         }
 
         /// <summary>판매구분과 거래처명이 같은 인접 행의 거래처 셀만 합칩니다.</summary>
