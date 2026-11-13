@@ -5,6 +5,8 @@
         /// <summary>
         /// Required designer variable.
         /// </summary>
+        private DevExpress.XtraEditors.TextEdit ediMatchNamesTextEdit;
+        private DevExpress.XtraLayout.LayoutControlItem ediMatchNamesLayoutItem;
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
@@ -45,6 +47,8 @@
 			this.emailTextEdit = new DevExpress.XtraEditors.TextEdit();
 			this.postNoTextEdit = new DevExpress.XtraEditors.TextEdit();
 			this.remarksTextEdit = new DevExpress.XtraEditors.TextEdit();
+            this.ediMatchNamesTextEdit = new DevExpress.XtraEditors.TextEdit();
+            this.ediMatchNamesLayoutItem = new DevExpress.XtraLayout.LayoutControlItem();
 			this.presiNameTextEdit = new DevExpress.XtraEditors.TextEdit();
 			this.citizeNoTextEdit = new DevExpress.XtraEditors.TextEdit();
 			this.custNoTextEdit = new DevExpress.XtraEditors.TextEdit();
@@ -161,6 +165,7 @@
 			this.layoutControl1.Controls.Add(this.emailTextEdit);
 			this.layoutControl1.Controls.Add(this.postNoTextEdit);
 			this.layoutControl1.Controls.Add(this.remarksTextEdit);
+            this.layoutControl1.Controls.Add(this.ediMatchNamesTextEdit);
 			this.layoutControl1.Controls.Add(this.presiNameTextEdit);
 			this.layoutControl1.Controls.Add(this.citizeNoTextEdit);
 			this.layoutControl1.Controls.Add(this.custNoTextEdit);
@@ -500,6 +505,7 @@
             this.layoutControlItem17,
             this.layoutControlItem25,
             this.layoutControlItem26,
+            this.ediMatchNamesLayoutItem,
             this.layoutControlItem8,
             this.layoutControlItem16,
             this.layoutControlItem15,
@@ -572,6 +578,24 @@
 			// 
 			// layoutControlItem26
 			// 
+            this.ediMatchNamesTextEdit.Name = "ediMatchNamesTextEdit";
+            this.ediMatchNamesTextEdit.StyleController = this.layoutControl1;
+            this.ediMatchNamesTextEdit.Properties.MaxLength = 500;
+            this.ediMatchNamesTextEdit.Properties.NullValuePrompt = "여러 이름은 | 구분 (예: 이마트에브리|에브리데이)";
+            this.ediMatchNamesTextEdit.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 250, 240);
+            this.ediMatchNamesTextEdit.Properties.Appearance.Options.UseBackColor = true;
+            this.ediMatchNamesTextEdit.TabIndex = 50;
+            this.ediMatchNamesTextEdit.Tag = "EdiMatchNames";
+            this.ediMatchNamesLayoutItem.Name = "ediMatchNamesLayoutItem";
+            this.ediMatchNamesLayoutItem.Control = this.ediMatchNamesTextEdit;
+            this.ediMatchNamesLayoutItem.Location = new System.Drawing.Point(571, 264);
+            this.ediMatchNamesLayoutItem.Size = new System.Drawing.Size(571, 44);
+            this.ediMatchNamesLayoutItem.Padding = new DevExpress.XtraLayout.Utils.Padding(10, 3, 4, 4);
+            this.ediMatchNamesLayoutItem.Text = "EDI 연결명";
+            this.ediMatchNamesLayoutItem.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
+            this.ediMatchNamesLayoutItem.TextSize = new System.Drawing.Size(91, 17);
+            this.ediMatchNamesLayoutItem.TextToControlDistance = 5;
+
 			this.layoutControlItem26.Control = this.remarksTextEdit;
 			this.layoutControlItem26.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
 			this.layoutControlItem26.CustomizationFormText = "참고사항";
@@ -584,7 +608,7 @@
 			this.layoutControlItem26.OptionsPrint.AppearanceItemText.Font = new System.Drawing.Font("굴림", 9F);
 			this.layoutControlItem26.OptionsPrint.AppearanceItemText.Options.UseFont = true;
 			this.layoutControlItem26.Padding = new DevExpress.XtraLayout.Utils.Padding(10, 3, 4, 4);
-			this.layoutControlItem26.Size = new System.Drawing.Size(1142, 44);
+			this.layoutControlItem26.Size = new System.Drawing.Size(571, 44);
 			this.layoutControlItem26.Text = "비고";
 			this.layoutControlItem26.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
 			this.layoutControlItem26.TextSize = new System.Drawing.Size(91, 17);

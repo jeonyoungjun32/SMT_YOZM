@@ -78,6 +78,7 @@ namespace SmartMES.View.CM
             postNoTextEdit.Tag      = "PostNo";
             textEdit1.Tag           = "Address";
             remarksTextEdit.Tag     = "Remark";
+            ediMatchNamesTextEdit.Tag = "EdiMatchNames";
         }
 
         #region GridView Setting
@@ -114,6 +115,8 @@ namespace SmartMES.View.CM
             grid.Create_GvColumn(gv, "홈페이지", "HomePage");
             grid.Create_GvColumn(gv, "우편번호", "PostNo");
             grid.Create_GvColumn(gv, "비고", "Remark");
+            grid.Create_GvColumn(gv, "EDI 연결명", "EdiMatchNames");
+            gv.Columns["EdiMatchNames"].Width = 240;
 
             grid.Create_GvColumn(gv, "사용여부", "UseYn");
 
@@ -229,6 +232,7 @@ namespace SmartMES.View.CM
             postNoTextEdit.EditValue = dr["PostNo"];
             textEdit1.EditValue = dr["Address"];
             remarksTextEdit.EditValue = dr["Remark"];
+            ediMatchNamesTextEdit.EditValue = dr["EdiMatchNames"];
 
             isSettingValue = false;
         }
@@ -445,6 +449,7 @@ namespace SmartMES.View.CM
             cm.PostNo   = dr["PostNo"].ConvertString_Null_To_Empty();
             cm.Address  = dr["Address"].ConvertString_Null_To_Empty();
             cm.Remark   = dr["Remark"].ConvertString_Null_To_Empty();
+            cm.EdiMatchNames = dr["EdiMatchNames"].ConvertString_Null_To_Empty().Trim();
             cm.UseYn = useYnComboboxEdit.EditValue.ConvertString_Null_To_Empty();
 
             //2. DB 적용

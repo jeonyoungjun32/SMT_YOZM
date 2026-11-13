@@ -58,6 +58,7 @@ namespace SmartMES.Models.CM
         public string SalesMan { get; set; }
 
         public string Remark { get; set; }
+        public string EdiMatchNames { get; set; }
 
         public string UseYn { get; set; }
         #endregion
@@ -94,6 +95,7 @@ namespace SmartMES.Models.CM
                     , CloseDate
                     , SalesMan
                     , Remark
+                    , EdiMatchNames
                     , UseYn
                     , CreId
                     , CreIP
@@ -137,6 +139,7 @@ namespace SmartMES.Models.CM
                     , CloseDate
                     , SalesMan
                     , Remark
+                    , EdiMatchNames
                     , UseYn
                     , CreId
                     , CreIP
@@ -188,21 +191,22 @@ namespace SmartMES.Models.CM
             return db.GetDataTable(query);
         }
 
+        // 거래처별 공통 포케스팅 표시 여부 조회
         public DataTable SelectCustomer_Price(string[] type = null)
         {
             query = "";
 
             query += $@"
-                        SELECT cc.CustCode , cc.CustName, cc.CustType, cci.Title CustTypeName
+                        SELECT cc.CustCode , cc.CustName, cc.CustType, COALESCE(cci.Title,cc.CustType) CustTypeName, ISNULL(cc.ForecastUseYn,'N') AS ForecastUseYn
                         ,  CASE WHEN EXISTS(
                                         SELECT CustCOde
                                         FROM CM_ItemPrice ip
-                                        WHERE ip.CustCOde = cc.CustCOde
+                                        WHERE ip.CustCOde = cc.CustCOde AND ip.CorpId=cc.CorpId
                                     )
                             THEN 'Y'ELSE 'N'
                             END AS PriceYn
                         FROM CM_Cust cc
-                        LEFT JOIN CM_CateItem cci on cc.custType = cci.ClassItemCode and cci.class = 'a030' --and cci.useyn = 'Y'
+                        LEFT JOIN CM_CateItem cci on cc.custType = cci.ClassItemCode and cci.class = 'a030' AND cci.CorpId=cc.CorpId
                         WHERE cc.CorpID = '{WrGlobal.CorpID}'
                         AND cc.UseYn = 'Y'
                         ";
@@ -387,6 +391,7 @@ namespace SmartMES.Models.CM
                   , PostNo
                   , Address
                   , Remark
+                  , EdiMatchNames
                   , CreId
                   , CreIP
                   , CreDt
@@ -411,6 +416,7 @@ namespace SmartMES.Models.CM
                 , {PostNo.ConvertStr_Empty_To_Null()}
                 , {Address.ConvertStr_Empty_To_Null()}
                 , {Remark.ConvertStr_Empty_To_Null()}
+                , {EdiMatchNames.ConvertStr_Empty_To_Null()}
                 , '{WrGlobal.LoginID}'
                 , '{WrGlobal.ClientHostName}'
                 , GETDATE()
@@ -441,6 +447,7 @@ namespace SmartMES.Models.CM
                 , HomePage = {HomePage.ConvertStr_Empty_To_Null()}
                 , PostNo = {PostNo.ConvertStr_Empty_To_Null()}
                 , Address = {Address.ConvertStr_Empty_To_Null()}
+                , EdiMatchNames = {EdiMatchNames.ConvertStr_Empty_To_Null()}
                 , Remark = {Remark.ConvertStr_Empty_To_Null()}
                 , ModId = '{WrGlobal.LoginID}'
                 , ModIP = '{WrGlobal.ClientHostName}'

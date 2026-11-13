@@ -28,7 +28,9 @@ namespace SmartMES.Models.CM
                 TextParameter("HSCode", 30, row),
                 TextParameter("HSName", 200, row),
                 TextParameter("HSSpec", 200, row),
-                TextParameter("HSUnit", 30, row)
+                TextParameter("HSUnit", 30, row),
+                new SqlParameter("@Amount", SqlDbType.Decimal)
+                    { Precision = 19, Scale = 4, Value = row["Amount"] }
             };
         }
 
@@ -239,7 +241,7 @@ namespace SmartMES.Models.CM
 
             string purchasingColumns = UsePurchasingFields ? @",
                               it.PurchaseUnitCode, it.PurchaseConversionQty, it.DeliveryOverTolerancePct,
-                              it.HSCode, it.HSName, it.HSSpec, it.HSUnit" : "";
+                              it.HSCode, it.HSName, it.HSSpec, it.HSUnit, it.Amount" : "";
 
             //품목관리(Frm_BS_Item) 조회 Query
             query = $@"SELECT '' AS Status,
@@ -684,6 +686,7 @@ namespace SmartMES.Models.CM
         {
             if (ItemCode == "" && ItemName == "" && Alias == "") return null;
 
+            string purchasingColumns = UsePurchasingFields ? ", bi.DeliveryOverTolerancePct, bi.PurchaseConversionQty" : "";
             query = $@"SELECT TOP 1
 	                          bi.ItemCode
 	                        , bi.ItemName
@@ -703,6 +706,7 @@ namespace SmartMES.Models.CM
 	                        , bi.Revision
 	                        , bi.PackQty
                             , cmcd.Title AS ItemTypeName
+                            {purchasingColumns}
 
                          FROM CM_Item bi
                     LEFT JOIN CM_CateItem cmcd ON cmcd.ClassItemCode = bi.ItemType
@@ -961,9 +965,9 @@ namespace SmartMES.Models.CM
         public bool Insert_CM_Item()
         {
             string purchasingColumns = purchasingParameters == null ? "" :
-                ", PurchaseUnitCode, PurchaseConversionQty, DeliveryOverTolerancePct, HSCode, HSName, HSSpec, HSUnit";
+                ", PurchaseUnitCode, PurchaseConversionQty, DeliveryOverTolerancePct, HSCode, HSName, HSSpec, HSUnit, Amount";
             string purchasingValues = purchasingParameters == null ? "" :
-                ", @PurchaseUnitCode, @PurchaseConversionQty, @DeliveryOverTolerancePct, @HSCode, @HSName, @HSSpec, @HSUnit";
+                ", @PurchaseUnitCode, @PurchaseConversionQty, @DeliveryOverTolerancePct, @HSCode, @HSName, @HSSpec, @HSUnit, @Amount";
             // 테이블 정리 필요해서 추후 수정 예정
             query = $@"INSERT INTO CM_Item(
                         CorpId
@@ -1077,7 +1081,7 @@ namespace SmartMES.Models.CM
                         PurchaseUnitCode = @PurchaseUnitCode,
                         PurchaseConversionQty = @PurchaseConversionQty,
                         DeliveryOverTolerancePct = @DeliveryOverTolerancePct,
-                        HSCode = @HSCode, HSName = @HSName, HSSpec = @HSSpec, HSUnit = @HSUnit";
+                        HSCode = @HSCode, HSName = @HSName, HSSpec = @HSSpec, HSUnit = @HSUnit, Amount = @Amount";
             // 테이블 정리 필요해서 추후 수정 예정
             query = $@"
                         UPDATE CM_Item

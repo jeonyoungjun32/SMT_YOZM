@@ -214,7 +214,8 @@ namespace SmartMES.View.BM.Popup
                 {
                     DataRow dr = GvPlacing.GetDataRow(row);
 
-                    int inQty = dr["InQty"].ConvertInt_Null_To_Zero();
+                    decimal inQty = MM_PlacingD.UseYozmOrderColumns
+                        ? dr["InQty"].ConvertDecimal_Null_To_Zero() : dr["InQty"].ConvertInt_Null_To_Zero();
 
                     if (inQty <= 0)
                     {

@@ -90,8 +90,16 @@ namespace SmartMES.Models.BM
                      , sm.ShipDate
                      , sm.SalesMan
                      , sm.HouseCode
+                     , tax.VatType
+                     , tax.VatRate
 
                 FROM BM_SalesM sm
+                OUTER APPLY (
+                    SELECT TOP (1) sd.VatType, sd.VatRate
+                    FROM BM_SalesD sd
+                    WHERE sd.CorpId = sm.CorpId AND sd.SalesNo = sm.SalesNo
+                    ORDER BY sd.SalesSeq
+                ) tax
                 WHERE sm.CorpId = '{WrGlobal.CorpID}'
                 AND sm.SalesDate BETWEEN '{startDate}' AND '{endDate}'
               ";

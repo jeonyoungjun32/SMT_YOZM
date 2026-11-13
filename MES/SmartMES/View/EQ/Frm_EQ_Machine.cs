@@ -58,58 +58,6 @@ namespace SmartMES.View.EQ
 			ssMGroup.smtLookUpDataValueMember = "코드";
 		}
 
-        /// <summary>설비 상세 항목은 기존 그리드에 연결하고, 원본 이관 정보는 조회만 허용합니다.</summary>
-        private void SetDetailColumns()
-        {
-            AddDetailColumn("ProductionPlantName", "생산공장명", null, true);
-            AddDetailColumn("ProductionLineName", "생산라인명", null, true);
-            AddDetailColumn("InstallDate", "설치일자", rpo.Create_rpoDate(), true);
-            AddDetailColumn("ManufactureDate", "제작일자", rpo.Create_rpoDate(), true);
-            AddDetailColumn("UsePlantName", "사용공장명", null, true);
-            AddDetailColumn("MaintenanceContactName", "관리업체담당자", null, true);
-            AddDetailColumn("MaintenanceContactTel", "관리업체연락처", null, true);
-            AddDetailColumn("InspectionDepartmentName", "점검관리부서명", null, true);
-            AddDetailColumn("InspectionStartDate", "점검시작일", rpo.Create_rpoDate(), true);
-            AddDetailColumn("InspectionEndDate", "점검종료일", rpo.Create_rpoDate(), true);
-            AddDetailColumn("IsMeasuringEquipment", "계측설비 여부", new RepositoryItemCheckEdit { AllowGrayed = true, ValueChecked = true, ValueUnchecked = false, ValueGrayed = DBNull.Value }, true);
-            AddDetailColumn("MeasuringInstrumentNo", "계측기번호", null, true);
-            AddDetailColumn("PowerSupplyType", "전원구분", null, true);
-            AddDetailColumn("PowerConsumptionKw", "사용전력(kW)", new RepositoryItemCalcEdit { Precision = 4 }, true);
-            AddDetailColumn("AgingGrade", "노후화등급", null, true);
-            AddDetailColumn("LegacyMachineCode", "구 설비번호", null, true);
-            AddDetailColumn("SourceRegisteredAt", "원본 자료 등록일시", rpo.Create_rpoDate(), false);
-            AddDetailColumn("EquipmentNumber", "원본 설비번호", null, true);
-            AddDetailColumn("RegisteredMachineName", "원본 상세 설비명", null, false);
-            AddDetailColumn("OriginalMachineName", "대표 설비명 변경 전 이름", null, false);
-            gvEQ_Machine.OptionsView.ShowAutoFilterRow = true;
-            gvEQ_Machine.Columns["MachineCode"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
-            gvEQ_Machine.Columns["MachineName"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
-        }
-
-        private void AddDetailColumn(string field, string caption, RepositoryItem editor = null, bool editable = true)
-        {
-            grid.Create_GvColumn(gvEQ_Machine, caption, field);
-            var column = gvEQ_Machine.Columns[field];
-            column.Width = field.EndsWith("Name") ? 180 : 130;
-            grid.Column_AllowEdit(column, editable);
-            column.OptionsColumn.ReadOnly = !editable;
-            if (editor != null)
-            {
-                gcEQ_Machine.RepositoryItems.Add(editor);
-                column.ColumnEdit = editor;
-            }
-            if (editor is RepositoryItemDateEdit)
-            {
-                column.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-                column.DisplayFormat.FormatString = field == "SourceRegisteredAt" ? "yyyy-MM-dd HH:mm:ss" : "yyyy-MM-dd";
-            }
-            else if (editor is RepositoryItemCalcEdit)
-            {
-                column.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-                column.DisplayFormat.FormatString = "#,##0.####";
-            }
-        }
-
         private void Set_GvMachine(GridView gv)
         {
             //GvMachine Column 생성 및 셋팅
@@ -171,7 +119,144 @@ namespace SmartMES.View.EQ
                 grid.Create_GvColumn(gv, "제조일자", "CreateYYMM", rpo.Create_rpoDate());
 
             if (Database.DbName.Equals("YOZM", StringComparison.OrdinalIgnoreCase))
-                SetDetailColumns();
+            {
+                grid.Create_GvColumn(gv, "생산공장명", "ProductionPlantName");
+                gv.Columns["ProductionPlantName"].Width = 180;
+                grid.Column_AllowEdit(gv.Columns["ProductionPlantName"], true);
+                gv.Columns["ProductionPlantName"].OptionsColumn.ReadOnly = false;
+
+                grid.Create_GvColumn(gv, "생산라인명", "ProductionLineName");
+                gv.Columns["ProductionLineName"].Width = 180;
+                grid.Column_AllowEdit(gv.Columns["ProductionLineName"], true);
+                gv.Columns["ProductionLineName"].OptionsColumn.ReadOnly = false;
+
+                grid.Create_GvColumn(gv, "설치일자", "InstallDate");
+                gv.Columns["InstallDate"].Width = 130;
+                grid.Column_AllowEdit(gv.Columns["InstallDate"], true);
+                gv.Columns["InstallDate"].OptionsColumn.ReadOnly = false;
+                var editorInstallDate = rpo.Create_rpoDate();
+                gcEQ_Machine.RepositoryItems.Add(editorInstallDate);
+                gv.Columns["InstallDate"].ColumnEdit = editorInstallDate;
+                gv.Columns["InstallDate"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                gv.Columns["InstallDate"].DisplayFormat.FormatString = "yyyy-MM-dd";
+
+                grid.Create_GvColumn(gv, "제작일자", "ManufactureDate");
+                gv.Columns["ManufactureDate"].Width = 130;
+                grid.Column_AllowEdit(gv.Columns["ManufactureDate"], true);
+                gv.Columns["ManufactureDate"].OptionsColumn.ReadOnly = false;
+                var editorManufactureDate = rpo.Create_rpoDate();
+                gcEQ_Machine.RepositoryItems.Add(editorManufactureDate);
+                gv.Columns["ManufactureDate"].ColumnEdit = editorManufactureDate;
+                gv.Columns["ManufactureDate"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                gv.Columns["ManufactureDate"].DisplayFormat.FormatString = "yyyy-MM-dd";
+
+                grid.Create_GvColumn(gv, "사용공장명", "UsePlantName");
+                gv.Columns["UsePlantName"].Width = 180;
+                grid.Column_AllowEdit(gv.Columns["UsePlantName"], true);
+                gv.Columns["UsePlantName"].OptionsColumn.ReadOnly = false;
+
+                grid.Create_GvColumn(gv, "관리업체담당자", "MaintenanceContactName");
+                gv.Columns["MaintenanceContactName"].Width = 180;
+                grid.Column_AllowEdit(gv.Columns["MaintenanceContactName"], true);
+                gv.Columns["MaintenanceContactName"].OptionsColumn.ReadOnly = false;
+
+                grid.Create_GvColumn(gv, "관리업체연락처", "MaintenanceContactTel");
+                gv.Columns["MaintenanceContactTel"].Width = 130;
+                grid.Column_AllowEdit(gv.Columns["MaintenanceContactTel"], true);
+                gv.Columns["MaintenanceContactTel"].OptionsColumn.ReadOnly = false;
+
+                grid.Create_GvColumn(gv, "점검관리부서명", "InspectionDepartmentName");
+                gv.Columns["InspectionDepartmentName"].Width = 180;
+                grid.Column_AllowEdit(gv.Columns["InspectionDepartmentName"], true);
+                gv.Columns["InspectionDepartmentName"].OptionsColumn.ReadOnly = false;
+
+                grid.Create_GvColumn(gv, "점검시작일", "InspectionStartDate");
+                gv.Columns["InspectionStartDate"].Width = 130;
+                grid.Column_AllowEdit(gv.Columns["InspectionStartDate"], true);
+                gv.Columns["InspectionStartDate"].OptionsColumn.ReadOnly = false;
+                var editorInspectionStartDate = rpo.Create_rpoDate();
+                gcEQ_Machine.RepositoryItems.Add(editorInspectionStartDate);
+                gv.Columns["InspectionStartDate"].ColumnEdit = editorInspectionStartDate;
+                gv.Columns["InspectionStartDate"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                gv.Columns["InspectionStartDate"].DisplayFormat.FormatString = "yyyy-MM-dd";
+
+                grid.Create_GvColumn(gv, "점검종료일", "InspectionEndDate");
+                gv.Columns["InspectionEndDate"].Width = 130;
+                grid.Column_AllowEdit(gv.Columns["InspectionEndDate"], true);
+                gv.Columns["InspectionEndDate"].OptionsColumn.ReadOnly = false;
+                var editorInspectionEndDate = rpo.Create_rpoDate();
+                gcEQ_Machine.RepositoryItems.Add(editorInspectionEndDate);
+                gv.Columns["InspectionEndDate"].ColumnEdit = editorInspectionEndDate;
+                gv.Columns["InspectionEndDate"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                gv.Columns["InspectionEndDate"].DisplayFormat.FormatString = "yyyy-MM-dd";
+
+                grid.Create_GvColumn(gv, "계측설비 여부", "IsMeasuringEquipment");
+                gv.Columns["IsMeasuringEquipment"].Width = 130;
+                grid.Column_AllowEdit(gv.Columns["IsMeasuringEquipment"], true);
+                gv.Columns["IsMeasuringEquipment"].OptionsColumn.ReadOnly = false;
+                var editorIsMeasuringEquipment = new RepositoryItemCheckEdit { AllowGrayed = true, ValueChecked = true, ValueUnchecked = false, ValueGrayed = DBNull.Value };
+                gcEQ_Machine.RepositoryItems.Add(editorIsMeasuringEquipment);
+                gv.Columns["IsMeasuringEquipment"].ColumnEdit = editorIsMeasuringEquipment;
+
+                grid.Create_GvColumn(gv, "계측기번호", "MeasuringInstrumentNo");
+                gv.Columns["MeasuringInstrumentNo"].Width = 130;
+                grid.Column_AllowEdit(gv.Columns["MeasuringInstrumentNo"], true);
+                gv.Columns["MeasuringInstrumentNo"].OptionsColumn.ReadOnly = false;
+
+                grid.Create_GvColumn(gv, "전원구분", "PowerSupplyType");
+                gv.Columns["PowerSupplyType"].Width = 130;
+                grid.Column_AllowEdit(gv.Columns["PowerSupplyType"], true);
+                gv.Columns["PowerSupplyType"].OptionsColumn.ReadOnly = false;
+
+                grid.Create_GvColumn(gv, "사용전력(kW)", "PowerConsumptionKw");
+                gv.Columns["PowerConsumptionKw"].Width = 130;
+                grid.Column_AllowEdit(gv.Columns["PowerConsumptionKw"], true);
+                gv.Columns["PowerConsumptionKw"].OptionsColumn.ReadOnly = false;
+                var editorPowerConsumptionKw = new RepositoryItemCalcEdit { Precision = 4 };
+                gcEQ_Machine.RepositoryItems.Add(editorPowerConsumptionKw);
+                gv.Columns["PowerConsumptionKw"].ColumnEdit = editorPowerConsumptionKw;
+                gv.Columns["PowerConsumptionKw"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                gv.Columns["PowerConsumptionKw"].DisplayFormat.FormatString = "#,##0.####";
+
+                grid.Create_GvColumn(gv, "노후화등급", "AgingGrade");
+                gv.Columns["AgingGrade"].Width = 130;
+                grid.Column_AllowEdit(gv.Columns["AgingGrade"], true);
+                gv.Columns["AgingGrade"].OptionsColumn.ReadOnly = false;
+
+                grid.Create_GvColumn(gv, "구 설비번호", "LegacyMachineCode");
+                gv.Columns["LegacyMachineCode"].Width = 130;
+                grid.Column_AllowEdit(gv.Columns["LegacyMachineCode"], true);
+                gv.Columns["LegacyMachineCode"].OptionsColumn.ReadOnly = false;
+
+                grid.Create_GvColumn(gv, "원본 자료 등록일시", "SourceRegisteredAt");
+                gv.Columns["SourceRegisteredAt"].Width = 130;
+                grid.Column_AllowEdit(gv.Columns["SourceRegisteredAt"], false);
+                gv.Columns["SourceRegisteredAt"].OptionsColumn.ReadOnly = true;
+                var editorSourceRegisteredAt = rpo.Create_rpoDate();
+                gcEQ_Machine.RepositoryItems.Add(editorSourceRegisteredAt);
+                gv.Columns["SourceRegisteredAt"].ColumnEdit = editorSourceRegisteredAt;
+                gv.Columns["SourceRegisteredAt"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                gv.Columns["SourceRegisteredAt"].DisplayFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
+
+                grid.Create_GvColumn(gv, "원본 설비번호", "EquipmentNumber");
+                gv.Columns["EquipmentNumber"].Width = 130;
+                grid.Column_AllowEdit(gv.Columns["EquipmentNumber"], true);
+                gv.Columns["EquipmentNumber"].OptionsColumn.ReadOnly = false;
+
+                grid.Create_GvColumn(gv, "원본 상세 설비명", "RegisteredMachineName");
+                gv.Columns["RegisteredMachineName"].Width = 180;
+                grid.Column_AllowEdit(gv.Columns["RegisteredMachineName"], false);
+                gv.Columns["RegisteredMachineName"].OptionsColumn.ReadOnly = true;
+
+                grid.Create_GvColumn(gv, "대표 설비명 변경 전 이름", "OriginalMachineName");
+                gv.Columns["OriginalMachineName"].Width = 180;
+                grid.Column_AllowEdit(gv.Columns["OriginalMachineName"], false);
+                gv.Columns["OriginalMachineName"].OptionsColumn.ReadOnly = true;
+
+                gv.OptionsView.ShowAutoFilterRow = true;
+                gv.Columns["MachineCode"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                gv.Columns["MachineName"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+            }
 
             grid.Create_GvColumn(gv, "등록자", "CreId");
             grid.Create_GvColumn(gv, "등록IP", "CreIP");

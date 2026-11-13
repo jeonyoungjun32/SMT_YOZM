@@ -354,7 +354,6 @@
             this.GvBM_SalesM.OptionsSelection.CheckBoxSelectorColumnWidth = 40;
             this.GvBM_SalesM.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
             this.GvBM_SalesM.OptionsView.ColumnAutoWidth = false;
-            this.GvBM_SalesM.OptionsView.ShowAutoFilterRow = true;
             this.GvBM_SalesM.OptionsView.ShowGroupPanel = false;
             this.GvBM_SalesM.RowHeight = 29;
             this.GvBM_SalesM.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.GvBM_SalesM_FocusedRowChanged);

@@ -1,4 +1,4 @@
-using DevExpress.XtraBars;
+﻿using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Windows.Forms;
 namespace SmartMES.Common
 {
     /// <summary>
-    /// MES에서 Ctrl+Q, Ctrl+S, Ctrl+D로 현재 화면의 조회·저장·삭제 버튼을 실행합니다.
+    /// MES에서 Ctrl+Q, Ctrl+S, Ctrl+D로 현재 화면의 조회·저장·삭제 버튼 실행
     /// </summary>
     internal sealed class clsShortcut : IMessageFilter
     {
@@ -20,14 +20,14 @@ namespace SmartMES.Common
             if (message.Msg != keyDown || Control.ModifierKeys != Keys.Control)
                 return false;
 
-            // 팝업이 열려 있으면 키 입력을 받은 팝업을 기준으로 버튼을 찾습니다.
+            // 팝업이 열려 있으면 키 입력을 받은 팝업을 기준으로 버튼 검색
             var form = Control.FromChildHandle(message.HWnd)?.FindForm() ?? Form.ActiveForm;
             bool repeat = (message.LParam.ToInt64() & (1L << 30)) != 0;
             return TryExecute(form, (Keys)message.WParam.ToInt32(), repeat);
         }
 
         /// <summary>
-        /// 현재 MDI 탭 또는 팝업의 버튼을 실행하고, 키를 누르고 있을 때 반복 실행을 막습니다.
+        /// 현재 MDI 탭·팝업의 명령 실행 및 키 반복 입력 차단
         /// </summary>
         internal bool TryExecute(Form form, Keys key, bool repeat = false)
         {
@@ -56,7 +56,7 @@ namespace SmartMES.Common
                 return Execute(repeat, () => ClickButton(button));
             }
 
-            // 리본 화면은 현재 페이지에 표시된 명령만 후보로 사용합니다.
+            // 리본 화면은 현재 페이지에 표시된 명령만 후보로 사용
             var ribbonCommands = controls.OfType<RibbonControl>()
                 .Where(ribbon => ribbon.Enabled && ribbon.SelectedPage != null)
                 .SelectMany(ribbon => ribbon.SelectedPage.Groups.Cast<RibbonPageGroup>())
@@ -101,7 +101,7 @@ namespace SmartMES.Common
             bool allowFocus = button.AllowFocus;
             try
             {
-                // 포커스를 막은 DevExpress 버튼도 클릭을 실행할 수 있도록 잠시 허용합니다.
+                // 포커스를 막은 DevExpress 버튼도 클릭을 실행할 수 있도록 잠시 허용
                 button.AllowFocus = true;
                 button.PerformClick();
             }
@@ -117,7 +117,7 @@ namespace SmartMES.Common
             if (buttons.Count <= 1)
                 return buttons.FirstOrDefault();
 
-            // 분할 화면에서 같은 명령이 여러 개면 포커스가 있는 영역의 버튼을 우선합니다.
+            // 분할 화면에서 같은 명령이 여러 개면 포커스가 있는 영역의 버튼 우선
             var focus = buttons.Where(button => button.ContainsFocus).ToList();
             if (focus.Count == 1)
                 return focus[0];

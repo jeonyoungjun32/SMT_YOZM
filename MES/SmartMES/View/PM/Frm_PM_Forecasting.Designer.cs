@@ -17,13 +17,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_PM_Forecasting));
             this.commonBar = new baseSMT.smtCommonBar();
-            this.registerButton = new baseSMT.smtSearchButton();
-            this.deleteButton = new baseSMT.smtSearchButton();
-            this.saveButton = new baseSMT.smtSearchButton();
-            this.confirmButton = new baseSMT.smtSearchButton();
-            this.cancelConfirmButton = new baseSMT.smtSearchButton();
-            this.templateButton = new baseSMT.smtSearchButton();
-            this.uploadButton = new baseSMT.smtSearchButton();
+            this.editButton = new baseSMT.smtSearchButton();
+            this.excelDownloadButton = new baseSMT.smtSearchButton();
             this.closeButton = new baseSMT.smtSearchButton();
             this.body = new System.Windows.Forms.TableLayoutPanel();
             this.filters = new System.Windows.Forms.FlowLayoutPanel();
@@ -82,14 +77,9 @@
             this.commonBar.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(63)))), ((int)(((byte)(92)))));
             this.commonBar.Appearance.Options.UseBackColor = true;
             this.commonBar.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.commonBar.Controls.Add(this.searchButton);
-            this.commonBar.Controls.Add(this.registerButton);
-            this.commonBar.Controls.Add(this.deleteButton);
-            this.commonBar.Controls.Add(this.saveButton);
-            this.commonBar.Controls.Add(this.confirmButton);
-            this.commonBar.Controls.Add(this.cancelConfirmButton);
-            this.commonBar.Controls.Add(this.templateButton);
-            this.commonBar.Controls.Add(this.uploadButton);
+            this.commonBar.Controls.Add(this.filters);
+            this.commonBar.Controls.Add(this.editButton);
+            this.commonBar.Controls.Add(this.excelDownloadButton);
             this.commonBar.Controls.Add(this.closeButton);
             this.commonBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.commonBar.Location = new System.Drawing.Point(0, 0);
@@ -102,170 +92,69 @@
             this.commonBar.smtImageTitleVisible = true;
             this.commonBar.TabIndex = 1;
             // 
-            // registerButton
-            // 
-            this.registerButton.AllowFocus = false;
-            this.registerButton.Appearance.ForeColor = System.Drawing.Color.White;
-            this.registerButton.Appearance.Options.UseForeColor = true;
-            this.registerButton.AutoSize = true;
-            this.registerButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.registerButton.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
-            this.registerButton.ImageOptions.ImageIndex = 1;
-            this.registerButton.ImageOptions.SvgImageSize = new System.Drawing.Size(20, 20);
-            this.registerButton.Location = new System.Drawing.Point(718, 0);
-            this.registerButton.Name = "registerButton";
-            this.registerButton.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.registerButton.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
-            this.registerButton.Size = new System.Drawing.Size(76, 40);
-            this.registerButton.smtButtonAutoText = false;
-            this.registerButton.smtButtonStyle = baseSMT.EnumButtonStyles.등록;
-            this.registerButton.TabIndex = 1;
-            this.registerButton.Text = "등록";
-            this.registerButton.ToolTip = "화면 시안: 업무 기능 미연결";
-            // 
-            // deleteButton
-            // 
-            this.deleteButton.AllowFocus = false;
-            this.deleteButton.Appearance.ForeColor = System.Drawing.Color.White;
-            this.deleteButton.Appearance.Options.UseForeColor = true;
-            this.deleteButton.AutoSize = true;
-            this.deleteButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.deleteButton.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
-            this.deleteButton.ImageOptions.ImageIndex = 3;
-            this.deleteButton.ImageOptions.SvgImageSize = new System.Drawing.Size(20, 20);
-            this.deleteButton.Location = new System.Drawing.Point(794, 0);
-            this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.deleteButton.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
-            this.deleteButton.Size = new System.Drawing.Size(76, 40);
-            this.deleteButton.smtButtonAutoText = false;
-            this.deleteButton.smtButtonStyle = baseSMT.EnumButtonStyles.삭제;
-            this.deleteButton.TabIndex = 2;
-            this.deleteButton.Text = "삭제";
-            this.deleteButton.ToolTip = "화면 시안: 업무 기능 미연결";
-            // 
-            // saveButton
-            // 
-            this.saveButton.AllowFocus = false;
-            this.saveButton.Appearance.ForeColor = System.Drawing.Color.White;
-            this.saveButton.Appearance.Options.UseForeColor = true;
-            this.saveButton.AutoSize = true;
-            this.saveButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.saveButton.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
-            this.saveButton.ImageOptions.ImageIndex = 4;
-            this.saveButton.ImageOptions.SvgImageSize = new System.Drawing.Size(20, 20);
-            this.saveButton.Location = new System.Drawing.Point(870, 0);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.saveButton.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
-            this.saveButton.Size = new System.Drawing.Size(76, 40);
-            this.saveButton.smtButtonAutoText = false;
-            this.saveButton.smtButtonStyle = baseSMT.EnumButtonStyles.저장;
-            this.saveButton.TabIndex = 3;
-            this.saveButton.Text = "저장";
-            this.saveButton.ToolTip = "화면 시안: 업무 기능 미연결";
-            // 
-            // confirmButton
-            // 
-            this.confirmButton.AllowFocus = false;
-            this.confirmButton.Appearance.ForeColor = System.Drawing.Color.White;
-            this.confirmButton.Appearance.Options.UseForeColor = true;
-            this.confirmButton.AutoSize = true;
-            this.confirmButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.confirmButton.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
-            this.confirmButton.ImageOptions.ImageIndex = 6;
-            this.confirmButton.ImageOptions.SvgImageSize = new System.Drawing.Size(20, 20);
-            this.confirmButton.Location = new System.Drawing.Point(946, 0);
-            this.confirmButton.Name = "confirmButton";
-            this.confirmButton.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.confirmButton.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
-            this.confirmButton.Size = new System.Drawing.Size(76, 40);
-            this.confirmButton.smtButtonAutoText = false;
-            this.confirmButton.smtButtonStyle = baseSMT.EnumButtonStyles.확정;
-            this.confirmButton.TabIndex = 4;
-            this.confirmButton.Text = "확정";
-            this.confirmButton.ToolTip = "화면 시안: 업무 기능 미연결";
-            // 
-            // cancelConfirmButton
-            // 
-            this.cancelConfirmButton.AllowFocus = false;
-            this.cancelConfirmButton.Appearance.ForeColor = System.Drawing.Color.White;
-            this.cancelConfirmButton.Appearance.Options.UseForeColor = true;
-            this.cancelConfirmButton.AutoSize = true;
-            this.cancelConfirmButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.cancelConfirmButton.Enabled = false;
-            this.cancelConfirmButton.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
-            this.cancelConfirmButton.ImageOptions.ImageIndex = 7;
-            this.cancelConfirmButton.ImageOptions.SvgImageSize = new System.Drawing.Size(20, 20);
-            this.cancelConfirmButton.Location = new System.Drawing.Point(1022, 0);
-            this.cancelConfirmButton.Name = "cancelConfirmButton";
-            this.cancelConfirmButton.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.cancelConfirmButton.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
-            this.cancelConfirmButton.Size = new System.Drawing.Size(100, 40);
-            this.cancelConfirmButton.smtButtonAutoText = false;
-            this.cancelConfirmButton.smtButtonStyle = baseSMT.EnumButtonStyles.확정취소;
-            this.cancelConfirmButton.TabIndex = 5;
-            this.cancelConfirmButton.Text = "확정취소";
-            this.cancelConfirmButton.ToolTip = "화면 시안: 업무 기능 미연결";
-            // 
-            // templateButton
-            // 
-            this.templateButton.AllowFocus = false;
-            this.templateButton.Appearance.ForeColor = System.Drawing.Color.White;
-            this.templateButton.Appearance.Options.UseForeColor = true;
-            this.templateButton.AutoSize = true;
-            this.templateButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.templateButton.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
-            this.templateButton.ImageOptions.ImageIndex = 9;
-            this.templateButton.ImageOptions.SvgImageSize = new System.Drawing.Size(20, 20);
-            this.templateButton.Location = new System.Drawing.Point(1122, 0);
-            this.templateButton.Name = "templateButton";
-            this.templateButton.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.templateButton.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
-            this.templateButton.Size = new System.Drawing.Size(127, 40);
-            this.templateButton.smtButtonAutoText = false;
-            this.templateButton.smtButtonStyle = baseSMT.EnumButtonStyles.엑셀변환;
-            this.templateButton.TabIndex = 6;
-            this.templateButton.Text = "양식 다운로드";
-            this.templateButton.ToolTip = "화면 시안: 업무 기능 미연결";
-            // 
-            // uploadButton
-            // 
-            this.uploadButton.AllowFocus = false;
-            this.uploadButton.Appearance.ForeColor = System.Drawing.Color.White;
-            this.uploadButton.Appearance.Options.UseForeColor = true;
-            this.uploadButton.AutoSize = true;
-            this.uploadButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.uploadButton.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
-            this.uploadButton.ImageOptions.ImageIndex = 8;
-            this.uploadButton.ImageOptions.SvgImageSize = new System.Drawing.Size(20, 20);
-            this.uploadButton.Location = new System.Drawing.Point(1249, 0);
-            this.uploadButton.Name = "uploadButton";
-            this.uploadButton.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.uploadButton.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
-            this.uploadButton.Size = new System.Drawing.Size(115, 40);
-            this.uploadButton.smtButtonAutoText = false;
-            this.uploadButton.smtButtonStyle = baseSMT.EnumButtonStyles.엑셀업로드;
-            this.uploadButton.TabIndex = 7;
-            this.uploadButton.Text = "엑셀 업로드";
-            this.uploadButton.ToolTip = "화면 시안: 업무 기능 미연결";
-            // 
+            // editButton
+            //
+            this.editButton.AllowFocus = false;
+            this.editButton.Appearance.ForeColor = System.Drawing.Color.White;
+            this.editButton.Appearance.Options.UseForeColor = true;
+            this.editButton.AutoSize = true;
+            this.editButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.editButton.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
+            this.editButton.ImageOptions.ImageIndex = 2;
+            this.editButton.ImageOptions.SvgImageSize = new System.Drawing.Size(20, 20);
+            this.editButton.Location = new System.Drawing.Point(1161, 0);
+            this.editButton.Name = "editButton";
+            this.editButton.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.editButton.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
+            this.editButton.Size = new System.Drawing.Size(76, 40);
+            this.editButton.smtButtonAutoText = false;
+            this.editButton.smtButtonStyle = baseSMT.EnumButtonStyles.수정;
+            this.editButton.TabIndex = 1;
+            this.editButton.Text = "수정";
+            this.editButton.ToolTip = "선택한 품목의 실 발주량 수정";
+            this.editButton.Click += new System.EventHandler(this.EditButton_Click);
+            //
+            // excelDownloadButton
+            //
+            this.excelDownloadButton.AllowFocus = false;
+            this.excelDownloadButton.Appearance.ForeColor = System.Drawing.Color.White;
+            this.excelDownloadButton.Appearance.Options.UseForeColor = true;
+            this.excelDownloadButton.AutoSize = true;
+            this.excelDownloadButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.excelDownloadButton.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
+            this.excelDownloadButton.ImageOptions.ImageIndex = 9;
+            this.excelDownloadButton.ImageOptions.SvgImageSize = new System.Drawing.Size(20, 20);
+            this.excelDownloadButton.Location = new System.Drawing.Point(1237, 0);
+            this.excelDownloadButton.Name = "excelDownloadButton";
+            this.excelDownloadButton.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.excelDownloadButton.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
+            this.excelDownloadButton.Size = new System.Drawing.Size(127, 40);
+            this.excelDownloadButton.smtButtonAutoText = false;
+            this.excelDownloadButton.smtButtonStyle = baseSMT.EnumButtonStyles.엑셀변환;
+            this.excelDownloadButton.TabIndex = 6;
+            this.excelDownloadButton.Text = "엑셀 다운로드";
+            this.excelDownloadButton.ToolTip = "조회 결과를 엑셀로 저장";
+            this.excelDownloadButton.Click += new System.EventHandler(this.ExcelDownloadButton_Click);
+            //
             // closeButton
             // 
             this.closeButton.AllowFocus = false;
+            this.closeButton.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(63)))), ((int)(((byte)(92)))));
             this.closeButton.Appearance.ForeColor = System.Drawing.Color.White;
+            this.closeButton.Appearance.Options.UseBackColor = true;
             this.closeButton.Appearance.Options.UseForeColor = true;
             this.closeButton.AutoSize = true;
             this.closeButton.Dock = System.Windows.Forms.DockStyle.Right;
             this.closeButton.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
             this.closeButton.ImageOptions.ImageIndex = 5;
-            this.closeButton.ImageOptions.SvgImageSize = new System.Drawing.Size(20, 20);
-            this.closeButton.Location = new System.Drawing.Point(1364, 0);
+            this.closeButton.ImageOptions.ImageToTextIndent = 15;
+            this.closeButton.ImageOptions.SvgImageSize = new System.Drawing.Size(21, 21);
+            this.closeButton.Location = new System.Drawing.Point(1348, 0);
+            this.closeButton.Margin = new System.Windows.Forms.Padding(4);
             this.closeButton.Name = "closeButton";
-            this.closeButton.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.closeButton.Padding = new System.Windows.Forms.Padding(12, 0, 12, 0);
             this.closeButton.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
-            this.closeButton.Size = new System.Drawing.Size(76, 40);
-            this.closeButton.smtButtonAutoText = false;
+            this.closeButton.Size = new System.Drawing.Size(92, 40);
             this.closeButton.smtButtonStyle = baseSMT.EnumButtonStyles.닫기;
             this.closeButton.TabIndex = 8;
             this.closeButton.Text = "닫기";
@@ -277,15 +166,13 @@
             this.body.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(246)))), ((int)(((byte)(248)))));
             this.body.ColumnCount = 1;
             this.body.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.body.Controls.Add(this.filters, 0, 0);
-            this.body.Controls.Add(this.cards, 0, 1);
-            this.body.Controls.Add(this.listGroup, 0, 2);
+            this.body.Controls.Add(this.cards, 0, 0);
+            this.body.Controls.Add(this.listGroup, 0, 1);
             this.body.Dock = System.Windows.Forms.DockStyle.Fill;
             this.body.Location = new System.Drawing.Point(0, 40);
             this.body.Name = "body";
             this.body.Padding = new System.Windows.Forms.Padding(12);
-            this.body.RowCount = 3;
-            this.body.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 58F));
+            this.body.RowCount = 2;
             this.body.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 106F));
             this.body.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.body.Size = new System.Drawing.Size(1440, 820);
@@ -301,10 +188,11 @@
             this.filters.Controls.Add(this.salesFilter);
             this.filters.Controls.Add(this.itemLabel);
             this.filters.Controls.Add(this.itemSearch);
+            this.filters.Controls.Add(this.searchButton);
             this.filters.Dock = System.Windows.Forms.DockStyle.Fill;
             this.filters.Location = new System.Drawing.Point(15, 23);
             this.filters.Name = "filters";
-            this.filters.Padding = new System.Windows.Forms.Padding(0, 8, 0, 8);
+            this.filters.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
             this.filters.Margin = new System.Windows.Forms.Padding(0);
             this.filters.Size = new System.Drawing.Size(1410, 76);
             this.filters.TabIndex = 1;
@@ -317,6 +205,8 @@
             this.monthLabel.Name = "monthLabel";
             this.monthLabel.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.monthLabel.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.monthLabel.Appearance.ForeColor = System.Drawing.Color.White;
+            this.monthLabel.Appearance.Options.UseForeColor = true;
             this.monthLabel.Appearance.Options.UseTextOptions = true;
             this.monthLabel.Size = new System.Drawing.Size(44, 32);
             this.monthLabel.TabIndex = 0;
@@ -353,6 +243,8 @@
             this.periodLabel.Name = "periodLabel";
             this.periodLabel.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.periodLabel.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.periodLabel.Appearance.ForeColor = System.Drawing.Color.White;
+            this.periodLabel.Appearance.Options.UseForeColor = true;
             this.periodLabel.Appearance.Options.UseTextOptions = true;
             this.periodLabel.Size = new System.Drawing.Size(56, 32);
             this.periodLabel.TabIndex = 2;
@@ -365,7 +257,7 @@
             this.periodMode.Name = "periodMode";
             this.periodMode.Margin = new System.Windows.Forms.Padding(0, 0, 8, 0);
             this.periodMode.Properties.AutoHeight = false;
-            this.periodMode.Properties.Items.AddRange(new object[] { "월별", "주별", "일별" });
+            this.periodMode.Properties.Items.AddRange(new object[] { "주별", "일별" });
             this.periodMode.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.periodMode.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             this.periodMode.Properties.ShowDropDown = DevExpress.XtraEditors.Controls.ShowDropDown.SingleClick;
@@ -380,6 +272,8 @@
             this.salesLabel.Name = "salesLabel";
             this.salesLabel.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.salesLabel.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.salesLabel.Appearance.ForeColor = System.Drawing.Color.White;
+            this.salesLabel.Appearance.Options.UseForeColor = true;
             this.salesLabel.Appearance.Options.UseTextOptions = true;
             this.salesLabel.Size = new System.Drawing.Size(56, 32);
             this.salesLabel.TabIndex = 4;
@@ -409,6 +303,8 @@
             this.itemLabel.Name = "itemLabel";
             this.itemLabel.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.itemLabel.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.itemLabel.Appearance.ForeColor = System.Drawing.Color.White;
+            this.itemLabel.Appearance.Options.UseForeColor = true;
             this.itemLabel.Appearance.Options.UseTextOptions = true;
             this.itemLabel.Size = new System.Drawing.Size(32, 32);
             this.itemLabel.TabIndex = 6;
@@ -427,22 +323,27 @@
             // searchButton
             // 
             this.searchButton.AllowFocus = false;
+            this.searchButton.Appearance.BackColor = System.Drawing.Color.FromArgb(49, 63, 92);
             this.searchButton.Appearance.ForeColor = System.Drawing.Color.White;
+            this.searchButton.Appearance.Options.UseBackColor = true;
             this.searchButton.Appearance.Options.UseForeColor = true;
             this.searchButton.AutoSize = true;
-            this.searchButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.searchButton.ImageOptions.SvgImageSize = new System.Drawing.Size(20, 20);
+            this.searchButton.Dock = System.Windows.Forms.DockStyle.None;
+            this.searchButton.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
+            this.searchButton.ImageOptions.ImageToTextIndent = 15;
+            this.searchButton.ImageOptions.SvgImageSize = new System.Drawing.Size(21, 21);
             this.searchButton.Margin = new System.Windows.Forms.Padding(4, 0, 0, 0);
             this.searchButton.ImageOptions.ImageIndex = 0;
-            this.searchButton.Location = new System.Drawing.Point(837, 11);
+            this.searchButton.Location = new System.Drawing.Point(1085, 0);
             this.searchButton.Name = "searchButton";
             this.searchButton.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
             this.searchButton.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
-            this.searchButton.Size = new System.Drawing.Size(76, 40);
+            this.searchButton.Size = new System.Drawing.Size(76, 32);
             this.searchButton.smtButtonStyle = baseSMT.EnumButtonStyles.조회;
             this.searchButton.TabIndex = 8;
             this.searchButton.Text = "조회";
-            this.searchButton.ToolTip = "판매구분과 품목으로 예시 목록 조회 (Ctrl+Q)";
+            this.searchButton.ToolTip = "판매구분과 품목으로 조회 (Ctrl+Q)";
+            this.searchButton.Click += new System.EventHandler(this.SearchButton_Click);
             // 
             // cards
             // 
@@ -488,7 +389,7 @@
             this.cardTitle1.Name = "cardTitle1";
             this.cardTitle1.Size = new System.Drawing.Size(63, 17);
             this.cardTitle1.TabIndex = 1;
-            this.cardTitle1.Text = "월 예상수량";
+            this.cardTitle1.Text = "전체 실 발주량";
             // 
             // cardValue1
             // 
@@ -500,7 +401,7 @@
             this.cardValue1.Name = "cardValue1";
             this.cardValue1.Size = new System.Drawing.Size(143, 37);
             this.cardValue1.TabIndex = 2;
-            this.cardValue1.Text = "11,600 EA";
+            this.cardValue1.Text = "0 EA";
             // 
             // card2
             // 
@@ -528,7 +429,7 @@
             this.cardTitle2.Name = "cardTitle2";
             this.cardTitle2.Size = new System.Drawing.Size(77, 17);
             this.cardTitle2.TabIndex = 1;
-            this.cardTitle2.Text = "B2B 예상수량";
+            this.cardTitle2.Text = "B2B 실 발주량";
             // 
             // cardValue2
             // 
@@ -540,7 +441,7 @@
             this.cardValue2.Name = "cardValue2";
             this.cardValue2.Size = new System.Drawing.Size(135, 37);
             this.cardValue2.TabIndex = 2;
-            this.cardValue2.Text = "6,000 EA";
+            this.cardValue2.Text = "0 EA";
             // 
             // card3
             // 
@@ -568,7 +469,7 @@
             this.cardTitle3.Name = "cardTitle3";
             this.cardTitle3.Size = new System.Drawing.Size(78, 17);
             this.cardTitle3.TabIndex = 1;
-            this.cardTitle3.Text = "B2C 예상수량";
+            this.cardTitle3.Text = "B2C 실 발주량";
             // 
             // cardValue3
             // 
@@ -580,7 +481,7 @@
             this.cardValue3.Name = "cardValue3";
             this.cardValue3.Size = new System.Drawing.Size(134, 37);
             this.cardValue3.TabIndex = 2;
-            this.cardValue3.Text = "5,600 EA";
+            this.cardValue3.Text = "0 EA";
             // 
             // listGroup
             // 
@@ -591,7 +492,7 @@
             this.listGroup.Padding = new System.Windows.Forms.Padding(4);
             this.listGroup.Size = new System.Drawing.Size(1410, 528);
             this.listGroup.TabIndex = 3;
-            this.listGroup.Text = "판매 예상수량  ·  4개 항목";
+            this.listGroup.Text = "실 발주량";
             // 
             // forecastGrid
             // 
@@ -620,7 +521,7 @@
             this.forecastView.Name = "forecastView";
             this.forecastView.OptionsView.ColumnAutoWidth = true;
             this.forecastView.FooterPanelHeight = 36;
-            this.forecastView.OptionsView.ShowFooter = true;
+            this.forecastView.OptionsView.ShowFooter = false;
             this.forecastView.OptionsView.ShowGroupPanel = false;
             this.forecastView.RowHeight = 36;
             // 
@@ -636,6 +537,7 @@
             this.MinimumSize = new System.Drawing.Size(1120, 640);
             this.Name = "Frm_PM_Forecasting";
             this.Text = "포케스팅 관리";
+            this.Load += new System.EventHandler(this.Frm_PM_Forecasting_Load);
             ((System.ComponentModel.ISupportInitialize)(this.commonBar)).EndInit();
             this.commonBar.ResumeLayout(false);
             this.commonBar.PerformLayout();
@@ -697,13 +599,8 @@
         private DevExpress.XtraEditors.GroupControl listGroup;
         private DevExpress.XtraGrid.GridControl forecastGrid;
         private DevExpress.XtraGrid.Views.Grid.GridView forecastView;
-        private baseSMT.smtSearchButton registerButton;
-        private baseSMT.smtSearchButton deleteButton;
-        private baseSMT.smtSearchButton saveButton;
-        private baseSMT.smtSearchButton confirmButton;
-        private baseSMT.smtSearchButton cancelConfirmButton;
-        private baseSMT.smtSearchButton templateButton;
-        private baseSMT.smtSearchButton uploadButton;
+        private baseSMT.smtSearchButton editButton;
+        private baseSMT.smtSearchButton excelDownloadButton;
         private baseSMT.smtSearchButton closeButton;
     }
 }

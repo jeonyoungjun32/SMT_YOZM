@@ -1,4 +1,5 @@
-﻿using baseSMT;
+﻿using System.Linq;
+using baseSMT;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
@@ -27,6 +28,7 @@ namespace SmartMES.View.CM
         private string Selected_Cust_Cd = "";
         private string Selected_ItemCode = "";
         private int? currentRowHandle = null;
+        private bool updatingForecastUse;
 
         public Frm_CM_ItemPrice_Cust()
         {
@@ -82,7 +84,8 @@ namespace SmartMES.View.CM
             gv.OptionsView.ColumnAutoWidth = true;     //Column 많으면 스크롤 생기도록 바꾸기
 
             //검색창
-            gv.OptionsFind.AlwaysVisible = true;
+            gv.OptionsFind.AlwaysVisible = false;
+            gv.OptionsFind.AllowFindPanel = true;
             gv.OptionsView.ShowGroupPanel = false;
 
             //Column 생성
@@ -90,18 +93,23 @@ namespace SmartMES.View.CM
             grid.Create_GvColumn(gv, "거래처코드", "CustCode");
             grid.Create_GvColumn(gv, "거래처명", "CustName");
             grid.Create_GvColumn(gv, "등록여부", "PriceYn");
+            var use = new RepositoryItemCheckEdit { ValueChecked = "Y", ValueUnchecked = "N" };
+            use.EditValueChanged += (sender, e) => gv.PostEditor();
+            grid.Create_GvColumn(gv, "사용여부", "ForecastUseYn", use);
+            grid.Column_AllowEdit(gv.Columns["ForecastUseYn"]);
+            gv.Columns["ForecastUseYn"].ToolTip = "공통 포케스팅 표시 여부 · 체크 변경 시 바로 저장";
+            gv.CellValueChanged += ForecastUse_CellValueChanged;
 
 			//
 			gv.Columns["PriceYn"].Visible = false;
 
 			//이벤트 설정
-			gv.RowCellStyle += Gv_RowCellStyle; ;              //등록여부에따른 배경색 지정
 			gv.FocusedRowObjectChanged += Gv_FocusedRowObjectChanged;   //Row선택 변경시 그행 조회
         }
 
 		private void Gv_RowCellStyle(object sender, RowCellStyleEventArgs e)
         {
-            //단가 등록 내역 있는지 색 표기
+            //금액 등록 내역 있는지 색 표기
             if (e.Column.FieldName == "PriceYn")   //
             {
                 GridView gv = sender as GridView;
@@ -138,24 +146,51 @@ namespace SmartMES.View.CM
             gv.OptionsView.ColumnAutoWidth = false;     //Column 많으면 스크롤 생기도록 바꾸기
             gv.OptionsBehavior.AutoPopulateColumns = false; //DataTable 입력시 Column 생성 방지
             gv.OptionsFind.AlwaysVisible = false;
+            gv.OptionsFind.AllowFindPanel = true;
             gv.OptionsView.ShowGroupPanel = false;
 
             //
             RepositoryItem lupPriceType = rpo.Create_RepositoryItem(code.Select_CM_CateItem_ByKey(), "그룹코드", "그룹명");
             RepositoryItem lupCust = rpo.Create_RepositoryItem(code.Select_Customer_ByKey(), "거래처코드", "거래처명");
-            RepositoryItemSearchLookUpEdit lup_Item = rpo.Create_RepositoryItemSearchLookUp(code.GetMaterialList(null), "품목코드", "품명");
+            RepositoryItemSearchLookUpEdit lup_Item = rpo.Create_RepositoryItemSearchLookUp(CM_ItemPrice.SelectItems(), "품목코드", "품목코드");
+            // 품명에 넓은 공간 배정, 규격·단위는 필요한 폭만 사용
+            lup_Item.PopupFormSize = new Size(850, 500);
+            lup_Item.PopulateViewColumns();
+            lup_Item.View.OptionsView.ColumnAutoWidth = true;
+            lup_Item.View.Columns["품목코드"].Width = 170;
+            lup_Item.View.Columns["품목코드"].MinWidth = 150;
+            lup_Item.View.Columns["품명"].Width = 450;
+            lup_Item.View.Columns["품명"].MinWidth = 320;
+            lup_Item.View.Columns["규격"].Width = 120;
+            lup_Item.View.Columns["단위"].Width = 70;
+
+            // 선택 즉시 셀 값을 반영하여 다른 셀로 이동하기 전 품목정보 갱신
+            lup_Item.EditValueChanged += (sender, e) => gv.PostEditor();
 
             //Column 생성
-            grid.Create_GvColumn(gv, "상태", "Status");
-            grid.Create_GvColumn(gv, "단가구분", "PriceType", lupPriceType);
+            grid.Create_GvColumn(gv, "금액구분", "PriceType", lupPriceType);
             grid.Create_GvColumn(gv, "거래처", "CustCode", lupCust);
-            grid.Create_GvColumn(gv, "품목", "ItemCode", lup_Item);
-            grid.Create_GvColumn(gv, "단가", "Price", rpo.Create_rpoTxt_Numeric());
+            grid.Create_GvColumn(gv, "품목코드", "ItemCode", lup_Item);
+            grid.Create_GvColumn(gv, "품목명", "ItemName");
+            grid.Create_GvColumn(gv, "금액", "Price", rpo.Create_rpoTxt_Numeric());
+            gv.Columns["Price"].ToolTip = "품목 1개 기준 금액 · 엑셀 금액이 없으면 발주수량 × 환산수량 × 등록 금액으로 계산";
+            var use = new RepositoryItemCheckEdit { ValueChecked = "Y", ValueUnchecked = "N", ValueGrayed = DBNull.Value };
+            use.EditValueChanged += (sender, e) => gv.PostEditor();
+            grid.Create_GvColumn(gv, "사용여부", "ForecastUseYn", use);
+            grid.Column_AllowEdit(gv.Columns["ForecastUseYn"]);
+            gv.Columns["ForecastUseYn"].ToolTip = "공통 포케스팅 표시 여부 · 체크 변경 시 바로 저장";
+            gv.CellValueChanged += ForecastUse_CellValueChanged;
+            grid.Create_GvColumn(gv, "규격", "Size");
+            grid.Create_GvColumn(gv, "단위", "UnitCode");
+            grid.Create_GvColumn(gv, "판매채널", "ChannelName");
+            grid.Create_GvColumn(gv, "납품처", "SourceShipToName");
+            grid.Create_GvColumn(gv, "매출처", "SourceSoldToName");            
             grid.Create_GvColumn(gv, "적용일자", "ApplyDate", rpo.Create_rpoDate());
             grid.Create_GvColumn(gv, "종료일자", "EndDate", rpo.Create_rpoDate());
             grid.Create_GvColumn(gv, "거래처품번", "CustAlias");
             grid.Create_GvColumn(gv, "이력", "History");
             grid.Create_GvColumn(gv, "비고", "Remark");
+            grid.Create_GvColumn(gv, "상태", "Status");
             grid.Create_GvColumn(gv, "등록자", "CreId");
             grid.Create_GvColumn(gv, "등록IP", "CreIP");
             grid.Create_GvColumn(gv, "등록일시", "CreDt");
@@ -165,7 +200,7 @@ namespace SmartMES.View.CM
 
 			//Repository 설정
 			grid.Column_AllowEdit(gv.Columns["CustCode"]);
-			grid.Column_AllowEdit(gv.Columns["PriceType"]);
+            grid.Column_AllowEdit(gv.Columns["PriceType"]);
 			grid.Column_AllowEdit(gv.Columns["ItemCode"]);
 			grid.Column_AllowEdit(gv.Columns["Price"]);
 			grid.Column_AllowEdit(gv.Columns["ApplyDate"]);
@@ -173,6 +208,17 @@ namespace SmartMES.View.CM
 			grid.Column_AllowEdit(gv.Columns["CustAlias"]);
 			grid.Column_AllowEdit(gv.Columns["Remark"]);
 			grid.Column_AllowEdit(gv.Columns["History"]);
+
+            // 거래처별 관리 정보 편집 허용, 품목 기본정보와 감사 이력은 조회 전용
+            foreach (string field in new[] { "ChannelName", "SourceShipToName", "SourceSoldToName" })
+                grid.Column_AllowEdit(gv.Columns[field]);
+
+            // 편집 가능한 셀에 MES 공통 입력 색상 명시 적용
+            foreach (DevExpress.XtraGrid.Columns.GridColumn column in gv.Columns)
+            {
+                if (column.OptionsColumn.AllowEdit)
+                    column.AppearanceCell.Options.UseBackColor = true;
+            }
 
             //
             gv.Columns["History"].Visible = false; //이력테이블 없어져서 숨김처리
@@ -184,7 +230,7 @@ namespace SmartMES.View.CM
             gv.Columns["Status"].AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             gv.Columns["PriceType"].AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
 
-            //단가 히스토리
+            //금액 히스토리
             RepositoryItemButtonEdit btn_History = new RepositoryItemButtonEdit();
             btn_History.TextEditStyle = TextEditStyles.HideTextEditor;  //Text입력 삭제
             btn_History.Click += Event_BtnHistory_Click;                //이벤트 지정
@@ -233,26 +279,26 @@ namespace SmartMES.View.CM
             gv.OptionsView.ColumnAutoWidth = false;     //Column 많으면 스크롤 생기도록 바꾸기
 
             //Repository 생성 or 이벤트 입력
-            //단가
+            //금액
             RepositoryItemTextEdit txt_Price = new RepositoryItemTextEdit();
             txt_Price.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             RepositoryItem lupPriceType = rpo.Create_RepositoryItem(code.Select_CM_CateItem_ByKey(), "그룹코드", "그룹명");
 
             //Column 생성
-            grid.Create_GvColumn(gv, "상태", "Status");
             grid.Create_GvColumn(gv, "순번", "Idx");
-            grid.Create_GvColumn(gv, "단가구분", "PriceType", lupPriceType);
-            grid.Create_GvColumn(gv, "단가", "Price", txt_Price);
-            grid.Create_GvColumn(gv, "단가 적용일", "ApplyDate");
+            grid.Create_GvColumn(gv, "금액구분", "PriceType", lupPriceType);
+            grid.Create_GvColumn(gv, "금액", "Price", txt_Price);
+            grid.Create_GvColumn(gv, "금액 적용일", "ApplyDate");
             grid.Create_GvColumn(gv, "변경사유", "Remark");
             grid.Create_GvColumn(gv, "등록자", "CreId");
             grid.Create_GvColumn(gv, "등록일시", "CreDt");
+            grid.Create_GvColumn(gv, "상태", "Status");
             grid.Create_GvColumn(gv, "수정자", "ModId");
             grid.Create_GvColumn(gv, "수정일시", "ModDt");
 
             //Column 단일 설정
             //셀값 변경 허용
-            grid.Column_AllowEdit(gv.Columns["Price"]);         //단가
+            grid.Column_AllowEdit(gv.Columns["Price"]);         //금액
             grid.Column_AllowEdit(gv.Columns["Remark"]);           //변경사유
 
             gv.Columns["Idx"].Visible = false;
@@ -261,13 +307,13 @@ namespace SmartMES.View.CM
            grid.SetCol_Type(gv.Columns["Price"], clsGrid.TypeList.TFloat);
 
             gv.Columns["Status"].AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;     //상태
-            gv.Columns["ApplyDate"].AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center; //단가 적용일
+            gv.Columns["ApplyDate"].AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center; //금액 적용일
 
 
             gv.RowStyle += grid.RowStyle_ChangeBg_ByStatus;                 //삭제시 배경색 지정
             gv.CellValueChanged += Event_CellValueChanged;                  //셀값 수정시 상태값 수정
             //gv.GridControl.ProcessGridKey += Event_ProcessGridKey_History;  //행추가, 삽입, 삭제 단축키기능 부여
-            //gv.ValidatingEditor += Event_ValidatingEdito_History;           //단가적용일 입력시 중복 확인
+            //gv.ValidatingEditor += Event_ValidatingEdito_History;           //금액적용일 입력시 중복 확인
         }
 
         private void Event_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
@@ -307,8 +353,12 @@ namespace SmartMES.View.CM
         private void DisplayCust()
 		{
             CM_Cust cc = new CM_Cust();
-            cc.CustType = LupPriceGroup.smtLookUpValue.ConvertString_Null_To_Empty();
-            GcCustomer.DataSource = cc.SelectCustomer_Price();
+            string priceType = LupPriceGroup.smtLookUpValue.ConvertString_Null_To_Empty();
+            string[] types = priceType == "20" ? new[] { "B2B", "B2C", "20", "40" }
+                : priceType == "10" ? new[] { "10", "40" } : null;
+            DataTable customers = cc.SelectCustomer_Price(types);
+            customers.DefaultView.Sort = "PriceYn DESC, CustName ASC";
+            GcCustomer.DataSource = customers.DefaultView;
 
             GvCustomer.BestFitColumns();
         }
@@ -316,7 +366,11 @@ namespace SmartMES.View.CM
         private void DisplayPrice()
         {
             DataRow dr = GvCustomer.GetFocusedDataRow();
-            if (dr == null) return;
+            if (dr == null)
+            {
+                gcMaterialPrice.DataSource = null;
+                return;
+            }
 
             string custCode = dr["CustCode"].ConvertString_Null_To_Empty();
             string priceType = LupPriceGroup.smtLookUpValue.ConvertString_Null_To_Empty();
@@ -330,20 +384,25 @@ namespace SmartMES.View.CM
             price.CustCode = custCode;
             price.PriceType = priceType;
 
-            gcMaterialPrice.DataSource = price.SelectMaterialPrice();
+            gcMaterialPrice.DataSource = price.SelectCustomerPrice();
 
             gvMaterialPrice.BestFitColumns();
+            gvMaterialPrice.Columns["ItemCode"].MinWidth = 140;
+            gvMaterialPrice.Columns["ItemName"].MinWidth = 220;
+            gvMaterialPrice.Columns["Price"].MinWidth = 110;
+            gvMaterialPrice.Columns["ApplyDate"].MinWidth = 105;
+            gvMaterialPrice.Columns["EndDate"].MinWidth = 105;
         }
 
         private void Search_ItemPrice_History()
         {
-            ////해당품목 거래처별 단가 조회
+            ////해당품목 거래처별 금액 조회
             //Check_Search_History();
 
             //GridView gv = gcMaterialPrice.MainView as GridView;
             //DataRow dr = gv.GetFocusedDataRow();
 
-            ////신규Row면 단가이력 안보여주기
+            ////신규Row면 금액이력 안보여주기
             //if (Convert.ToString(dr["Status"]) != "신규")
             //{
             //    //Pnl_History.Visible = true;
@@ -412,6 +471,11 @@ namespace SmartMES.View.CM
                         if (!Save_ToDatabase(dt.Rows[curHandle], 'D')) return;
                     }
                 }
+                // 저장한 거래처 금액을 열려 있는 B2B 화면의 자동 계산 행에 반영
+                foreach (Form form in Application.OpenForms)
+                    if (form is SmartMES.View.BM.Frm_BM_EdiOrderB2B edi && !edi.IsDisposed)
+                        edi.RefreshCustomerPrices();
+
                 //3. 조회
                 DisplayPrice();
 
@@ -440,7 +504,7 @@ namespace SmartMES.View.CM
                     //미입력된 칸 있는지 확인
                     if (Convert.ToString(dr["PriceType"]) == "" || Convert.ToString(dr["PriceType"]) == "ALL")
                     {
-                        MessageBox.Show("단가구분이 비어있습니다.");
+                        MessageBox.Show("금액구분이 비어있습니다.");
                         return false;
                     }
                     else if (Convert.ToString(dr["CustCode"]) == "" || Convert.ToString(dr["ItemCode"]) == "")
@@ -450,28 +514,27 @@ namespace SmartMES.View.CM
                     }
                     else if (Convert.ToString(dr["Price"]) == "")
                     {
-                        MessageBox.Show("단가가 비어있습니다.");
+                        MessageBox.Show("금액이 비어있습니다.");
                         return false;
                     }
                     else if (Convert.ToString(dr["ApplyDate"]) == "")
                     {
-                        MessageBox.Show("단가적용일이 비어있습니다.");
+                        MessageBox.Show("금액적용일이 비어있습니다.");
                         return false;
                     }
                     checkCnt++;
                 }
                 else if (status == "수정")
                 {
-                    if (Convert.ToString(dr["PriceType"]) == "" || Convert.ToString(dr["PriceType"]) == "ALL")
+                    if (string.IsNullOrWhiteSpace(Convert.ToString(dr["CustCode"]))
+                        || string.IsNullOrWhiteSpace(Convert.ToString(dr["ItemCode"]))
+                        || string.IsNullOrWhiteSpace(Convert.ToString(dr["PriceType"]))
+                        || Convert.ToString(dr["PriceType"]) == "ALL")
                     {
-                        MessageBox.Show("단가그룹이 비어있습니다.");
+                        MessageBox.Show("거래처·품목·금액구분을 선택해 주세요.");
                         return false;
                     }
-                    else if (Convert.ToString(dr["ApplyDate"]) == "" || dr["ApplyDate"].ConvertDate_To_Char10() == "0001-01-01")
-                    {
-                        MessageBox.Show("단가적용일이 비어있습니다.");
-                        return false;
-                    }
+                    // 기존 판매품목의 미입력 금액·적용일은 NULL 유지
                     checkCnt++;
                 }
                 else if (status == "삭제")
@@ -488,6 +551,16 @@ namespace SmartMES.View.CM
 
         private bool Save_ToDatabase(DataRow dr, char div)
         {
+            // 기존 행은 미입력 값을 보존하여 수정, 삭제 시 날짜 변환 생략
+            if (div == 'U')
+            {
+                CM_ItemPrice.SaveCustomerPrice(dr);
+                dr["Status"] = "";
+                return true;
+            }
+            if (div == 'D')
+                return new CM_ItemPrice { Seq = dr["Seq"].ConvertInt_Null_To_Zero() }.Del_MaterialPrice();
+
             //데이터베이스에 반영
             //1. 기본 셋팅
             CM_ItemPrice mp = new CM_ItemPrice();
@@ -500,6 +573,9 @@ namespace SmartMES.View.CM
             mp.EndDate = dr["EndDate"].ConvertString_Null_To_Empty() == "" ? "" : dr["EndDate"].ConvertDate_To_Char10();
             mp.CustAlias = dr["CustAlias"].ConvertString_Null_To_Empty();
             mp.Remark = dr["Remark"].ConvertString_Null_To_Empty();
+            mp.ChannelName = dr["ChannelName"].ConvertString_Null_To_Empty();
+            mp.SourceShipToName = dr["SourceShipToName"].ConvertString_Null_To_Empty();
+            mp.SourceSoldToName = dr["SourceSoldToName"].ConvertString_Null_To_Empty();
 
             //CM_ItemPriceHistory history = new CM_ItemPriceHistory();
             //history.PriceType = Convert.ToString(dr["PriceType"]);
@@ -514,7 +590,7 @@ namespace SmartMES.View.CM
             {
                 if (mp.PriceType == "")
                 {
-                    MessageBox.Show("단가그룹을 선택해주세요.");
+                    MessageBox.Show("금액그룹을 선택해주세요.");
                     return false;
                 }
                 if (mp.CustCode == "")
@@ -542,7 +618,7 @@ namespace SmartMES.View.CM
                     MessageBox.Show("저장 중 에러가 발생하였습니다.");
                     return false;
                 }
-                //if (!history.Ins_MaterialPriceHistory())     // 단가이력 등록
+                //if (!history.Ins_MaterialPriceHistory())     // 금액이력 등록
                 //{
                 //    //저장 중 에러 발생시
                 //    MessageBox.Show("저장 중 에러가 발생하였습니다.");
@@ -562,7 +638,6 @@ namespace SmartMES.View.CM
 
             //상태값 초기화
             dr[0] = "";
-            DisplayPrice();
             return true;
         }
 
@@ -600,25 +675,103 @@ namespace SmartMES.View.CM
             GridView gv = sender as GridView;
 
             //셀값 수정 시 상태값 수정
-            if (e.Column.FieldName == gv.Columns[0].FieldName) return;
-            grid.Change_Status(gv, e.RowHandle);
+            if (e.Column.FieldName == gv.Columns[0].FieldName || e.Column.FieldName == "ForecastUseYn")
+                return;
+
+            DataRow row = gv.GetDataRow(e.RowHandle);
+
+            if (row == null)
+                return;
+
+            if (row["Seq"].ConvertInt_Null_To_Zero() == 0)
+                row["Status"] = "신규";
+            else
+                grid.Change_Status(gv, e.RowHandle);
+
+            if (e.Column.FieldName == "ItemCode")
+            {
+                var lookup = gv.Columns["ItemCode"].ColumnEdit as RepositoryItemSearchLookUpEdit;
+                // 조회창 반환 형식에 관계없이 선택한 품목의 원본 행 사용
+                object selected = lookup?.GetRowByKeyValue(e.Value);
+                DataRow item = selected is DataRowView itemView ? itemView.Row : selected as DataRow;
+                row["ItemName"] = item == null ? DBNull.Value : item["품명"];
+                row["Size"] = item == null ? DBNull.Value : item["규격"];
+                row["UnitCode"] = item == null ? DBNull.Value : item["단위"];
+                gv.RefreshRow(e.RowHandle);
+            }
+        }
+
+        /// <summary>공통 사용여부 즉시 저장 및 같은 거래처·품목 행 동기화</summary>
+        private async void ForecastUse_CellValueChanged(object sender, CellValueChangedEventArgs e)
+        {
+            if (updatingForecastUse || e.Column.FieldName != "ForecastUseYn")
+                return;
+
+            var view = (GridView)sender;
+            DataRow row = view.GetDataRow(e.RowHandle);
+
+            if (row == null)
+                return;
+
+            // 왼쪽은 거래처 전체, 오른쪽은 선택 거래처의 품목별 표시 설정
+            bool customer = view == GvCustomer;
+            string useYn = Convert.ToString(e.Value) == "Y" ? "Y" : "N";
+            updatingForecastUse = true;
+            try
+            {
+                CM_ItemPrice.SaveForecastUse(Convert.ToString(row["CustCode"]),
+                    customer ? null : Convert.ToString(row["ItemCode"]),
+                    customer ? null : Convert.ToString(row["PriceType"]), useYn);
+                // 금액 이력으로 같은 품목이 여러 행에 있어도 공통 표시 설정은 동일하게 반영
+                if (!customer)
+                {
+                    foreach (DataRow item in row.Table.Rows)
+                    {
+                        if (Equals(item["ItemCode"], row["ItemCode"]) && Equals(item["PriceType"], row["PriceType"]))
+                            item["ForecastUseYn"] = useYn;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // 저장 실패 시 체크 복원, 이벤트 재진입은 updatingForecastUse로 차단
+                row[e.Column.FieldName] = useYn == "Y" ? "N" : "Y";
+                MessageBox.Show(ex.Message);
+                return;
+            }
+            finally
+            {
+                updatingForecastUse = false;
+            }
+
+            // 공통 체크 저장 후 열린 포케스팅 화면을 현재 조회 조건으로 갱신
+            foreach (var form in Application.OpenForms.OfType<SmartMES.View.PM.Frm_PM_Forecasting>().ToArray())
+            {
+                if (form.IsDisposed || form.Disposing)
+                    continue;
+
+                try
+                {
+                    await form.RefreshEdiQuantitiesAsync();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("사용여부는 저장됐지만 포케스팅 갱신에 실패했습니다. 다시 조회해 주세요.\n" + ex.Message);
+                }
+            }
         }
 
         private void gvMaterialPrice_ShowingEditor(object sender, CancelEventArgs e)
         {
-            // 현재 행의 상태 확인 (예: 신규, 수정)
-            string status = Convert.ToString(gvMaterialPrice.GetRowCellValue(gvMaterialPrice.FocusedRowHandle, "Status"));
-
-            // 상태가 "신규"가 아닐 때, ItemCode, PriceType, CustCode 칼럼의 편집을 막음
-            if (status != "신규")
+            if (gvMaterialPrice.FocusedColumn.FieldName == "ForecastUseYn" && gvMaterialPrice.GetFocusedDataRow()?["Seq"].ConvertInt_Null_To_Zero() == 0)
             {
-                if (gvMaterialPrice.FocusedColumn.FieldName == "ItemCode" ||
-                    gvMaterialPrice.FocusedColumn.FieldName == "PriceType" ||
-                    gvMaterialPrice.FocusedColumn.FieldName == "CustCode")
-                {
-                    e.Cancel = true;  // 편집을 취소
-                }
+                e.Cancel = true;
+                return;
             }
+
+            // 삭제 예정 행은 편집 제외
+            e.Cancel = Convert.ToString(gvMaterialPrice.GetFocusedRowCellValue("Status")) == "삭제";
+
         }
 
         private void cmdClose_Click(object sender, EventArgs e)
@@ -658,11 +811,20 @@ namespace SmartMES.View.CM
                 {
                     //삽입, 추가 진행인 경우
                     dic.Add("Status", "신규");
-                    dic.Add("PriceType", drCust["CustType"]);
+                    string type = LupPriceGroup.smtLookUpValue.ConvertString_Null_To_Empty();
+                    string custType = drCust["CustType"].ConvertString_Null_To_Empty();
+                    dic.Add("PriceType", type != "ALL" && type != "" ? type
+                        : custType == "10" ? "10" : "20");
                     dic.Add("CustCode", drCust["CustCode"]);
+                    dic.Add("ApplyDate", DateTime.Today);
                 }
                 else
                 {
+                    if (gvMaterialPrice.GetFocusedRowCellValue("Seq").ConvertInt_Null_To_Zero() == 0)
+                    {
+                        gvMaterialPrice.DeleteRow(gvMaterialPrice.FocusedRowHandle);
+                        return;
+                    }
                     //삭제 진행인경우
                     dic.Add("Status", Convert.ToString(gvMaterialPrice.GetFocusedRowCellValue("Status")) == "삭제" ? "" : "삭제");
                 }
@@ -781,12 +943,12 @@ namespace SmartMES.View.CM
                     //미입력된 칸 있는지 확인
                     if (Convert.ToString(dr["Price"]) == "")
                     {
-                        MessageBox.Show("단가가 비어있습니다.");
+                        MessageBox.Show("금액이 비어있습니다.");
                         return false;
                     }
                     else if (Convert.ToString(dr["ApplyDate"]) == "")
                     {
-                        MessageBox.Show("단가적용일이 비어있습니다.");
+                        MessageBox.Show("금액적용일이 비어있습니다.");
                         return false;
                     }
                 }
@@ -863,7 +1025,7 @@ namespace SmartMES.View.CM
         //        else
         //        {
         //            //추가 변경사항 private 따로 만들기
-        //            //최근단가변경이력으로 Update
+        //            //최근금액변경이력으로 Update
         //            //if (!price.Upd_ItemPrice()) return false;
         //        }
         //    }
@@ -876,7 +1038,7 @@ namespace SmartMES.View.CM
         //        else
         //        {
         //            //추가 변경사항 private 따로 만들기
-        //            //최상위 단가로 최근단가 변경
+        //            //최상위 금액으로 최근금액 변경
         //            //if (!price.Upd_ItemPrice_ByHD()) return false;
         //        }
         //    }

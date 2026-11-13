@@ -1,6 +1,7 @@
 ﻿using SmartMES.Common;
 using System;
 using System.Collections.Generic;
+using SmartMES.Models.MM;
 using System.Data;
 using System.Linq;
 using SmartCommon.Common;
@@ -74,6 +75,14 @@ namespace SmartMES.Models
         // 발주 완료처리
         public void EndMM_PlacingM(string mmOrderNo)
         {
+            if (MM_PlacingD.UseYozmOrderColumns)
+            {
+                query = $"UPDATE MM_PlacingM SET CloseDate = CAST(GETDATE() AS date), CloseUserID = '{WrGlobal.LoginID}' " +
+                    $"WHERE CorpId = '{WrGlobal.CorpID}' AND MmOrderNo = '{mmOrderNo}'";
+                db.ExecuteQuery(query);
+                return;
+            }
+
             query = String.Format("Update MM_PlacingM Set State = '완료', CloseDate = Cast(getdate() as date), CloseUserID = '{2}' Where CorpId ='{0}' And MmOrderNo = '{1}'", WrGlobal.CorpID, mmOrderNo, WrGlobal.LoginID);
             db.ExecuteQuery(query);
 
@@ -98,6 +107,18 @@ namespace SmartMES.Models
 
         public void DeleteMM_PurchaseM(string coId, string stoNo)
         {
+            if (MM_PlacingD.UseYozmOrderColumns)
+            {
+                db.ExecuteQuery($@"
+                    SET XACT_ABORT ON;
+                    BEGIN TRANSACTION;
+                    EXEC dbo.Placing_UpdateInQtyByPurchase '{coId}', '{stoNo}', 1;
+                    DELETE dbo.MM_PurchaseD WHERE CorpId = '{coId}' AND StoNo = '{stoNo}';
+                    DELETE dbo.MM_PurchaseM WHERE CorpId = '{coId}' AND StoNo = '{stoNo}';
+                    COMMIT;");
+                return;
+            }
+
             query = String.Format("Delete MM_PurchaseD Where CorpId ='{0}' And StoNo = '{1}'", coId, stoNo);
             db.ExecuteQuery(query);
 

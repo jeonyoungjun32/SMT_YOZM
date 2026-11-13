@@ -10,6 +10,7 @@ using SmartMES.Models.MM;
 using SmartMES.View.BM.Popup;
 using System;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace SmartMES.View.MM
@@ -18,6 +19,7 @@ namespace SmartMES.View.MM
     {
         string crud = "";
         string StoNo = "";
+        private readonly string sourceOrderNo;
 
         clsCode code = new clsCode();
         clsPurchase purchase = new clsPurchase();
@@ -37,12 +39,13 @@ namespace SmartMES.View.MM
             InitializeComponent();
         }
 
-        public frmMM_PurchaseD_TypeA(string _crud, string _stoNo)
+        public frmMM_PurchaseD_TypeA(string _crud, string _stoNo, string orderNo = null)
         {
             InitializeComponent();
 
             this.crud = _crud;
             this.StoNo = _stoNo;
+            sourceOrderNo = orderNo;
 
             Set_Lup();
             SetGrid(gvDetail);
@@ -64,6 +67,11 @@ namespace SmartMES.View.MM
             }
 
             DisplayDetail();
+            if (!string.IsNullOrEmpty(sourceOrderNo))
+            {
+                TxtMmOrderNo.Text = sourceOrderNo;
+                AddDetail_MmOrder();
+            }
         }
 
 		#region 디자인
@@ -349,6 +357,9 @@ namespace SmartMES.View.MM
                 return;
             }
 
+            if (MM_PlacingD.UseYozmOrderColumns && !ValidateYozmReceipt(dt))
+                return;
+
             //마스터 저장
             string stoNo = "";
             string state = "";
@@ -453,7 +464,51 @@ namespace SmartMES.View.MM
 
             MessageBox.Show("저장되었습니다.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            this.Close();
+            if (!string.IsNullOrEmpty(sourceOrderNo))
+                DialogResult = DialogResult.OK;
+            else
+                Close();
+        }
+
+        private bool ValidateYozmReceipt(DataTable details)
+        {
+            try
+            {
+                var rows = details.Select("ISNULL(Status, '') <> '삭제'");
+                
+                if (rows.Length == 0 || rows.Any(row => row["Qty"].ConvertDecimal_Null_To_Zero() <= 0))
+                    throw new InvalidOperationException("입고 품목과 0보다 큰 입고수량을 입력하세요.");
+
+                string customer = searchCustomer.EditValue.ConvertString_Null_To_Empty();
+                
+                foreach (var order in rows.Where(row => !string.IsNullOrEmpty(row["MmOrderNo"].ToString())).GroupBy(row => row["MmOrderNo"].ToString()))
+                {
+                    using (DataTable limits = MM_PlacingD.SelectReceiptLimits(order.Key, StoNo))
+                    {
+                        foreach (var line in order.GroupBy(row => row["MmOrderSeq"].ConvertInt_Null_To_Zero()))
+                        {
+                            DataRow limit = limits.AsEnumerable().FirstOrDefault(row => row.Field<int>("MmOrderSeq") == line.Key);
+                            
+                            if (limit == null || limit["CustCode"].ToString() != customer ||
+                                line.Any(row => row["ItemCode"].ToString() != limit["ItemCode"].ToString()))
+                                throw new InvalidOperationException($"발주 {order.Key}의 거래처 또는 품목이 일치하지 않습니다.");
+                                
+                            if (limit.Field<DateTime?>("CloseDate") > new DateTime(1900, 1, 1))
+                                throw new InvalidOperationException($"종료된 발주 {order.Key}는 입고할 수 없습니다.");
+                                
+                            if (line.Sum(row => row["Qty"].ConvertDecimal_Null_To_Zero()) >
+                                limit["AvailableQty"].ConvertDecimal_Null_To_Zero())
+                                throw new InvalidOperationException($"발주 {order.Key}의 {line.Key}번 품목이 입고 가능 수량을 초과했습니다.");
+                        }
+                    }
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message, "입고 확인");
+                return false;
+            }
         }
 
         #region 품목선택
@@ -597,6 +652,11 @@ namespace SmartMES.View.MM
                 decimal qty = drv["InQty"].ConvertDecimal_Null_To_Zero();
                 newItem["Qty"] = qty;
 
+                if (MM_PlacingD.UseYozmOrderColumns && dt.Rows.Count == 0)
+                {
+                    vatTypeLookUpEdit.EditValue = drv["VatType"];
+                    vatRateSpinEdit.EditValue = drv["VatRate"];
+                }
 
                 string custCode = searchCustomer.EditValue.ConvertString_Null_To_Empty();
                 string ItemCode = drv["ItemCode"].ToString();
@@ -605,11 +665,14 @@ namespace SmartMES.View.MM
                 cmPrice.PriceType = "10";
                 cmPrice.ApplyDate = DateTime.Now.ToString("d");
 
-                decimal unitPrice = cmPrice.Get_MaterialPrice(custCode, ItemCode);
+                decimal unitPrice = MM_PlacingD.UseYozmOrderColumns ? drv["UnitPrice"].ConvertDecimal_Null_To_Zero()
+                    : cmPrice.Get_MaterialPrice(custCode, ItemCode);
                 newItem["UnitPrice"] = unitPrice;
 
                 decimal price = unitPrice * qty;
-                decimal vatPrice = price * (decimal)0.1;
+                decimal vatPrice = MM_PlacingD.UseYozmOrderColumns
+                    ? Math.Round(price * vatRateSpinEdit.EditValue.ConvertDecimal_Null_To_Zero() / 100)
+                    : price * 0.1m;
 
                 newItem["Price"] = price;
                 newItem["VatPrice"] = vatPrice;
@@ -652,18 +715,47 @@ namespace SmartMES.View.MM
             pd.MmOrderNo = TxtMmOrderNo.Text;
 
             DataTable dtPlacing = pd.SelectRemainList();
-            if (dtPlacing == null) return;
-            if (dtPlacing.Rows.Count < 1) return;
+            if (dtPlacing == null || dtPlacing.Rows.Count == 0)
+            {
+                if (MM_PlacingD.UseYozmOrderColumns)
+                    MessageBox.Show("입고할 잔량이 없거나 종료된 발주입니다.", "입고등록");
+                return;
+            }
 
             try
             {
                 DataTable dt = gvDetail.GridControl.DataSource as DataTable;
                 if (dt == null) return;
 
+                if (MM_PlacingD.UseYozmOrderColumns)
+                {
+                    DataRow order = dtPlacing.Rows[0];
+                    string customer = searchCustomer.EditValue.ConvertString_Null_To_Empty();
+                    if (!string.IsNullOrEmpty(customer) && customer != order["CustCode"].ToString())
+                    {
+                        MessageBox.Show("선택한 거래처와 발주의 거래처가 다릅니다.", "입고등록");
+                        return;
+                    }
+                    if (dt.Rows.Count == 0)
+                    {
+                        searchCustomer.EditValue = order["CustCode"];
+                        vatTypeLookUpEdit.EditValue = order["VatType"];
+                        vatRateSpinEdit.EditValue = order["VatRate"];
+                        var houses = dtPlacing.AsEnumerable().Select(row => row["ReceiveHouseId"].ToString())
+                            .Where(value => value.Length > 0).Distinct().ToArray();
+                        if (houses.Length == 1)
+                            houseIDLookUpEdit.EditValue = houses[0];
+                    }
+                }
+
                 DataRow newItem;
 
                 foreach (DataRow dr in dtPlacing.Rows)
 				{
+                    if (MM_PlacingD.UseYozmOrderColumns && dt.Select("ISNULL(Status, '') <> '삭제'").Any(row =>
+                        row["MmOrderNo"].Equals(dr["MmOrderNo"]) && row["MmOrderSeq"].Equals(dr["MmOrderSeq"])))
+                        continue;
+
                     newItem = dt.NewRow();
 
                     newItem["CorpId"] = WrGlobal.CorpID;
@@ -714,9 +806,12 @@ namespace SmartMES.View.MM
                     cmPrice.PriceType = "10";
                     cmPrice.ApplyDate = DateTime.Now.ToString("d");
 
-                    decimal unitPrice = cmPrice.Get_MaterialPrice(custCode, ItemCode);
+                    decimal unitPrice = MM_PlacingD.UseYozmOrderColumns ? dr["UnitPrice"].ConvertDecimal_Null_To_Zero()
+                        : cmPrice.Get_MaterialPrice(custCode, ItemCode);
                     decimal price = unitPrice * remainQty;
-                    decimal vatPrice = (unitPrice * remainQty) * (decimal)0.1;
+                    decimal vatPrice = MM_PlacingD.UseYozmOrderColumns
+                        ? Math.Round(price * vatRateSpinEdit.EditValue.ConvertDecimal_Null_To_Zero() / 100)
+                        : price * 0.1m;
 
                     newItem["UnitPrice"] = unitPrice;
 

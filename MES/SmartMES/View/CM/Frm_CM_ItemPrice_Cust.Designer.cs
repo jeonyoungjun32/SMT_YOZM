@@ -110,7 +110,7 @@
             this.Pnl_History.ShowCaption = false;
             this.Pnl_History.Size = new System.Drawing.Size(857, 179);
             this.Pnl_History.TabIndex = 284;
-            this.Pnl_History.Text = "품목별 단가내역";
+            this.Pnl_History.Text = "품목별 금액내역";
             // 
             // Gc_History
             // 
@@ -248,7 +248,7 @@
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Size = new System.Drawing.Size(1249, 588);
-            this.layoutControlGroup1.Text = "단가리스트";
+            this.layoutControlGroup1.Text = "금액리스트";
             // 
             // splitterItem2
             // 
@@ -282,7 +282,7 @@
             this.layoutControlGroup3.Location = new System.Drawing.Point(386, 0);
             this.layoutControlGroup3.Name = "layoutControlGroup3";
             this.layoutControlGroup3.Size = new System.Drawing.Size(863, 403);
-            this.layoutControlGroup3.Text = "단가 리스트";
+            this.layoutControlGroup3.Text = "금액 리스트";
             // 
             // layoutControlItem3
             // 
@@ -319,7 +319,7 @@
             this.smtCommonBar1.Name = "smtCommonBar1";
             this.smtCommonBar1.Size = new System.Drawing.Size(1249, 40);
             this.smtCommonBar1.smtImageTitleSvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("smtCommonBar1.smtImageTitleSvgImage")));
-            this.smtCommonBar1.smtImageTitleText = "거래처별 단가";
+            this.smtCommonBar1.smtImageTitleText = "거래처별 품목 관리";
             this.smtCommonBar1.smtImageTitleVisible = true;
             this.smtCommonBar1.TabIndex = 6;
             // 
@@ -449,7 +449,7 @@
             this.LupPriceGroup.LookAndFeel.UseDefaultLookAndFeel = false;
             this.LupPriceGroup.Name = "LupPriceGroup";
             this.LupPriceGroup.Size = new System.Drawing.Size(233, 40);
-            this.LupPriceGroup.smtLabelTitleValue = "단가그룹";
+            this.LupPriceGroup.smtLabelTitleValue = "금액그룹";
             this.LupPriceGroup.smtLabelTitleVisible = true;
             this.LupPriceGroup.smtLabelTitleWidth = 100;
             this.LupPriceGroup.smtLookUpAlignment = DevExpress.Utils.HorzAlignment.Default;
@@ -493,7 +493,7 @@
             this.Controls.Add(this.smtCommonBar1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Frm_CM_ItemPrice_Cust";
-            this.Text = "거래처별 단가";
+            this.Text = "거래처별 품목 관리";
             this.Load += new System.EventHandler(this.Frm_CM_ItemPrice_Cust_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);

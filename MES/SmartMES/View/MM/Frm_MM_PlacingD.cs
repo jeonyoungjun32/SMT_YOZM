@@ -9,6 +9,8 @@ using SmartMES.Models.MM;
 using SmartMES.View.BM.Popup;
 using System;
 using System.Data;
+using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Input;
 
@@ -27,11 +29,13 @@ namespace SmartMES.View.MM
         public Frm_MM_PlacingD()
         {
             InitializeComponent();
+            ApplyInputColors();
         }
 
         public Frm_MM_PlacingD(string _crud, string _mmOrderNo, string _placingType = "")
         {
             InitializeComponent();
+            ApplyInputColors();
 
             this.crud = _crud;
             this.mmOrderNo = _mmOrderNo;
@@ -77,7 +81,7 @@ namespace SmartMES.View.MM
                 dr["WriteID"] = WrGlobal.LoginID;
                 dr["VatType"] = "10";
                 dr["VatRate"] = 10;
-                dr["State"] = "진행";
+                dr["State"] = MM_PlacingD.NewOrderState;
                 dr["CreIP"] = WrGlobal.ClientHostName;
                 dr["CreId"] = WrGlobal.LoginID;
                 dr["CreDt"] = DateTime.Now;
@@ -89,6 +93,31 @@ namespace SmartMES.View.MM
         }
 
         #region 디자인
+
+        private void ApplyInputColors()
+        {
+            if (!MM_PlacingD.UseYozmOrderColumns)
+                return;
+
+            foreach (var editor in new DevExpress.XtraEditors.BaseEdit[]
+            {
+                mmOrderNoTextEdit, placingDateEdit, deliveryDateDateEdit, stateTextEdit, searchCustomer,
+                vatTypeLookUpEdit, vatRateSpinEdit
+            })
+            {
+                Color readOnly = baseSMT.smtDesignSetting.ReadOnlyColor;
+                bool required = editor == searchCustomer || editor == placingDateEdit ||
+                    editor == deliveryDateDateEdit || editor == vatTypeLookUpEdit;
+                Color color = editor.Properties.ReadOnly ? readOnly :
+                    required ? Color.SeaShell : baseSMT.smtDesignSetting.MustColor;
+                editor.Properties.Appearance.BackColor = color;
+                editor.Properties.Appearance.Options.UseBackColor = true;
+                editor.Properties.AppearanceFocused.BackColor = color;
+                editor.Properties.AppearanceFocused.Options.UseBackColor = true;
+                editor.Properties.AppearanceReadOnly.BackColor = readOnly;
+                editor.Properties.AppearanceReadOnly.Options.UseBackColor = true;
+            }
+        }
 
         private void Set_Lup()
         {
@@ -138,14 +167,76 @@ namespace SmartMES.View.MM
             btnDelete.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             btnDelete.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnDelete_ButtonClick);
 
+            if (MM_PlacingD.UseYozmOrderColumns)
+            {
+                {
+                    bool editable = btnDelete != null;
+                    var types = rpo.Create_RepositoryItemSearchLookUp(code.GetCM_CateItem(WrGlobal.CorpID, "A010"), "코드", "명칭");
+                    var large = rpo.Create_RepositoryItemSearchLookUp(code.GetCM_CateItem(WrGlobal.CorpID, "A01210"), "코드", "명칭");
+                    var middle = rpo.Create_RepositoryItemSearchLookUp(code.GetCM_CateItem(WrGlobal.CorpID, "A01220"), "코드", "명칭");
+                    var units = rpo.Create_RepositoryItemSearchLookUp(code.smtLookUp("품목단위", "", ""), "코드", "코드명");
+                    var houses = rpo.Create_RepositoryItemSearchLookUp(code.GetWarehouseList_Dt(), "창고코드", "창고명");
+        
+                    grid.Create_GvColumn(gv, "순번", "MmOrderSeq");
+                    grid.Create_GvColumn(gv, "품목코드", "ItemCode");
+                    grid.Create_GvColumn(gv, "품목명", "ItemName");
+                    grid.Create_GvColumn(gv, "규격", "Size");
+                    grid.Create_GvColumn(gv, "구분", "ItemType", types);
+                    grid.Create_GvColumn(gv, "대분류", "ItemClass1", large);
+                    grid.Create_GvColumn(gv, "중분류", "ItemClass2", middle);
+                    grid.Create_GvColumn(gv, "발주단위", "UnitCode", units);
+                    grid.Create_GvColumn(gv, "발주수량", "Qty", null, editable);
+                    grid.Create_GvColumn(gv, "납기일자", "DeliveryDate", editable ? rpo.Create_rpoDate() : null, editable);
+                    grid.Create_GvColumn(gv, "입고창고", "ReceiveHouseId", houses, editable);
+                    grid.Create_GvColumn(gv, "비고", "Remark", new RepositoryItemTextEdit { MaxLength = 500 }, editable);
+                    grid.Create_GvColumn(gv, "납품초과 허용율(%)", "DeliveryOverTolerancePct");
+                    grid.Create_GvColumn(gv, "환산수량", "PurchaseConversionQty");
+                    grid.Create_GvColumn(gv, "납품누계", "DeliveredQty");
+                    grid.Create_GvColumn(gv, "입고누계", "InQty");
+                    grid.Create_GvColumn(gv, "진행상태", "State");
+                    grid.Create_GvColumn(gv, "BOM", "BomChecked", new RepositoryItemCheckEdit(), editable);
+                    grid.Create_GvColumn(gv, "단가", "UnitPrice", null, editable);
+                    grid.Create_GvColumn(gv, "금액", "Price");
+                    grid.Create_GvUnboundColumn(gv, "수량", "DisplayQty", typeof(double), "[Qty]",
+                        DevExpress.Utils.FormatType.Numeric, "#,##0.####");
+                    grid.Create_GvColumn(gv, "MRP번호", "MrpNo", new RepositoryItemTextEdit { MaxLength = 20 }, editable);
+                    grid.Create_GvColumn(gv, "수주번호", "SdOrderNo");
+                    grid.Create_GvColumn(gv, "등록자", "CreId");
+                    grid.Create_GvColumn(gv, "등록일", "CreDt");
+                    grid.Create_GvColumn(gv, "수정자", "ModId");
+                    grid.Create_GvColumn(gv, "수정일", "ModDt");
+        
+                    grid.SetCol_Type(gv.Columns["DeliveryDate"], clsGrid.TypeList.TDate);
+                    foreach (string field in new[] { "CreDt", "ModDt" })
+                        grid.SetCol_Type(gv.Columns[field], clsGrid.TypeList.TDateTime);
+                    foreach (string field in new[] { "Qty", "DeliveryOverTolerancePct", "PurchaseConversionQty", "DeliveredQty", "InQty", "UnitPrice", "Price" })
+                    {
+                        gv.Columns[field].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                        gv.Columns[field].DisplayFormat.FormatString = "#,##0.######";
+                    }
+                    if (editable)
+                    {
+                        foreach (string field in new[] { "Qty", "DeliveryDate", "ReceiveHouseId", "Remark", "BomChecked", "UnitPrice", "MrpNo" })
+                        {
+                            var appearance = gv.Columns[field].AppearanceCell;
+                            appearance.BackColor = field == "Qty" ? Color.SeaShell : baseSMT.smtDesignSetting.MustColor;
+                            appearance.Options.UseBackColor = true;
+                        }
+                        grid.Create_GvColumn(gv, "삭제", "colDelete", btnDelete, true);
+                        gv.Columns["colDelete"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Right;
+                    }
+                }
+                grid.RowNumber_Indicator(gv);
+                gv.CellValueChanged += Gv_CellValueChanged;
+                return;
+            }
+
             //품목분류1,2,3
             RepositoryItemSearchLookUpEdit lup_Class_Cd1 = rpo.Create_RepositoryItemSearchLookUp(code.GetCM_CateItem(WrGlobal.CorpID, "A01210"), "코드", "명칭");
             RepositoryItemSearchLookUpEdit lup_Class_Cd2 = rpo.Create_RepositoryItemSearchLookUp(code.GetCM_CateItem(WrGlobal.CorpID, "A01220"), "코드", "명칭");
             RepositoryItemSearchLookUpEdit lup_Class_Cd3 = rpo.Create_RepositoryItemSearchLookUp(code.GetCM_CateItem(WrGlobal.CorpID, "A01230"), "코드", "명칭");
             RepositoryItemSearchLookUpEdit lup_UnitCode = rpo.Create_RepositoryItemSearchLookUp(code.smtLookUp("품목단위", "", ""), "코드", "코드명");
 
-
-            //
             grid.Create_GvColumn(gv, "상태", "Status");
             grid.Create_GvColumn(gv, "발주번호", "MmOrderNo");
             grid.Create_GvColumn(gv, "발주순번", "MmOrderSeq");
@@ -156,22 +247,13 @@ namespace SmartMES.View.MM
             grid.Create_GvColumn(gv, "발주량", "Qty");
             grid.Create_GvColumn(gv, "입고량", "InQty");
             grid.Create_GvColumn(gv, "미입고량", "BalanceQty");
-
             grid.Create_GvColumn(gv, "단가", "UnitPrice");
             grid.Create_GvColumn(gv, "공급가", "Price");
             grid.Create_GvColumn(gv, "부가세", "VatPrice");
             grid.Create_GvColumn(gv, "총금액", "TotalPrice");
             grid.Create_GvColumn(gv, "상태", "State");
             grid.Create_GvColumn(gv, "비고", "Remark");
-
             grid.Create_GvColumn(gv, "삭제", "colDelete", btnDelete);
-            AddPlanningColumns(gv, grid, () => placingDateEdit.EditValue,
-                () => searchCustomer.EditValue, () => searchCustomer.Text);
-            if (MM_PlacingD.UsePlanningFields)
-            {
-                placingDateEdit.EditValueChanged += (s, e) => gv.RefreshData();
-                searchCustomer.EditValueChanged += (s, e) => gv.RefreshData();
-            }
 
             //Allow Edit
 			grid.Column_AllowEdit(gv.Columns["DeliveryDate"]);
@@ -198,106 +280,14 @@ namespace SmartMES.View.MM
 
             //
             gv.Columns["colDelete"].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Right;
+            gv.Columns["InQty"].Visible = false;
+            gv.Columns["BalanceQty"].Visible = false;
 
             //이벤트
             grid.RowNumber_Indicator(gv);
 			gv.CellValueChanged += Gv_CellValueChanged;
         }
 
-        /// <summary>발주 목록과 편집 화면에 같은 구매 계획 항목과 계산식을 적용합니다.</summary>
-        internal static void AddPlanningColumns(GridView view, clsGrid grid, Func<object> orderDate = null,
-            Func<object> customerCode = null, Func<object> customerName = null)
-        {
-            if (!MM_PlacingD.UsePlanningFields)
-                return;
-
-            bool editable = orderDate != null;
-            if (editable)
-            {
-                grid.Create_GvUnboundColumn(view, "거래처 코드", "PlanningCustCode", typeof(string), "");
-                grid.Create_GvUnboundColumn(view, "구매처", "PlanningCustName", typeof(string), "");
-            }
-            else
-            {
-                grid.Create_GvColumn(view, "거래처 코드", "CustCode");
-                grid.Create_GvColumn(view, "구매처", "CustName");
-            }
-
-            grid.Create_GvColumn(view, "현재고량", "CurrentStockQty");
-            grid.Create_GvColumn(view, "월사용량", "MonthlyUsageQty", null, editable);
-            grid.Create_GvColumn(view, "용도", "UsagePurpose", CreatePlanningTextEditor(view, 200, editable), editable);
-            grid.Create_GvColumn(view, "사용부서", "UsageDepartment", CreatePlanningTextEditor(view, 100, editable), editable);
-            grid.Create_GvColumn(view, "MOQ", "MinimumOrderQty", null, editable);
-            grid.Create_GvColumn(view, "1P 기준", "PTLoadQty");
-            foreach (string field in new[] { "CurrentStockQty", "MonthlyUsageQty", "MinimumOrderQty", "PTLoadQty" })
-            {
-                view.Columns[field].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-                view.Columns[field].DisplayFormat.FormatString = "#,##0.####";
-            }
-
-            grid.Create_GvUnboundColumn(view, "일평균 (월 22일)", "DailyUsageQty", typeof(decimal), "", DevExpress.Utils.FormatType.Numeric, "#,##0.##");
-            grid.Create_GvUnboundColumn(view, "재고회전일수", "StockDays", typeof(decimal), "", DevExpress.Utils.FormatType.Numeric, "#,##0.##");
-            grid.Create_GvUnboundColumn(view, "리드 타임 (일)", "LeadTimeDays", typeof(int), "");
-            grid.Create_GvUnboundColumn(view, "납품일 기준 잔여재고량", "DeliveryRemainingQty", typeof(decimal), "", DevExpress.Utils.FormatType.Numeric, "#,##0.##");
-            grid.Create_GvUnboundColumn(view, "납품일 기준 재고회전일수", "DeliveryStockDays", typeof(decimal), "", DevExpress.Utils.FormatType.Numeric, "#,##0.##");
-
-            view.CustomUnboundColumnData += (sender, e) =>
-            {
-                if (!e.IsGetData)
-                    return;
-                switch (e.Column.FieldName)
-                {
-                    case "PlanningCustCode": e.Value = Convert.ToString(customerCode()); return;
-                    case "PlanningCustName": e.Value = Convert.ToString(customerName()); return;
-                }
-
-                object Value(string field) => view.GetListSourceRowCellValue(e.ListSourceRowIndex, field);
-                bool hasDelivery = DateTime.TryParse(Convert.ToString(Value("DeliveryDate")), out DateTime delivery);
-                if (e.Column.FieldName == "LeadTimeDays")
-                {
-                    if (hasDelivery && DateTime.TryParse(Convert.ToString(editable ? orderDate() : Value("PlacingDate")), out DateTime placed)
-                        && delivery.Date >= placed.Date)
-                        e.Value = (delivery.Date - placed.Date).Days;
-                    return;
-                }
-
-                object usage = Value("MonthlyUsageQty");
-                if (usage == null || usage == DBNull.Value)
-                    return;
-                decimal daily = Convert.ToDecimal(usage) / 22m;
-                object stockValue = Value("CurrentStockQty");
-                if (e.Column.FieldName == "DailyUsageQty")
-                {
-                    e.Value = daily;
-                    return;
-                }
-                if (stockValue == null || stockValue == DBNull.Value)
-                    return;
-                decimal stock = Convert.ToDecimal(stockValue);
-                decimal remaining = stock - daily * Math.Max(0, (delivery.Date - DateTime.Today).Days);
-                switch (e.Column.FieldName)
-                {
-                    case "StockDays": if (daily > 0) e.Value = stock / daily; break;
-                    case "DeliveryRemainingQty": if (hasDelivery) e.Value = remaining; break;
-                    case "DeliveryStockDays":
-                        if (hasDelivery && daily > 0)
-                        {
-                            decimal pending = Math.Max(0m, Value("Qty").ConvertDecimal_Null_To_Zero() - Value("InQty").ConvertDecimal_Null_To_Zero());
-                            e.Value = (remaining + pending) / daily;
-                        }
-                        break;
-                }
-            };
-        }
-
-        private static RepositoryItemTextEdit CreatePlanningTextEditor(GridView view, int maxLength, bool editable)
-        {
-            if (!editable)
-                return null;
-            var editor = new RepositoryItemTextEdit { MaxLength = maxLength };
-            view.GridControl.RepositoryItems.Add(editor);
-            return editor;
-        }
 
 		private void Gv_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
 		{
@@ -306,9 +296,18 @@ namespace SmartMES.View.MM
             DataRow drChanged = gv.GetDataRow(e.RowHandle);
             string value = e.Value.ConvertString_Null_To_Empty();
 
-            //셀값 수정 시 상태값 수정
-            if (e.Column.FieldName == gv.Columns[0].FieldName) return;
-            grid.Change_Status(gv, e.RowHandle);
+            if (MM_PlacingD.UseYozmOrderColumns)
+            {
+                if (drChanged != null && string.IsNullOrEmpty(drChanged["Status"].ConvertString_Null_To_Empty()))
+                    drChanged["Status"] = "수정";
+            }
+            else
+            {
+                if (e.Column.FieldName == gv.Columns[0].FieldName)
+                    return;
+
+                grid.Change_Status(gv, e.RowHandle);
+            }
 
 
             gv.BestFitColumns();
@@ -358,8 +357,10 @@ namespace SmartMES.View.MM
 
         private void cmdSave_Click(object sender, EventArgs e)
         {
-            if (!gvDetail.PostEditor() || !gvDetail.UpdateCurrentRow())
+            if (MM_PlacingD.UseYozmOrderColumns &&
+                ((gvDetail.ActiveEditor != null && !gvDetail.PostEditor()) || !gvDetail.UpdateCurrentRow()))
                 return;
+
             if ((searchCustomer.EditValue ?? "").ToString() == "")
             {
                 MessageBox.Show("거래처를 선택하세요.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -372,28 +373,13 @@ namespace SmartMES.View.MM
                 return;
             }
 
-            if (gvDetail.SelectedRowsCount <= 0)
+            var detail = gcDetail.DataSource as DataTable;
+            if (MM_PlacingD.UseYozmOrderColumns
+                ? detail == null || detail.Select("ISNULL(Status, '') <> '삭제'").Length == 0
+                : gvDetail.SelectedRowsCount <= 0)
             {
                 MessageBox.Show("품목을 선택하세요.", "에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-            }
-
-            if (MM_PlacingD.UsePlanningFields && gcDetail.DataSource is DataTable detail)
-            {
-                foreach (DataRow row in detail.Rows)
-                {
-                    if (row.RowState == DataRowState.Deleted)
-                        continue;
-                    foreach (string field in new[] { "MonthlyUsageQty", "MinimumOrderQty" })
-                    {
-                        decimal quantity = row[field].ConvertDecimal_Null_To_Zero();
-                        if (quantity < 0 || quantity > 999999999999999.9999m)
-                        {
-                            MessageBox.Show("월사용량과 MOQ는 0 이상이며 정수부가 15자리를 넘을 수 없습니다.", "입력 확인");
-                            return;
-                        }
-                    }
-                }
             }
 
             MM_PlacingM pm = new MM_PlacingM();
@@ -412,7 +398,8 @@ namespace SmartMES.View.MM
                 pm.VatRate = vatRateSpinEdit.EditValue.ConvertInt_Null_To_Zero();
                 pm.CustomerUser = customerUserTextEdit.EditValue.ConvertString_Null_To_Empty();
                 pm.CustomerTel = customerTelTextEdit.EditValue.ConvertString_Null_To_Empty();
-                pm.State = "진행";
+                pm.State = MM_PlacingD.UseYozmOrderColumns && crud == "Update"
+                    ? stateTextEdit.EditValue.ConvertString_Null_To_Empty() : MM_PlacingD.NewOrderState;
                 pm.PlacingType = "10"; //통합
                 pm.Remark = remarkTextEdit.EditValue.ConvertString_Null_To_Empty();
 
@@ -450,10 +437,13 @@ namespace SmartMES.View.MM
 
             try
             {
-                for (int i = 0; i < gvDetail.RowCount; i++)
+                var rows = MM_PlacingD.UseYozmOrderColumns
+                    ? detail.Select(null, null, DataViewRowState.CurrentRows).AsEnumerable()
+                    : Enumerable.Range(0, gvDetail.RowCount).Select(gvDetail.GetDataRow);
+                foreach (DataRow dr in rows)
                 {
-                    DataRow dr = gvDetail.GetDataRow(i);
-                    if (dr == null) return;
+                    if (dr == null)
+                        continue;
 
                     MM_PlacingD pd = new MM_PlacingD();
 
@@ -463,23 +453,44 @@ namespace SmartMES.View.MM
                     pd.ItemCode = dr["ItemCode"].ConvertString_Null_To_Empty();
                     pd.UnitCode = dr["UnitCode"].ConvertString_Null_To_Empty();
                     pd.Qty = dr["Qty"].ConvertFloat_Null_To_Zero();
-                    pd.UnitPrice = dr["UnitPrice"].ConvertInt_Null_To_Zero();
+                    pd.UnitPrice = MM_PlacingD.UseYozmOrderColumns
+                        ? dr["UnitPrice"].ConvertDecimal_Null_To_Zero()
+                        : dr["UnitPrice"].ConvertInt_Null_To_Zero();
                     pd.Price = dr["Price"].ConvertInt_Null_To_Zero();
                     pd.VatPrice = dr["VatPrice"].ConvertInt_Null_To_Zero();
                     pd.TotalPrice = dr["TotalPrice"].ConvertInt_Null_To_Zero();
                     pd.VatType = dr["VatType"].ConvertString_Null_To_Empty();
                     pd.VatRate = dr["VatRate"].ConvertInt_Null_To_Zero();
                     pd.DeliveryDate = dr["DeliveryDate"].ConvertDate_To_Char10();
-                    pd.State = "진행";
+                    pd.State = MM_PlacingD.NewOrderState;
                     pd.Remark = dr["Remark"].ConvertString_Null_To_Empty();
-                    pd.SetPlanningFields(dr);
+                    if (MM_PlacingD.UseYozmOrderColumns)
+                    {
+                        pd.ReceiveHouseId = dr["ReceiveHouseId"].ConvertString_Null_To_Empty();
+                        pd.MrpNo = dr["MrpNo"].ConvertString_Null_To_Empty();
+                        pd.BomChecked = !dr.IsNull("BomChecked") && Convert.ToBoolean(dr["BomChecked"]);
+                        pd.SdOrderNo = dr["SdOrderNo"].ConvertString_Null_To_Empty();
+                        pd.SdOrderSeq = dr.Field<int?>("SdOrderSeq");
+                        pd.OrderNo = dr["OrderNo"].ConvertString_Null_To_Empty();
+                        pd.InQty = dr["InQty"].ConvertFloat_Null_To_Zero();
+                        pd.BalanceQty = Math.Max(0f, pd.Qty.GetValueOrDefault() - pd.InQty.GetValueOrDefault());
+                        pd.LossRate = dr["LossRate"].ConvertFloat_Null_To_Zero();
+                        if (crud == "Update" && dr["Status"].ToString() != "신규")
+                            pd.State = dr["State"].ConvertString_Null_To_Empty();
+                        pd.CloseDate = dr["CloseDate"].ConvertDate_To_Char10();
+                        pd.CloseUser = dr["CloseUser"].ConvertString_Null_To_Empty();
+                        pd.VatType = pm.VatType;
+                        pd.VatRate = pm.VatRate;
+                    }
 
                     //금액 합계 계산
-                    sumPrice += pd.Price ?? 0;
-                    sumVat += pd.VatPrice ?? 0;
-                    sumTotal += pd.TotalPrice ?? 0;
-
                     string status = dr["Status"].ConvertString_Null_To_Empty();
+                    if (!MM_PlacingD.UseYozmOrderColumns || status != "삭제")
+                    {
+                        sumPrice += pd.Price ?? 0;
+                        sumVat += pd.VatPrice ?? 0;
+                        sumTotal += pd.TotalPrice ?? 0;
+                    }
 
                     if (status == "신규")
                     {
@@ -550,11 +561,17 @@ namespace SmartMES.View.MM
 				}
 				else if (status == "삭제")
 				{
-					gvDetail.SetRowCellValue(rowHandle, "Status", "");
+                    if (MM_PlacingD.UseYozmOrderColumns)
+                        dr["Status"] = "수정";
+                    else
+					    gvDetail.SetRowCellValue(rowHandle, "Status", "");
 				}
 				else
 				{
-					gvDetail.SetRowCellValue(rowHandle, "Status", "삭제");
+                    if (MM_PlacingD.UseYozmOrderColumns)
+                        dr["Status"] = "삭제";
+                    else
+					    gvDetail.SetRowCellValue(rowHandle, "Status", "삭제");
 				}
 			}
 		}
@@ -566,10 +583,14 @@ namespace SmartMES.View.MM
         // 금액 재계산
         private void CalculatePrice()
         {
-            for (int i = 0; i < gvDetail.RowCount; i++)
+            var detail = gcDetail.DataSource as DataTable;
+            var rows = MM_PlacingD.UseYozmOrderColumns && detail != null
+                ? detail.Select(null, null, DataViewRowState.CurrentRows).AsEnumerable()
+                : Enumerable.Range(0, gvDetail.RowCount).Select(gvDetail.GetDataRow);
+            foreach (DataRow row in rows)
             {
-                DataRow row = gvDetail.GetDataRow(i);
-                if (row == null) continue;
+                if (row == null || row["Status"].ToString() == "삭제")
+                    continue;
 
                 if (row["Qty"] == DBNull.Value || string.IsNullOrEmpty(row["Qty"].ToString()))
                     row["Qty"] = 0;
@@ -581,9 +602,14 @@ namespace SmartMES.View.MM
                 decimal unitPrice = Convert.ToDecimal(row["UnitPrice"]);
                 decimal vatRate = Convert.ToDecimal(vatRateSpinEdit.EditValue);
 
-                row["Price"] = qty * unitPrice;
-                row["VatPrice"] = Math.Round((qty * unitPrice) * vatRate / 100);
-                row["TotalPrice"] = Convert.ToDecimal(row["Price"]) + Convert.ToDecimal(row["VatPrice"]);
+                decimal price = qty * unitPrice;
+                decimal vat = Math.Round(price * vatRate / 100);
+                if (MM_PlacingD.UseYozmOrderColumns && string.IsNullOrEmpty(row["Status"].ToString()) &&
+                    (row["Price"].ConvertDecimal_Null_To_Zero() != price || row["VatPrice"].ConvertDecimal_Null_To_Zero() != vat))
+                    row["Status"] = "수정";
+                row["Price"] = price;
+                row["VatPrice"] = vat;
+                row["TotalPrice"] = price + vat;
             }
         }
 
@@ -595,7 +621,8 @@ namespace SmartMES.View.MM
 
         private void vatTypeLookUpEdit_EditValueChanged(object sender, EventArgs e)
         {
-            if ((vatTypeLookUpEdit.EditValue ?? "").ToString() == "21")
+            string vatType = vatTypeLookUpEdit.EditValue.ConvertString_Null_To_Empty();
+            if (vatType == "21" || (MM_PlacingD.UseYozmOrderColumns && vatType == "10"))
             {
                 vatRateSpinEdit.EditValue = 10;
             }
@@ -651,7 +678,7 @@ namespace SmartMES.View.MM
                 newItem["CorpId"] = WrGlobal.CorpID;
                 //newItem["MmOrderNo"] = TxtSdOrderNo.Text;
                 newItem["Status"] = "신규";
-                newItem["State"] = "대기";
+                newItem["State"] = MM_PlacingD.UseYozmOrderColumns ? MM_PlacingD.NewOrderState : "대기";
 
                 int maxSeq = 0;
 
@@ -666,6 +693,12 @@ namespace SmartMES.View.MM
                 cm.ItemCode = clsCommon.getString(drv["ItemCode"]);
 
                 DataRow drItem = cm.Select_Item_RowInfo();
+                if (MM_PlacingD.UseYozmOrderColumns)
+                {
+                    newItem["BomChecked"] = false;
+                    foreach (string field in new[] { "ItemType", "DeliveryOverTolerancePct", "PurchaseConversionQty" })
+                        newItem[field] = drItem[field];
+                }
 
                 if (dt.Columns.Contains("ItemCode")) newItem["ItemCode"] = clsCommon.getString(drv["ItemCode"]);
                 if (dt.Columns.Contains("ItemName")) newItem["ItemName"] = clsCommon.getString(drItem["ItemName"]);
@@ -680,7 +713,6 @@ namespace SmartMES.View.MM
                 if (dt.Columns.Contains("UnitCode")) newItem["UnitCode"] = clsCommon.getString(drItem["UnitCode"]);
                 if (dt.Columns.Contains("ColorCode")) newItem["ColorCode"] = clsCommon.getString(drItem["ColorCode"]);
                 if (dt.Columns.Contains("ShipToCode")) newItem["ShipToCode"] = clsCommon.getString(drv["ShipToCode"]);
-                new MM_PlacingD().FillPlanningItem(newItem, drItem);
 
                 if (Convert.ToString(deliveryDateDateEdit.EditValue) != "")
                 {
@@ -689,8 +721,7 @@ namespace SmartMES.View.MM
 
                 //newItem["Qty"] = drv["SdOrderQty"];
 
-                decimal orderQty = drv["OrderQty"].ConvertDecimal_Null_To_Zero();
-                newItem["Qty"] = orderQty;
+                newItem["Qty"] = drv["OrderQty"].ConvertDecimal_Null_To_Zero();
 
                 if (dt.Columns.Contains("StockQty")) newItem["StockQty"] = 0;
                 if (dt.Columns.Contains("ReqQty")) newItem["ReqQty"] = 0;
@@ -726,15 +757,17 @@ namespace SmartMES.View.MM
             }
                 */
 
-                newItem["Price"] = price * orderQty;
-                newItem["VatPrice"] = price * orderQty * 0.1.ConvertDecimal_Null_To_Zero();
-                newItem["TotalPrice"] = price * orderQty * 1.1.ConvertDecimal_Null_To_Zero();
+                newItem["Price"] = 0;
+                newItem["VatPrice"] = 0;
+                newItem["TotalPrice"] = 0;
 
                 newItem["CreId"] = WrGlobal.LoginID;
                 newItem["CreIP"] = WrGlobal.ClientHostName;
                 newItem["CreDt"] = DateTime.Now;
 
                 dt.Rows.Add(newItem);
+                if (MM_PlacingD.UseYozmOrderColumns)
+                    CalculatePrice();
 
                 gvDetail.FocusedRowHandle = gvDetail.RowCount - 1;
 

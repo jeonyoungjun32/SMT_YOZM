@@ -160,7 +160,8 @@ namespace SmartMES.Models.MM
                         LEFT JOIN MM_PlacingM PM ON PD.CorpId = PM.CorpId AND PD.MmOrderNo = PM.MmOrderNo
 						LEFT JOIN CM_Item CM ON PD.CorpId = CM.CorpId AND PD.ItemCode = cm.ItemCode
                         WHERE PD.CorpId = '{WrGlobal.CorpID}'
-                            AND PM.State = '진행'
+                            AND PM.State = CASE WHEN DB_NAME() = N'YOZM' THEN N'발주' ELSE N'진행' END
+                            AND (DB_NAME() <> N'YOZM' OR PM.CloseDate IS NULL OR PM.CloseDate <= '19000101')
                         ";
 
             if (CustCode != null && CustCode != "" && CustCode.ToUpper() != "ALL")
@@ -283,6 +284,7 @@ namespace SmartMES.Models.MM
 						WHERE pd.CorpId = '{WrGlobal.CorpID}'
 						AND pd.MmOrderNo = '{MmOrderNo}'
 						AND pd.Qty - ISNULL(pc.InQty,0) > 0
+                        AND (DB_NAME() <> N'YOZM' OR PM.CloseDate IS NULL OR PM.CloseDate <= '19000101')
             ";
 
             return db.GetDataTable(query);

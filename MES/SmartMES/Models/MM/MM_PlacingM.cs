@@ -3,6 +3,7 @@ using SmartMES.Common;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using SmartCommon.Common;
@@ -12,6 +13,27 @@ namespace SmartMES.Models.MM
 {
 	public class MM_PlacingM
     {
+        private const string ReopenOrderSql = @"
+            UPDATE dbo.MM_PlacingM
+            SET State = N'발주', CloseDate = NULL, CloseUserID = NULL,
+                ModId = @UserId, ModIP = @HostName, ModDt = GETDATE()
+            WHERE CorpId = @CorpId AND MmOrderNo = @OrderNo
+              AND State = N'발주' AND CloseDate > '19000101';
+            SELECT @@ROWCOUNT;";
+
+        internal static bool ReopenYozmOrder(string orderNo)
+        {
+            using (var connection = new SqlConnection(Database.m_ConnectionString))
+            using (var command = new SqlCommand(ReopenOrderSql, connection))
+            {
+                command.Parameters.Add("@CorpId", SqlDbType.NVarChar, 10).Value = WrGlobal.CorpID;
+                command.Parameters.Add("@OrderNo", SqlDbType.NVarChar, 20).Value = orderNo;
+                command.Parameters.Add("@UserId", SqlDbType.NVarChar, 30).Value = WrGlobal.LoginID;
+                command.Parameters.Add("@HostName", SqlDbType.NVarChar, 50).Value = WrGlobal.ClientHostName;
+                connection.Open();
+                return Convert.ToInt32(command.ExecuteScalar()) == 1;
+            }
+        }
         #region Property
         public string CorpId { get; set; }
         public string MmOrderNo { get; set; }
@@ -66,6 +88,11 @@ namespace SmartMES.Models.MM
                               , pm.WorkType
                               , pm.Remark
                               , pm.CloseDate
+                              , CASE WHEN pm.CloseDate > '19000101' THEN N'완료'
+                                     WHEN pm.State = N'입고' THEN N'입고완료'
+                                     WHEN EXISTS (SELECT 1 FROM dbo.MM_PlacingD d WHERE d.CorpId = pm.CorpId
+                                         AND d.MmOrderNo = pm.MmOrderNo AND d.InQty > 0) THEN N'분할입고'
+                                     ELSE N'발주' END AS ReceiptProgress
                               , pm.CloseUserID
                               , pm.CreId
                               , pm.CreIP
@@ -166,7 +193,12 @@ namespace SmartMES.Models.MM
 
         public bool Insert_MM_PlacingM()
         {
-            query = $@"
+            return db.ExecuteQuery(BuildInsertQuery());
+        }
+
+        internal string BuildInsertQuery()
+        {
+            return $@"
                         INSERT INTO MM_PlacingM(
                                  CorpId
                                , MmOrderNo
@@ -217,8 +249,6 @@ namespace SmartMES.Models.MM
                                 , GETDATE()
                         )
                     ";
-
-            return db.ExecuteQuery(query);
         }
 
         public bool Update_MM_PlacingM_Price()

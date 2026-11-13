@@ -136,7 +136,6 @@
             this.gvMM_PurchaseM.OptionsSelection.MultiSelect = true;
             this.gvMM_PurchaseM.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
             this.gvMM_PurchaseM.OptionsView.ColumnAutoWidth = false;
-            this.gvMM_PurchaseM.OptionsView.ShowAutoFilterRow = true;
             this.gvMM_PurchaseM.OptionsView.ShowGroupPanel = false;
             this.gvMM_PurchaseM.OptionsView.ShowIndicator = false;
             this.gvMM_PurchaseM.RowHeight = 29;

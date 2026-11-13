@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using SmartCommon.Common;
@@ -25,7 +26,7 @@ namespace SmartMES.Models.MM
         public string ItemCode { get; set; }
         public string UnitCode { get; set; }
         public float? Qty { get; set; }
-        public int? UnitPrice { get; set; }
+        public decimal? UnitPrice { get; set; }
         public int? Price { get; set; }
         public int? VatPrice { get; set; }
         public int? TotalPrice { get; set; }
@@ -46,117 +47,30 @@ namespace SmartMES.Models.MM
         public string ModIP { get; set; }
         public DateTime? ModDt { get; set; }
         public string CustCode { get; set; }
+        public string ReceiveHouseId { get; set; }
+        public string MrpNo { get; set; }
+        public bool BomChecked { get; set; }
+        internal static bool UseYozmOrderColumns => string.Equals(Database.DbName, "YOZM", StringComparison.OrdinalIgnoreCase);
+        internal static string NewOrderState => UseYozmOrderColumns ? "발주" : "진행";
+        internal static string ReceivedState => UseYozmOrderColumns ? "입고" : "완료";
 
         #endregion
 
         Database db = new Database();
         string query = "";
-        internal static bool UsePlanningFields => string.Equals(Database.DbName, "YOZM", StringComparison.OrdinalIgnoreCase);
-        private List<SqlParameter> planningParameters;
-
-        /// <summary>재고 기준일로 원본 발주계획을 조회하고 현재 구매처 코드의 등록 여부를 표시합니다.</summary>
-        internal DataTable SelectImportedPurchasePlan(DateTime startDate, DateTime endDate, string customerCode)
-        {
-            const string sql = @"
-                SELECT P.BasisDate, P.ItemCode, P.SourceItemName, P.SupplierSourceCode, P.SupplierSourceName,
-                       P.SourceUnit, P.UnitPrice, P.CurrentStockQty, P.StockCoverageMonths, P.PurchaseQty,
-                       P.PurchaseAmount, P.MonthlyUsageQty, P.DailyUsageQty, P.DeliveryDate,
-                       P.DeliveryRemainingQty, P.LeadTimeDays, P.DeliveryCoverageMonths, P.UsagePurpose,
-                       P.UsageDepartment, P.Remark, P.MinimumOrderQty, P.PalletBasis, P.SourceExtraQty,
-                       P.SourceRow, P.SourceIssues,
-                       CASE WHEN C.CustCode IS NULL THEN N'미등록'
-                            WHEN C.UseYn <> 'Y' OR C.UseYn IS NULL THEN N'사용 중지'
-                            WHEN C.CustName <> P.SupplierSourceName THEN N'거래처명 확인'
-                            ELSE N'연결' END AS SupplierStatus
-                FROM dbo.MM_PlacingPlan P
-                LEFT JOIN dbo.CM_Cust C ON C.CorpId = P.CorpId AND C.CustCode = P.SupplierSourceCode
-                WHERE P.CorpId = @CorpId AND P.BasisDate BETWEEN @StartDate AND @EndDate
-                  AND (@CustomerCode IS NULL OR P.SupplierSourceCode = @CustomerCode)
-                ORDER BY P.BasisDate DESC, P.SourceRow;";
-            using (var connection = new SqlConnection(Database.m_ConnectionString))
-            using (var command = new SqlCommand(sql, connection))
-            using (var adapter = new SqlDataAdapter(command))
-            {
-                command.Parameters.Add("@CorpId", SqlDbType.NVarChar, 10).Value = WrGlobal.CorpID;
-                command.Parameters.Add("@StartDate", SqlDbType.Date).Value = startDate.Date;
-                command.Parameters.Add("@EndDate", SqlDbType.Date).Value = endDate.Date;
-                command.Parameters.Add("@CustomerCode", SqlDbType.NVarChar, 30).Value =
-                    string.IsNullOrWhiteSpace(customerCode) || customerCode == "ALL" ? (object)DBNull.Value : customerCode;
-                var rows = new DataTable();
-                adapter.Fill(rows);
-                return rows;
-            }
-        }
-
-        private bool ExecuteDetailWrite()
-        {
-            if (planningParameters == null)
-                return db.ExecuteQuery(query);
-
-            using (var command = new SqlCommand(query))
-            {
-                command.Parameters.AddRange(planningParameters.ToArray());
-                return db.ExecuteCommand(command);
-            }
-        }
-
-        /// <summary>발주 편집 화면에서 받은 계획 입력값을 기존 상세 저장 명령에 포함합니다.</summary>
-        internal void SetPlanningFields(DataRow row)
-        {
-            planningParameters = null;
-            if (!UsePlanningFields)
-                return;
-
-            planningParameters = new List<SqlParameter>
-            {
-                new SqlParameter("@MonthlyUsageQty", SqlDbType.Decimal) { Precision = 19, Scale = 4, Value = row["MonthlyUsageQty"] },
-                new SqlParameter("@MinimumOrderQty", SqlDbType.Decimal) { Precision = 19, Scale = 4, Value = row["MinimumOrderQty"] },
-                new SqlParameter("@UsagePurpose", SqlDbType.NVarChar, 200) { Value = row["UsagePurpose"] },
-                new SqlParameter("@UsageDepartment", SqlDbType.NVarChar, 100) { Value = row["UsageDepartment"] }
-            };
-        }
-
-        // 기준 창고를 임의로 고르지 않고 사업장 내 해당 품목의 입출고를 합산합니다.
-        private const string CurrentStockSql = @"
-            SELECT SUM(CASE s.StockType
-                WHEN N'창고입고재고' THEN s.Qty
-                WHEN N'창고출고재고' THEN -s.Qty END)
-            FROM dbo.StockInOutView s
-            WHERE s.CorpId = CM.CorpId AND s.ItemCode = CM.ItemCode
-                AND s.InOutDate < DATEADD(day, 1, CONVERT(date, GETDATE()))";
-
-        internal void FillPlanningItem(DataRow row, DataRow item)
-        {
-            if (!UsePlanningFields)
-                return;
-
-            string corp = WrGlobal.CorpID.Replace("'", "''");
-            string code = Convert.ToString(item["ItemCode"]).Replace("'", "''");
-            DataTable result = db.GetDataTable($@"
-                SELECT CM.PTLoadQty, COALESCE(({CurrentStockSql}), 0) AS CurrentStockQty
-                FROM dbo.CM_Item CM WHERE CM.CorpId = N'{corp}' AND CM.ItemCode = N'{code}'");
-            if (result != null && result.Rows.Count == 1)
-            {
-                row["PTLoadQty"] = result.Rows[0]["PTLoadQty"];
-                row["CurrentStockQty"] = result.Rows[0]["CurrentStockQty"];
-            }
-        }
 
         public DataTable Select_MM_PlacingD_MmOrderNo()
 		{
-            string planningColumns = UsePlanningFields ? $@"
-                              , PM.CustCode
-                              , Cust.CustName
-                              , PM.PlacingDate
-                              , PD.MonthlyUsageQty
-                              , PD.MinimumOrderQty
-                              , PD.UsagePurpose
-                              , PD.UsageDepartment
-                              , CM.PTLoadQty
-                              , COALESCE(({CurrentStockSql}), 0) AS CurrentStockQty" : "";
-            string planningJoins = UsePlanningFields ? @"
-                        LEFT JOIN dbo.MM_PlacingM PM ON PM.CorpId = PD.CorpId AND PM.MmOrderNo = PD.MmOrderNo
-                        LEFT JOIN dbo.CM_Cust Cust ON Cust.CorpId = PM.CorpId AND Cust.CustCode = PM.CustCode" : "";
+            string yozmColumns = UseYozmOrderColumns ? @"
+                              , CM.ItemType
+                              , CM.DeliveryOverTolerancePct
+                              , CM.PurchaseConversionQty
+                              , PD.ReceiveHouseId
+                              , PD.MrpNo
+                              , PD.BomChecked
+                              , COALESCE((SELECT SUM(R.Qty) FROM dbo.MM_PurchaseD R
+                                  WHERE R.CorpId = PD.CorpId AND R.MmOrderNo = PD.MmOrderNo
+                                    AND R.MmOrderSeq = PD.MmOrderSeq), 0) AS DeliveredQty" : "";
             query = $@"
                         SELECT  '' AS Status
                               , PD.CorpId
@@ -200,15 +114,12 @@ namespace SmartMES.Models.MM
                               , PD.ModId
                               , PD.ModIP
                               , PD.ModDt
-                              , CM.Size
-                              , CM.UnitCode
-                              {planningColumns}
+                              {yozmColumns}
 
                         FROM MM_PlacingD PD
 						LEFT JOIN CM_Item CM ON PD.CorpId = CM.CorpId AND PD.ItemCode = cm.ItemCode
-                        {planningJoins}
                         WHERE PD.CorpId = '{WrGlobal.CorpID}'
-                        AND PD.MmOrderNo = '{MmOrderNo}'
+                        AND MmOrderNo = '{MmOrderNo}'
                         ";
 
             if(ItemCode != null && ItemCode != "" && ItemCode.ToUpper() != "ALL")
@@ -266,7 +177,8 @@ namespace SmartMES.Models.MM
                         LEFT JOIN MM_PlacingM PM ON PD.CorpId = PM.CorpId AND PD.MmOrderNo = PM.MmOrderNo
 						LEFT JOIN CM_Item CM ON PD.CorpId = CM.CorpId AND PD.ItemCode = cm.ItemCode
                         WHERE PD.CorpId = '{WrGlobal.CorpID}'
-                            AND PM.State = '진행'
+                            AND PM.State = N'{NewOrderState}'
+                            AND (DB_NAME() <> N'YOZM' OR PM.CloseDate IS NULL OR PM.CloseDate <= '19000101')
                         ";
 
             if (CustCode != null && CustCode != "" && CustCode.ToUpper() != "ALL")
@@ -337,6 +249,7 @@ namespace SmartMES.Models.MM
 
         public DataTable SelectRemainList()
 		{
+            string house = UseYozmOrderColumns ? ", PD.ReceiveHouseId" : "";
             query = $@"
                         SELECT 
                               PD.CorpId
@@ -376,6 +289,7 @@ namespace SmartMES.Models.MM
                               , CM.ItemClass2
                               , CM.ItemClass3
 							  , PM.CustCode
+                              {house}
 
                         FROM MM_PlacingD PD
                         LEFT JOIN MM_PlacingM PM ON PD.CorpId = PM.CorpId AND PD.MmOrderNo = PM.MmOrderNo
@@ -389,6 +303,7 @@ namespace SmartMES.Models.MM
 						WHERE pd.CorpId = '{WrGlobal.CorpID}'
 						AND pd.MmOrderNo = '{MmOrderNo}'
 						AND pd.Qty - ISNULL(pc.InQty,0) > 0
+                        AND (DB_NAME() <> N'YOZM' OR PM.CloseDate IS NULL OR PM.CloseDate <= '19000101')
             ";
 
             return db.GetDataTable(query);
@@ -396,116 +311,162 @@ namespace SmartMES.Models.MM
 
         public bool Insert_MM_PlacingD()
         {
-            string planningColumns = planningParameters == null ? "" : ", MonthlyUsageQty, MinimumOrderQty, UsagePurpose, UsageDepartment";
-            string planningValues = planningParameters == null ? "" : ", @MonthlyUsageQty, @MinimumOrderQty, @UsagePurpose, @UsageDepartment";
-            query = $@"
-                        INSERT INTO MM_PlacingD
-                        (
-                              CorpId
-                            , MmOrderNo
-                            , MmOrderSeq
-                            , SdOrderNo
-                            , SdOrderSeq
-                            , OrderNo
-                            , ItemCode
-                            , UnitCode
-                            , Qty
-                            , UnitPrice
-                            , Price
-                            , VatPrice
-                            , TotalPrice
-                            , VatType
-                            , VatRate
-                            , InQty
-                            , BalanceQty
-                            , LossRate
-                            , DeliveryDate
-                            , State
-                            , CloseDate
-                            , CloseUser
-                            , Remark
-                            , CreId
-                            , CreIP
-                            , CreDt
-                            {planningColumns}
-                        )
-                        VALUES
-                        (
-                              '{WrGlobal.CorpID}'
-                            , {MmOrderNo.ConvertStr_Empty_To_Null()}
-                            , {MmOrderSeq.ConvertInt_Null_To_Zero()}
-                            , {SdOrderNo.ConvertStr_Empty_To_Null()}
-                            , {SdOrderSeq.ConvertInt_Null_To_Zero()}
-                            , {OrderNo.ConvertStr_Empty_To_Null()}
-                            , {ItemCode.ConvertStr_Empty_To_Null()}
-                            , {UnitCode.ConvertStr_Empty_To_Null()}
-                            , '{Qty.ConvertFloat_Null_To_Zero()}'
-                            , '{UnitPrice.ConvertFloat_Null_To_Zero()}'
-                            , '{Price.ConvertFloat_Null_To_Zero()}'
-                            , '{VatPrice.ConvertFloat_Null_To_Zero()}'
-                            , '{TotalPrice.ConvertFloat_Null_To_Zero()}'
-                            , {VatType.ConvertStr_Empty_To_Null()}
-                            , '{VatRate.ConvertInt_Null_To_Zero()}'
-                            , '{InQty.ConvertFloat_Null_To_Zero()}'
-                            , '{BalanceQty.ConvertFloat_Null_To_Zero()}'
-                            , '{LossRate.ConvertFloat_Null_To_Zero()}'
-                            , '{DeliveryDate.ConvertDate_To_Char10()}'
-                            , {State.ConvertStr_Empty_To_Null()}
-                            , '{CloseDate.ConvertDate_To_Char10()}'
-                            , {CloseUser.ConvertStr_Empty_To_Null()}
-                            , {Remark.ConvertStr_Empty_To_Null()}
-                            , '{WrGlobal.LoginID}'
-                            , '{WrGlobal.ClientHostName}'
-                            , GETDATE()
-                            {planningValues}
-                        )
-                        ";
+            return ExecuteOrderWrite(BuildInsertQuery());
+        }
 
-            return ExecuteDetailWrite();
+        internal static DataTable SelectReceiptLimits(string orderNo, string receiptNo)
+        {
+            const string sql = @"
+                SELECT D.MmOrderSeq, D.ItemCode, M.CustCode, M.CloseDate,
+                       D.Qty * (1 + COALESCE(I.DeliveryOverTolerancePct, 0) / 100.0) - ISNULL(R.Qty, 0) AS AvailableQty
+                FROM dbo.MM_PlacingD D
+                JOIN dbo.MM_PlacingM M ON M.CorpId = D.CorpId AND M.MmOrderNo = D.MmOrderNo
+                LEFT JOIN dbo.CM_Item I ON I.CorpId = D.CorpId AND I.ItemCode = D.ItemCode
+                OUTER APPLY (
+                    SELECT SUM(P.Qty) AS Qty FROM dbo.MM_PurchaseD P
+                    WHERE P.CorpId = D.CorpId AND P.MmOrderNo = D.MmOrderNo AND P.MmOrderSeq = D.MmOrderSeq
+                      AND P.StoNo <> @ReceiptNo
+                ) R
+                WHERE D.CorpId = @CorpId AND D.MmOrderNo = @OrderNo";
+            using (var connection = new SqlConnection(Database.m_ConnectionString))
+            using (var command = new SqlCommand(sql, connection))
+            using (var adapter = new SqlDataAdapter(command))
+            {
+                command.Parameters.Add("@CorpId", SqlDbType.NVarChar, 10).Value = WrGlobal.CorpID;
+                command.Parameters.Add("@OrderNo", SqlDbType.NVarChar, 20).Value = orderNo;
+                command.Parameters.Add("@ReceiptNo", SqlDbType.NVarChar, 20).Value = receiptNo ?? "";
+                var rows = new DataTable();
+                adapter.Fill(rows);
+                return rows;
+            }
+        }
+
+        internal string BuildInsertQuery()
+        {
+            string columns = UseYozmOrderColumns ? ", ReceiveHouseId, MrpNo, BomChecked" : "";
+            string values = UseYozmOrderColumns ? ", @ReceiveHouseId, @MrpNo, @BomChecked" : "";
+            return $@"
+                       INSERT INTO MM_PlacingD
+                       (
+                             CorpId
+                           , MmOrderNo
+                           , MmOrderSeq
+                           , SdOrderNo
+                           , SdOrderSeq
+                           , OrderNo
+                           , ItemCode
+                           , UnitCode
+                           , Qty
+                           , UnitPrice
+                           , Price
+                           , VatPrice
+                           , TotalPrice
+                           , VatType
+                           , VatRate
+                           , InQty
+                           , BalanceQty
+                           , LossRate
+                           , DeliveryDate
+                           , State
+                           , CloseDate
+                           , CloseUser
+                           , Remark
+                           , CreId
+                           , CreIP
+                           , CreDt
+                           {columns}
+                       )
+                       VALUES
+                       (
+                             '{WrGlobal.CorpID}'
+                           , {MmOrderNo.ConvertStr_Empty_To_Null()}
+                           , {MmOrderSeq.ConvertInt_Null_To_Zero()}
+                           , {SdOrderNo.ConvertStr_Empty_To_Null()}
+                           , {SdOrderSeq.ConvertInt_Null_To_Zero()}
+                           , {OrderNo.ConvertStr_Empty_To_Null()}
+                           , {ItemCode.ConvertStr_Empty_To_Null()}
+                           , {UnitCode.ConvertStr_Empty_To_Null()}
+                           , {Qty.ConvertFloat_Null_To_Zero()}
+                           , {UnitPriceSql}
+                           , {Price.ConvertFloat_Null_To_Zero()}
+                           , {VatPrice.ConvertFloat_Null_To_Zero()}
+                           , {TotalPrice.ConvertFloat_Null_To_Zero()}
+                           , {VatType.ConvertStr_Empty_To_Null()}
+                           , {VatRate.ConvertInt_Null_To_Zero()}
+                           , {InQty.ConvertFloat_Null_To_Zero()}
+                           , {BalanceQty.ConvertFloat_Null_To_Zero()}
+                           , {LossRate.ConvertFloat_Null_To_Zero()}
+                           , '{DeliveryDate.ConvertDate_To_Char10()}'
+                           , {State.ConvertStr_Empty_To_Null()}
+                           , {CloseDate.ConvertDate_To_Char10().ConvertStr_Empty_To_Null()}
+                           , {CloseUser.ConvertStr_Empty_To_Null()}
+                           , {Remark.ConvertStr_Empty_To_Null()}
+                           , '{WrGlobal.LoginID}'
+                           , '{WrGlobal.ClientHostName}'
+                           , GETDATE()
+                           {values}
+                       )";
         }
 
         public bool Update_MM_PlacingD()
         {
-            // 발주 편집 화면에서 바꾸지 않는 입고·마감·연계 값은 기존 값을 유지합니다.
-            string extraFields = planningParameters == null ? $@",
-                              SdOrderNo = {SdOrderNo.ConvertStr_Empty_To_Null()},
-                              SdOrderSeq = {SdOrderSeq.ConvertInt_Null_To_Zero()},
-                              OrderNo = {OrderNo.ConvertStr_Empty_To_Null()},
-                              InQty = '{InQty.ConvertFloat_Null_To_Zero()}',
-                              BalanceQty = '{BalanceQty.ConvertFloat_Null_To_Zero()}',
-                              LossRate = '{LossRate.ConvertFloat_Null_To_Zero()}',
-                              State = {State.ConvertStr_Empty_To_Null()},
-                              CloseDate = '{CloseDate.ConvertDate_To_Char10()}',
-                              CloseUser = {CloseUser.ConvertStr_Empty_To_Null()}" : @",
-                              MonthlyUsageQty = @MonthlyUsageQty,
-                              MinimumOrderQty = @MinimumOrderQty,
-                              UsagePurpose = @UsagePurpose,
-                              UsageDepartment = @UsageDepartment";
+            string extra = UseYozmOrderColumns ? @"
+                              ReceiveHouseId = @ReceiveHouseId,
+                              MrpNo = @MrpNo,
+                              BomChecked = @BomChecked," : "";
             query = $@"
                         UPDATE MM_PlacingD
                         SET
                               MmOrderSeq = {MmOrderSeq.ConvertInt_Null_To_Zero()},
+                              SdOrderNo = {SdOrderNo.ConvertStr_Empty_To_Null()},
+                              SdOrderSeq = {SdOrderSeq.ConvertInt_Null_To_Zero()},
+                              OrderNo = {OrderNo.ConvertStr_Empty_To_Null()},
                               ItemCode = {ItemCode.ConvertStr_Empty_To_Null()},
                               UnitCode = {UnitCode.ConvertStr_Empty_To_Null()},
                               Qty = '{Qty.ConvertFloat_Null_To_Zero()}',
-                              UnitPrice = '{UnitPrice.ConvertFloat_Null_To_Zero()}',
+                              UnitPrice = {UnitPriceSql},
+                              {extra}
                               Price = '{Price.ConvertFloat_Null_To_Zero()}',
                               VatPrice = '{VatPrice.ConvertFloat_Null_To_Zero()}',
                               TotalPrice = '{TotalPrice.ConvertFloat_Null_To_Zero()}',
                               VatType = {VatType.ConvertStr_Empty_To_Null()},
                               VatRate = '{VatRate.ConvertInt_Null_To_Zero()}',
+                              InQty = '{InQty.ConvertFloat_Null_To_Zero()}',
+                              BalanceQty = '{BalanceQty.ConvertFloat_Null_To_Zero()}',
+                              LossRate = '{LossRate.ConvertFloat_Null_To_Zero()}',
                               DeliveryDate = '{DeliveryDate.ConvertDate_To_Char10()}',
+                              State = {State.ConvertStr_Empty_To_Null()},
+                              CloseDate = '{CloseDate.ConvertDate_To_Char10()}',
+                              CloseUser = {CloseUser.ConvertStr_Empty_To_Null()},
                               Remark = {Remark.ConvertStr_Empty_To_Null()},
                               ModId = '{WrGlobal.LoginID}',
                               ModIP = '{WrGlobal.ClientHostName}',
                               ModDt = GETDATE()
-                              {extraFields}
                         WHERE CorpId = '{WrGlobal.CorpID}'
                           AND MmOrderNo = {MmOrderNo.ConvertStr_Empty_To_Null()}
                           AND MmOrderSeq = {MmOrderSeq.ConvertInt_Null_To_One()}
                     ";
 
-            return ExecuteDetailWrite();
+            return ExecuteOrderWrite(query);
+        }
+
+        private string UnitPriceSql => UseYozmOrderColumns ? "@UnitPrice" : (UnitPrice ?? 0m).ToString(CultureInfo.InvariantCulture);
+
+        private bool ExecuteOrderWrite(string sql)
+        {
+            if (!UseYozmOrderColumns)
+                return db.ExecuteQuery(sql);
+
+            using (var command = new SqlCommand(sql))
+            {
+                command.Parameters.Add("@UnitPrice", SqlDbType.Decimal).Precision = 22;
+                command.Parameters["@UnitPrice"].Scale = 4;
+                command.Parameters["@UnitPrice"].Value = UnitPrice ?? 0m;
+                command.Parameters.Add("@ReceiveHouseId", SqlDbType.NVarChar, 20).Value = string.IsNullOrWhiteSpace(ReceiveHouseId) ? (object)DBNull.Value : ReceiveHouseId;
+                command.Parameters.Add("@MrpNo", SqlDbType.NVarChar, 20).Value = string.IsNullOrWhiteSpace(MrpNo) ? (object)DBNull.Value : MrpNo;
+                command.Parameters.Add("@BomChecked", SqlDbType.Bit).Value = BomChecked;
+                return db.ExecuteCommand(command);
+            }
         }
 
         public bool Delete_MM_PlacingD()

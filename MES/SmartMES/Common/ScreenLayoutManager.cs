@@ -15,7 +15,7 @@ using System.Xml.Linq;
 
 namespace SmartMES.Common
 {
-    /// <summary>화면의 배치만 캡처합니다. 조회 결과·입력값·편집 권한은 변경하지 않습니다.</summary>
+    /// <summary>화면 배치 캡처, 조회 결과·입력값·편집 권한 제외</summary>
     internal static class ScreenLayoutSnapshot
     {
         internal static string Capture(Form form)
@@ -34,6 +34,7 @@ namespace SmartMES.Common
             if (grid != null)
             {
                 element.SetAttributeValue("kind", "grid");
+                element.SetAttributeValue("columnAutoWidth", grid.OptionsView.ColumnAutoWidth);
                 foreach (DevExpress.XtraGrid.Columns.GridColumn column in grid.Columns)
                     element.Add(Column(column.FieldName, column.Name, column.Visible, column.VisibleIndex, column.Width, column.Fixed.ToString()));
             }
@@ -69,7 +70,9 @@ namespace SmartMES.Common
 
         internal static void Apply(Form form, string xml)
         {
-            if (string.IsNullOrEmpty(xml)) return;
+            if (string.IsNullOrEmpty(xml))
+                return;
+
             XDocument document;
             using (var reader = XmlReader.Create(new StringReader(xml), new XmlReaderSettings
             {
@@ -81,7 +84,10 @@ namespace SmartMES.Common
             foreach (var saved in document.Root.Elements("Target"))
             {
                 object target;
-                if (!targets.TryGetValue((string)saved.Attribute("key") ?? "", out target)) continue;
+
+                if (!targets.TryGetValue((string)saved.Attribute("key") ?? "", out target))
+                    continue;
+
                 var layout = target as LayoutControl;
                 var split = target as SplitContainerControl;
                 var grid = target as GridView;
@@ -99,6 +105,8 @@ namespace SmartMES.Common
                     grid.BeginUpdate();
                     try
                     {
+                        if ((bool?)saved.Attribute("columnAutoWidth") is bool columnAutoWidth)
+                            grid.OptionsView.ColumnAutoWidth = columnAutoWidth;
                         foreach (var savedColumn in saved.Elements("Column").OrderBy(c => (int?)c.Attribute("index") ?? -1))
                         {
                             var column = grid.Columns.Cast<DevExpress.XtraGrid.Columns.GridColumn>().FirstOrDefault(c => Matches(savedColumn, c.FieldName, c.Name));
@@ -120,7 +128,10 @@ namespace SmartMES.Common
                         foreach (var savedColumn in saved.Elements("Column").OrderBy(c => (int?)c.Attribute("index") ?? -1))
                         {
                             var column = tree.Columns.Cast<DevExpress.XtraTreeList.Columns.TreeListColumn>().FirstOrDefault(c => Matches(savedColumn, c.FieldName, c.Name));
-                            if (column == null) continue;
+
+                            if (column == null)
+                                continue;
+
                             column.Visible = (bool?)savedColumn.Attribute("visible") ?? true;
                             if (column.Visible) column.VisibleIndex = Math.Max(0, (int?)savedColumn.Attribute("index") ?? 0);
                             column.Width = Math.Max(20, (int?)savedColumn.Attribute("width") ?? column.Width);
@@ -163,7 +174,7 @@ namespace SmartMES.Common
 
         internal static string Key(Form form)
         {
-            // 같은 클래스라도 메뉴 인자가 다른 일상/정기 화면은 별도 보관합니다.
+            // 같은 클래스라도 메뉴 인자가 다른 일상/정기 화면은 별도 보관
             string identity = form.GetType().FullName + "\n" + form.Name + "\n" + Convert.ToString(form.Tag);
             using (var sha = SHA256.Create())
                 return BitConverter.ToString(sha.ComputeHash(Encoding.UTF8.GetBytes(identity))).Replace("-", "");
@@ -178,16 +189,20 @@ namespace SmartMES.Common
 
         internal void Register(Form form)
         {
-            if (defaults.ContainsKey(form)) return;
-            // Load에서 소스가 구성한 배치를 먼저 보관한 후 DB의 사용자 배치를 복원합니다.
+            if (defaults.ContainsKey(form))
+                return;
+
+            // Load에서 소스가 구성한 배치를 먼저 보관한 후 DB의 사용자 배치를 복원
             defaults.Add(form, ScreenLayoutSnapshot.Capture(form));
             form.FormClosed += (sender, args) => defaults.Remove(form);
-            // 조회 후 BestFitColumns가 실행되어도 사용자가 보고 있던 배치를 유지합니다.
+            // 조회 후 BestFitColumns가 실행되어도 사용자가 보고 있던 배치를 유지
             foreach (var grid in Grids(form))
             {
                 grid.DataSourceChanged += (sender, args) =>
                 {
-                    if (form.IsDisposed || !form.IsHandleCreated) return;
+                    if (form.IsDisposed || !form.IsHandleCreated)
+                        return;
+
                     string current = ScreenLayoutSnapshot.Capture(form);
                     form.BeginInvoke((Action)(() =>
                     {

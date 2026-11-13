@@ -60,35 +60,42 @@ namespace SmartMES.View.MM
         {
             //Grid 공통 설정
             gv.Appearance.HeaderPanel.TextOptions.HAlignment = HorzAlignment.Center;   //Header 정렬
-            gv.OptionsView.ColumnAutoWidth = false;     //Column 많으면 스크롤 생기도록 바꾸기
+            gv.OptionsView.ColumnAutoWidth = true;
             gv.OptionsView.ShowGroupPanel = false;
             gv.IndicatorWidth = 50;                     //순번 너비
 
             //창고
             RepositoryItemSearchLookUpEdit lup_House = rpo.Create_RepositoryItemSearchLookUp(code.GetWarehouseList_Dt(), "창고코드", "창고명");
+            var employee = rpo.Create_RepositoryItemSearchLookUp(code.GetDataTableUser(false), "코드", "명칭");
 
-            grid.Create_GvColumn(gv, "입고번호", "StoNo");
-            grid.Create_GvColumn(gv, "거래처", "CustName");
-            grid.Create_GvColumn(gv, "입고일", "StoDate");
-            grid.Create_GvColumn(gv, "창고", "HouseID");
-            grid.Create_GvColumn(gv, "공급가", "Price");
-            grid.Create_GvColumn(gv, "부가세", "VatPrice");
-            grid.Create_GvColumn(gv, "총금액", "TotalPrice");
-            grid.Create_GvColumn(gv, "상태", "State");
-            grid.Create_GvColumn(gv, "비고", "Remark");
-            
+            var columns = new (string Caption, string Field, int Width)[]
+            {
+                ("입고번호", "StoNo", 140),
+                ("거래처", "CustName", 170),
+                ("입고일자", "StoDate", 110),
+                ("창고", "HouseID", 125),
+                ("담당자", "WriteID", 105),
+                ("거래처담당", "CustomerUser", 115),
+                ("VAT구분", "VatTypeTitle", 100),
+                ("부가세율", "VatRate", 110),
+                ("진행상태", "State", 85),
+                ("비고", "Remark", 220),
+            };
+            foreach (var column in columns)
+            {
+                grid.Create_GvColumn(gv, column.Caption, column.Field);
+                gv.Columns[column.Field].MinWidth = column.Width * DeviceDpi / 96;
+                gv.Columns[column.Field].Width = gv.Columns[column.Field].MinWidth;
+            }
+
+
             //Repository
-            if (gv.Columns.ColumnByFieldName("HouseID") != null) gv.Columns["HouseID"].ColumnEdit = lup_House;
+            gv.Columns["HouseID"].ColumnEdit = lup_House;
+            gv.Columns["WriteID"].ColumnEdit = employee;
 
             //셀값 정렬
             grid.SetCol_Type(gv.Columns["StoDate"], clsGrid.TypeList.TDate);
-            grid.SetCol_Type(gv.Columns["Price"], clsGrid.TypeList.TFloat);
-            grid.SetCol_Type(gv.Columns["VatPrice"], clsGrid.TypeList.TFloat);
-            grid.SetCol_Type(gv.Columns["TotalPrice"], clsGrid.TypeList.TFloat);
 
-            grid.SetCol_Summary(gv, "Price");
-            grid.SetCol_Summary(gv, "VatPrice");
-            grid.SetCol_Summary(gv, "TotalPrice");
 
             //이벤트 설정
             gv.CustomDrawRowIndicator += grid.RowNumber_Indicator;    //행번호 표기

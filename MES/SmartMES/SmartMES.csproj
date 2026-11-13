@@ -28,11 +28,11 @@
     <ProductName>SNexisMES_YOZM</ProductName>
     <PublisherName>%28주%29에스엠티비전</PublisherName>
     <SuiteName>SNexisMES_YOZM</SuiteName>
-    <MinimumRequiredVersion>1.0.0.5</MinimumRequiredVersion>
+    <MinimumRequiredVersion>1.0.0.6</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.html</WebPage>
     <TrustUrlParameters>true</TrustUrlParameters>
-    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationRevision>7</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -75,7 +75,8 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\YOZM_favicon.ico</ApplicationIcon>
+    <!-- 이전 설치본 아이콘 캐시와 구분되는 실행 파일·ClickOnce 공통 아이콘 -->
+    <ApplicationIcon>YOZM_App.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
@@ -357,6 +358,8 @@
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Windows.Input.Manipulations" />
     <Reference Include="System.Xaml" />
@@ -377,6 +380,7 @@
     <Compile Include="Common\AIRequester.cs" />
     <Compile Include="Common\clsDocument.cs" />
     <Compile Include="Common\clsShortcut.cs" />
+    <Compile Include="Common\GridColumnPinning.cs" />
     <Compile Include="Common\ScreenLayoutManager.cs" />
     <Compile Include="Common\ScreenLayoutRepository.cs" />
     <Compile Include="Common\clsExcelDown.cs" />
@@ -415,6 +419,8 @@
     <Compile Include="Models\AI\ST_OptCond_Init.cs" />
     <Compile Include="Models\AI\ST_Std_DataSet.cs" />
     <Compile Include="Models\BM\BM_EstimateD.cs" />
+    <Compile Include="Models\BM\BM_EdiExcel.cs" />
+    <Compile Include="Models\BM\BM_EdiImport.cs" />
     <Compile Include="Models\BM\BM_EstimateM.cs" />
     <Compile Include="Models\BM\BM_SampleOutM.cs" />
     <Compile Include="Models\Chatbot\ChatBot_History.cs" />
@@ -479,6 +485,7 @@
     <Compile Include="Models\EQ\EQ_Repair.cs" />
     <Compile Include="Models\Management\MM_ProductAnalysis.cs" />
     <Compile Include="Models\Management\MM_PurchaseAnalysis.cs" />
+    <Compile Include="Models\PM\PM_Forecasting.cs" />
     <Compile Include="Models\PM\PM_OrderProcess.cs" />
     <Compile Include="Models\PM\PM_OrderResultWorker.cs" />
     <Compile Include="Models\PM\PM_SdRoute.cs" />
@@ -1756,6 +1763,12 @@
     <Compile Include="View\QM\Rpt\RptOQC_v3.designer.cs">
       <DependentUpon>RptOQC_v3.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\BM\Frm_BM_EdiOrderB2B.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BM\Frm_BM_EdiOrderB2B.Designer.cs">
+      <DependentUpon>Frm_BM_EdiOrderB2B.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\BM\Frm_BM_SdOrderD.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2415,7 +2428,20 @@
     <Compile Include="View\WrSyncWork.designer.cs">
       <DependentUpon>WrSyncWork.cs</DependentUpon>
     </Compile>
-    <Content Include="YOZM_favicon.ico" />
+    <Content Include="YOZM_App.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <PublishFile Include="YOZM_App.ico">
+      <Visible>False</Visible>
+      <Group />
+      <TargetPath />
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <Content Include="YOZM_favicon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <None Include="Resources\Actions_Bookmark.svg" />
     <None Include="Resources\SF로고원본ai파일%28투명%29309x69.png" />
@@ -2546,6 +2572,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Analysis\Frm_AN_DefectType.resx">
       <DependentUpon>Frm_AN_DefectType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BM\Frm_BM_EdiOrderB2B.resx">
+      <DependentUpon>Frm_BM_EdiOrderB2B.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\BM\Frm_BM_OrderOutDetail.resx">
       <DependentUpon>Frm_BM_OrderOutDetail.cs</DependentUpon>

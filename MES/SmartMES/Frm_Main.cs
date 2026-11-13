@@ -426,7 +426,8 @@ namespace SmartMES
         }
         public void SetQuickMenuRefresh()
         {
-            if (myMenuElement == null) return;
+            if (myMenuElement == null)
+                return;
 
             myMenuElement.Elements.Clear();
 
@@ -455,7 +456,8 @@ namespace SmartMES
         {
             RegistryKey reg = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\SNEXISMES", true);
 
-            if (reg == null) return;
+            if (reg == null)
+                return;
 
             displayNoticeYn = reg.GetValue("DisplayYn") as string;
 
@@ -496,16 +498,23 @@ namespace SmartMES
             string checkKey = "CheckDate_" + WrGlobal.DBName;
 
             RegistryKey reg = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\SNEXISMES", true);
-            if (reg == null) return;
+
+            if (reg == null)
+                return;
+
            string CheckDate = reg.GetValue(checkKey) == null ? "" : reg.GetValue(checkKey).ToString();
-            if (CheckDate == dDatetime.ToString("yyyyMMdd")) return;
+
+            if (CheckDate == dDatetime.ToString("yyyyMMdd"))
+                return;
 
             query = $@"
                         select count(*) from SM_Notice
                         where CorpId = {WrGlobal.CorpID} and '{dDatetime.ToString("yyyy-MM-dd")}' between convert(date,StartDate) and convert(date,EndDate)
                     ";
             int count = db.ExecuteScalarQuery(query);
-            if (count <= 0) return;
+
+            if (count <= 0)
+                return;
 
             Frm_LookUpNotice frmNotice = new Frm_LookUpNotice(dDatetime);
             if (frmNotice.ShowDialog() == DialogResult.OK)
@@ -599,8 +608,11 @@ namespace SmartMES
         {
             try
             {
-                if (e.Element.Style == DevExpress.XtraBars.Navigation.ElementStyle.Group) return;
-                if (e.Element.Tag == null) return;
+                if (e.Element.Style == DevExpress.XtraBars.Navigation.ElementStyle.Group)
+                    return;
+
+                if (e.Element.Tag == null)
+                    return;
 
                 string[] arrTag = e.Element.Tag.ToString().Split(new char[] { '|' });
 
@@ -649,7 +661,9 @@ namespace SmartMES
             if (e.Control && e.KeyCode == Keys.C)
             {
                 GridView gv = sender as GridView;
-                if (gv.FocusedValue == null) return;
+
+                if (gv.FocusedValue == null)
+                    return;
 
                 e.Handled = true;
                 gv.GetFocusedDisplayText();
@@ -678,7 +692,9 @@ namespace SmartMES
             if (e.Control && e.KeyCode == Keys.C)
             {
                 DevExpress.XtraTreeList.TreeList tr = sender as DevExpress.XtraTreeList.TreeList;
-                if (tr.FocusedValue == null) return;
+
+                if (tr.FocusedValue == null)
+                    return;
 
                 e.Handled = true;
                 tr.GetFocusedDisplayText();
@@ -897,7 +913,10 @@ namespace SmartMES
             protected override void DrawText(DevExpress.Utils.Drawing.GraphicsCache cache)
             {
                 string text = Text;
-                if (text == null || text.Length == 0 || this.TextBounds.IsEmpty) return;
+
+                if (text == null || text.Length == 0 || this.TextBounds.IsEmpty)
+                    return;
+
                 AppearanceObject appearance = new AppearanceObject(GetDefaultAppearance());
                 appearance.Font = new Font("Segoe UI", 18, FontStyle.Bold);
                 appearance.TextOptions.Trimming = Trimming.EllipsisCharacter;

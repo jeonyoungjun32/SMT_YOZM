@@ -58,6 +58,9 @@ namespace SmartMES
                     chkRemember.Checked = true;
                 }
             }
+
+            // 저장된 아이디가 있으면 비밀번호 칸부터 입력
+            ActiveControl = string.IsNullOrWhiteSpace(txtID.Text) ? txtID : txtPW;
 		}
 
         private void SetInit()
@@ -82,7 +85,6 @@ namespace SmartMES
                 cboCompany.EditValue = drv["CorpId"];
                 txtPW.Text = "";
             }
-            txtPW.Focus();
         }
 
         // 로그인

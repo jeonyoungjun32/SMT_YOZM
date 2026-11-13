@@ -46,7 +46,9 @@ namespace SmartMES.View.MM
             Dt_Date.smtEndDateTimeValue = endDate;
 
             //상태 설정
-            query = $@"select '전체' 상태
+            query = MM_PlacingD.UseYozmOrderColumns
+                ? "SELECT N'전체' AS 상태 UNION ALL SELECT N'발주' UNION ALL SELECT N'입고'"
+                : $@"select '전체' 상태
                         Union All
                         select '진행' 상태
                         Union All
@@ -111,8 +113,8 @@ namespace SmartMES.View.MM
             grid.Create_GvColumn(gv, "납기일자", "DeliveryDate");
             grid.Create_GvColumn(gv, "상태", "State");
             grid.Create_GvColumn(gv, "비고", "Remark");
-            grid.Create_GvColumn(gv, "마감일자", "CloseDate");
-            grid.Create_GvColumn(gv, "마감담당자", "CloseUser");
+            grid.Create_GvColumn(gv, MM_PlacingD.UseYozmOrderColumns ? "종료일자" : "마감일자", "CloseDate");
+            grid.Create_GvColumn(gv, MM_PlacingD.UseYozmOrderColumns ? "종료담당자" : "마감담당자", "CloseUser");
 
             grid.Create_GvColumn(gv, "수주번호", "SdOrderNo");
             grid.Create_GvColumn(gv, "수주순번", "SdOrderSeq");

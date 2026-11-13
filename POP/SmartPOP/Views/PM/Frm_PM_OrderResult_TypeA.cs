@@ -730,6 +730,50 @@ namespace SmartPOP.Views.PM
             //     }
             // }
 
+            // 작업지시 라인의 투입창고 사용, 미설정 시 기본 자재창고
+            // 생산 입고는 품목 창고 → 작업지시 라인 창고 → 기본 제품창고 순서
+            query = $@"
+                SELECT
+                    COALESCE(NULLIF(LTRIM(RTRIM(line.InHouseID)), ''), 'S0001') AS FromHouse,
+                    COALESCE(NULLIF(LTRIM(RTRIM(item.HouseID)), ''),
+                             NULLIF(LTRIM(RTRIM(line.OutHouseID)), ''), 'S0002') AS ToHouse
+                FROM (SELECT 1 AS Id) seed
+                LEFT JOIN PM_OrderProcess op
+                    ON op.CorpId = '{WrGlobal.CorpID}'
+                    AND op.OrderNo = '{_OrderNo}'
+                    AND op.OrderSeq = {_OrderSeq}
+                    AND op.ProcessCode = '{odr.ProcessCode}'
+                LEFT JOIN CM_Line line
+                    ON line.CorpId = op.CorpId AND line.LineCode = op.LineCode
+                LEFT JOIN CM_Item item
+                    ON item.CorpId = '{WrGlobal.CorpID}' AND item.ItemCode = '{odr.MaterialCode}';";
+
+            DataRow drHouse = db.GetDataRow(query);
+            if (drHouse == null)
+            {
+                cls_MessageBox.Show("생산 입출고 창고를 확인할 수 없습니다.");
+                return;
+            }
+
+            string fromHouse = drHouse["FromHouse"].ConvertString_Null_To_Empty();
+            string toHouse = drHouse["ToHouse"].ConvertString_Null_To_Empty();
+
+            // 실적 수정과 기존 수불 삭제 전에 사용 가능한 창고인지 확인
+            query = $@"
+                SELECT HouseID
+                FROM CM_Warehouse
+                WHERE CorpId = '{WrGlobal.CorpID}' AND UseYn = 'Y'
+                    AND HouseID IN ('{fromHouse}', '{toHouse}');";
+            DataTable houses = db.GetDataTable(query);
+            if (houses == null
+                || !houses.AsEnumerable().Any(row => row["HouseID"].ConvertString_Null_To_Empty() == toHouse)
+                || (WrGlobal.ProcOption["PD"]["ProcResult_MatOut_AutoYN"] == "Y"
+                    && !houses.AsEnumerable().Any(row => row["HouseID"].ConvertString_Null_To_Empty() == fromHouse)))
+            {
+                cls_MessageBox.Show($"입출고 창고 설정을 확인해 주세요.\n자재 출고: {fromHouse}\n생산 입고: {toHouse}");
+                return;
+            }
+
             odr.Upd_PM_OrderResult_POP();
 
             float orderQty = Lbl_OrderQty.EditValue.ConvertFloat_Null_To_Zero();
@@ -775,37 +819,6 @@ namespace SmartPOP.Views.PM
             std.JobSeq2 = _SubSeq;
 
             std.DeleteStockMD_Work();
-
-            //생산재고 입고창고, 자재채고 출고창고 구하기
-            query = $@"
-                    SELECT TOP 1 
-
-                        A.InHouseID
-					    , (  
-					    	SELECT HouseID 
-					    	FROM CM_Item
-					    	WHERE CorpId = '{WrGlobal.CorpID}'
-                        AND ItemCode = '{odr.MaterialCode}'
-					    ) AS OutHouseID
-
-                    FROM CM_Line A
-                    LEFT JOIN CM_Process B ON a.CorpId = B.CorpId AND a.ProcessCode = B.ProcessCode
-                    WHERE A.CorpId = '{WrGlobal.CorpID}'
-                    AND A.ProcessCode = '{odr.ProcessCode}'
-                    
-            ";
-
-            DataRow drLine = db.GetDataRow(query);
-
-            //string fromHouse = drLine["InHouseID"].ConvertString_Null_To_Empty();   //하위자재 출고 창고
-            //string toHouse = drLine["OutHouseID"].ConvertString_Null_To_Empty();    //생산 입고 창고
-
-
-            string fromHouse  = "S0001";
-            string toHouse = "S0002";
-
-            if (fromHouse.IsNullOrEmpty()) fromHouse = "S0001";
-            if (toHouse.IsNullOrEmpty()) toHouse = "S0002";
 
             //자재수불 + 자재출고 처리
             if (WrGlobal.ProcOption["PD"]["ProcResult_MatOut_AutoYN"] == "Y")

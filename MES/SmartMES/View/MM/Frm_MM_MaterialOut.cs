@@ -71,11 +71,26 @@ namespace SmartMES.View.MM
             clsRepository rpo = new clsRepository();
             RepositoryItemSearchLookUpEdit lupCust = rpo.Create_RepositoryItemSearchLookUp(code.GetCustomer(), "거래처코드", "거래처명");
 
-            grid.Create_GvColumn(gv, "출고번호", "SalesNo");
-            grid.Create_GvColumn(gv, "매출업체", "ShipToCode", lupCust);
-            grid.Create_GvColumn(gv, "출고일", "SalesDate");
-            grid.Create_GvColumn(gv, "총금액", "TotalPrice");
-            grid.Create_GvColumn(gv, "비고", "Remark");
+            var columns = new (string Caption, string Field, int Width)[]
+            {
+                ("출고번호", "SalesNo", 140),
+                ("거래처", "ShipToCode", 170),
+                ("출고일자", "SalesDate", 110),
+                ("출고창고", "HouseCode", 115),
+                ("VAT구분", "VatType", 100),
+                ("부가세율", "VatRate", 110),
+                ("비고", "Remark", 220),
+            };
+            foreach (var column in columns)
+            {
+                grid.Create_GvColumn(gv, column.Caption, column.Field, column.Field == "ShipToCode" ? lupCust : null);
+                gv.Columns[column.Field].MinWidth = column.Width * DeviceDpi / 96;
+                gv.Columns[column.Field].Width = gv.Columns[column.Field].MinWidth;
+            }
+
+            grid.SetCol_Type(gv.Columns["SalesDate"], clsGrid.TypeList.TDate);
+            gv.Columns["HouseCode"].ColumnEdit = rpo.Create_RepositoryItemSearchLookUp(code.GetWarehouseList_Dt(), "창고코드", "창고명");
+            gv.Columns["VatType"].ColumnEdit = rpo.Create_RepositoryItemSearchLookUp(code.GetClassList("C010"), "분류코드", "분류명");
 
             //
             if(Database.DbName.ToUpper().Contains("KNP"))
@@ -83,7 +98,6 @@ namespace SmartMES.View.MM
                 gv.Columns["ShipToCode"].Visible = false;
 			}
 
-            grid.SetCol_Type(gv.Columns["TotalPrice"], clsGrid.TypeList.TInt);
         }
 
         private void Set_GvDetail(GridView gv)

@@ -70,6 +70,7 @@ namespace SmartMES
 
             // 현재 MES 화면의 조회·저장·삭제 버튼을 Ctrl+Q, Ctrl+S, Ctrl+D로 실행합니다.
             Application.AddMessageFilter(new clsShortcut());
+            Application.AddMessageFilter(new GridColumnPinning());
 
             string strShowFrom = "";
             RegistryKey reg = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\SNEXISMES");

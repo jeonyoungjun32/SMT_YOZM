@@ -328,7 +328,36 @@ namespace SmartMES.View.CM
             RepositoryItemLookUpEdit lup_ItemType = rpo.Create_RepositoryItem(code.smtLookUp("품목구분", new string[] { ItemType }, ""), "코드", "코드명");
             //단위
             RepositoryItemSearchLookUpEdit lup_UnitCode = rpo.Create_RepositoryItemSearchLookUp(code.smtLookUp("품목단위", "", ""), "코드", "코드명");
-            AddPurchasingColumns(gv, lup_UnitCode);
+            if (CM_Item.UsePurchasingFields)
+            {
+                // 품목 1개 기준 공통 금액
+                grid.Create_GvColumn(gv, "금액", "Amount", rpo.Create_rpoTxt_Numeric(), true);
+                grid.Column_AllowEdit(gv.Columns["Amount"]);
+                gv.Columns["Amount"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                gv.Columns["Amount"].DisplayFormat.FormatString = "#,##0.####";
+                gv.Columns["Amount"].ToolTip = "품목 1개 기준 공통 금액";
+    
+                grid.Create_GvColumn(gv, "구매단위", "PurchaseUnitCode", lup_UnitCode, true);
+                grid.Create_GvColumn(gv, "환산수량", "PurchaseConversionQty", null, true);
+                grid.Create_GvColumn(gv, "납품초과 허용률(%)", "DeliveryOverTolerancePct", null, true);
+                gv.Columns["PurchaseConversionQty"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                gv.Columns["PurchaseConversionQty"].DisplayFormat.FormatString = "#,##0.######";
+                gv.Columns["DeliveryOverTolerancePct"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                gv.Columns["DeliveryOverTolerancePct"].DisplayFormat.FormatString = "#,##0.####";
+                foreach (var field in new[]
+                {
+                    new { Caption = "HS코드", Name = "HSCode", MaxLength = 30 },
+                    new { Caption = "HS명", Name = "HSName", MaxLength = 200 },
+                    new { Caption = "HS규격", Name = "HSSpec", MaxLength = 200 },
+                    new { Caption = "HS단위", Name = "HSUnit", MaxLength = 30 }
+                })
+                {
+                    var editor = new RepositoryItemTextEdit { MaxLength = field.MaxLength };
+                    gv.GridControl.RepositoryItems.Add(editor);
+                    grid.Create_GvColumn(gv, field.Caption, field.Name, editor, true);
+                }
+            }
+
             //거래처
             RepositoryItemSearchLookUpEdit lup_CustCode = rpo.Create_RepositoryItemSearchLookUp(code.smtLookUp("거래처", "", "", ""), "거래처코드", "거래처명");
             //포장단위
@@ -962,33 +991,6 @@ namespace SmartMES.View.CM
 
             //5. 저장 후 선택한 row를 불러옴
             (Gc_Item.MainView as GridView).FocusedRowHandle = SaveFocusedRowInx;
-        }
-
-        /// <summary>제품정보와 자재정보에서 구매 및 HS 항목을 같은 방식으로 편집합니다.</summary>
-        private void AddPurchasingColumns(GridView view, RepositoryItemSearchLookUpEdit unitLookup)
-        {
-            if (!CM_Item.UsePurchasingFields)
-                return;
-
-            grid.Create_GvColumn(view, "구매단위", "PurchaseUnitCode", unitLookup, true);
-            grid.Create_GvColumn(view, "환산수량", "PurchaseConversionQty", null, true);
-            grid.Create_GvColumn(view, "납품초과 허용률(%)", "DeliveryOverTolerancePct", null, true);
-            view.Columns["PurchaseConversionQty"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            view.Columns["PurchaseConversionQty"].DisplayFormat.FormatString = "#,##0.######";
-            view.Columns["DeliveryOverTolerancePct"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            view.Columns["DeliveryOverTolerancePct"].DisplayFormat.FormatString = "#,##0.####";
-            foreach (var field in new[]
-            {
-                new { Caption = "HS코드", Name = "HSCode", MaxLength = 30 },
-                new { Caption = "HS명", Name = "HSName", MaxLength = 200 },
-                new { Caption = "HS규격", Name = "HSSpec", MaxLength = 200 },
-                new { Caption = "HS단위", Name = "HSUnit", MaxLength = 30 }
-            })
-            {
-                var editor = new RepositoryItemTextEdit { MaxLength = field.MaxLength };
-                view.GridControl.RepositoryItems.Add(editor);
-                grid.Create_GvColumn(view, field.Caption, field.Name, editor, true);
-            }
         }
 
         private bool Check_SaveClick(DataTable dt)
